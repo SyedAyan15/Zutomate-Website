@@ -460,3 +460,27 @@
       });
     }
   
+    // ── MOBILE MENU TOGGLE ──
+    (function () {
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      const links = document.querySelectorAll('.nav-links a');
+
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+          menuBtn.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            menuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    })();
+
+  
