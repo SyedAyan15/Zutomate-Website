@@ -2002,4 +2002,154 @@
       font-weight: 400;
       color: rgba(255, 255, 255, 0.4);
     }
-  
+
+    /* ── MOBILE OPTIMIZATIONS ── */
+    @media (max-width: 768px) {
+      /* Global Adjustments */
+      body {
+        padding-top: 60px;
+      }
+      
+      /* Navbar */
+      nav.nav-top, nav.nav-scrolled {
+        padding: 12px 20px;
+      }
+      nav.nav-scrolled {
+        width: calc(100% - 24px);
+        top: 6px;
+      }
+      .nav-links {
+        display: none; /* Hide standard links on mobile */
+      }
+      .nav-cta {
+        padding: 7px 14px;
+        font-size: 12px;
+      }
+      
+      /* Hero */
+      .hero {
+        padding: 50px 20px 60px;
+        min-height: calc(100vh - 60px);
+      }
+      .hero-form {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        backdrop-filter: none;
+      }
+      .hero-form input {
+        border-radius: 8px;
+        border: 1px solid var(--w12);
+        background: rgba(255,255,255,0.04);
+        margin-bottom: 12px;
+      }
+      .hero-form .vdivider {
+        display: none;
+      }
+      .hero-form button {
+        border-radius: 8px;
+      }
+      .service-tags {
+        gap: 6px;
+      }
+      .tag {
+        padding: 6px 14px;
+        font-size: 12px;
+      }
+
+      /* Why Zutomate */
+      .why-section {
+        padding: 40px 20px 50px;
+      }
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      .why-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .why-card:last-child {
+        border-bottom: none;
+      }
+      .why-card::before {
+        height: 100%;
+        width: 3px;
+        background: linear-gradient(180deg, transparent, #ff6a1a, #ff4500, #ff6a1a, transparent);
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+      .why-card.why-active::before {
+        transform: scaleX(1); /* Wait, keep scaleX since it was left border? No, top border was scaleX. Let's just override to make it nice if we had a vertical bar, or just let scaleX work normally across the top of each block stack. The scaleX across top works fine for stacked blocks as well. So we don't need to override before pseudo element strictly! I'll leave the before element alone, the visual top highlight bar actually looks awesome dividing stacked cards! */
+      }
+
+      /* Partners */
+      .partners-section {
+        padding: 40px 0;
+      }
+      
+      /* Services / GTM Section */
+      .services-section, .gtm-section {
+        padding: 50px 20px;
+      }
+      .gtm-grid {
+        grid-template-columns: 1fr;
+      }
+      .gtm-col {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .gtm-col:last-child {
+        border-bottom: none;
+      }
+      .services-divider {
+        margin: 0 20px;
+      }
+      .services-cta {
+        padding: 50px 20px;
+      }
+
+      /* 90-Day Plan - Mobile Scroller */
+      .plan-section {
+        padding: 50px 20px;
+      }
+      .plan-timeline {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .plan-months {
+        min-width: 600px;
+      }
+      .plan-rows {
+        min-width: 600px;
+      }
+      
+      /* Testimonials */
+      .testimonials-section {
+        padding: 50px 0;
+      }
+      .testimonials-label-wrap {
+        padding: 0 20px;
+      }
+      .testimonials-track {
+        padding: 0 20px;
+      }
+      .tcard {
+        flex: 0 0 calc(100% - 40px);
+        min-width: calc(100% - 40px);
+      }
+      .tslider-nav {
+        padding: 0 20px;
+      }
+
+      /* Footer Bottom */
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
