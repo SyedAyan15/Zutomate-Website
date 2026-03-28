@@ -99,6 +99,7 @@
         setTimeout(function() {
           entry.target.classList.add('visible');
         }, idx * 80);
+        obs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
@@ -224,9 +225,7 @@
                 word.classList.add('word-show');
               }, i * 60);
             });
-          } else {
-            // Reset when heading leaves viewport so it replays on next scroll
-            words.forEach(word => word.classList.remove('word-show'));
+            headingObserver.unobserve(entry.target);
           }
         });
       }, { threshold: 0.2 });
@@ -369,13 +368,12 @@
       var cols = document.querySelectorAll('.gtm-col');
       cols.forEach(setupCol);
 
-      // Observe each column — replay every time it enters view
+      // Observe each column — trigger only once when it enters view
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             revealCol(entry.target);
-          } else {
-            hideCol(entry.target);
+            observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
