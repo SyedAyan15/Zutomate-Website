@@ -2040,8 +2040,12 @@
       }
       
       /* Navbar */
-      nav.nav-top, nav.nav-scrolled {
+      nav.nav-top {
         padding: 12px 20px;
+      }
+      nav.nav-scrolled {
+        padding: 12px 14px;
+        width: calc(100% - 32px);
       }
       .mobile-menu-btn {
         display: flex;
@@ -2113,6 +2117,11 @@
         padding: 50px 20px 60px;
         min-height: calc(100vh - 60px);
       }
+      .hero-glow, .footer-bg-glow {
+        width: 100%;
+        max-width: 100vw;
+        border-radius: 0;
+      }
       .hero-form {
         flex-direction: column;
         background: transparent;
@@ -2167,6 +2176,8 @@
       /* Partners */
       .partners-section {
         padding: 40px 0;
+        max-width: 100vw;
+        overflow: hidden;
       }
       
       /* Services / GTM Section */
