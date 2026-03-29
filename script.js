@@ -483,4 +483,45 @@
       }
     })();
 
+    // ── NAVIGATION ACTIVE STATE ON SCROLL ──
+    (function () {
+      const sections = [
+        { id: 'home', linkText: 'Home' },
+        { id: 'services', linkText: 'Services' },
+        { id: 'how-we-work', linkText: 'Process' }
+      ];
+
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Adjust as needed to capture the active section centrally
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const targetSection = sections.find(s => s.id === id);
+
+            if (targetSection) {
+              navLinks.forEach(link => {
+                if (link.textContent.trim() === targetSection.linkText) {
+                  link.classList.add('active');
+                } else {
+                  link.classList.remove('active');
+                }
+              });
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (el) observer.observe(el);
+      });
+    })();
+
   

@@ -19,6 +19,12 @@
 
   <!-- ── NAV ── -->
   <nav>
+    <button class="mobile-menu-btn" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <a href="/" class="logo" style="display:flex;align-items:center;gap:0;text-decoration:none;">
       <svg width="28" height="30" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg"
         style="flex-shrink:0;">
@@ -43,19 +49,13 @@
       <li><a href="#">Resources</a></li>
     </ul>
 
-    <button class="mobile-menu-btn" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
     <a href="#" onclick="event.preventDefault();document.getElementById('footer-cta-form').scrollIntoView({behavior:'smooth'}); setTimeout(() => document.getElementById('cta-email').focus(), 500);" class="nav-cta">
       <span class="arrow">↗</span> Get in touch
     </a>
   </nav>
 
   <!-- ── HERO ── -->
-  <section class="hero">
+  <section class="hero" id="home">
     <canvas id="dot-canvas"></canvas>
     <div class="hero-glow"></div>
 
@@ -844,12 +844,12 @@
   </section>
 
   <!-- ── AI AGENT SYSTEMS ── -->
-  <section class="gtm-section">
+  <section class="gtm-section" id="services">
     <h2 class="gtm-heading">AI Agent Systems</h2>
     <p class="gtm-sub">Autonomous agents that research, qualify, and engage accounts — without human input.</p>
 
     <div class="gtm-grid gtm-grid-2">
-      <div class="gtm-col" style="border-right: 1px solid rgba(255,255,255,0.07);">
+      <div class="gtm-col">
         <p class="gtm-col-title">AI RAG Agent</p>
         <svg viewBox="0 0 480 790" width="100%" style="display:block;max-width:460px;margin:0 auto">
           <line x1="240" y1="46" x2="240" y2="66" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
@@ -978,7 +978,7 @@
             fill="rgba(255,255,255,0.88)">Log to Memory</text>
         </svg>
       </div>
-      <div class="gtm-col" style="border-right:none;">
+      <div class="gtm-col">
         <p class="gtm-col-title">Lead Qualification Agent</p>
         <svg viewBox="0 0 480 700" width="100%" style="display:block;max-width:440px;margin:0 auto">
           <line x1="240" y1="50" x2="240" y2="78" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
