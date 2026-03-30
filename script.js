@@ -91,6 +91,18 @@
   
 
 (function() {
+  var ctaLink = document.getElementById('nav-cta-link');
+  if (ctaLink) {
+    ctaLink.addEventListener('click', function() {
+      setTimeout(function() {
+        var emailInput = document.getElementById('cta-email');
+        if (emailInput) emailInput.focus();
+      }, 500);
+    });
+  }
+})();
+
+(function() {
   var rows = document.querySelectorAll('[data-plan-row]');
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
