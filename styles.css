@@ -1824,7 +1824,7 @@
 
     /* ── FOOTER STYLES ── */
     .site-footer {
-      background: #040812; /* Deep structural navy-graphite */
+      background: #111827; /* Muted dark grey */
       border-top: 1px dashed rgba(255, 255, 255, 0.15); /* Explicit architectural boundary */
       position: relative;
       overflow: hidden;
