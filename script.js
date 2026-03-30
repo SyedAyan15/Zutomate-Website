@@ -91,15 +91,21 @@
   
 
 (function() {
-  var ctaLink = document.getElementById('nav-cta-link');
-  if (ctaLink) {
-    ctaLink.addEventListener('click', function() {
-      setTimeout(function() {
-        var emailInput = document.getElementById('cta-email');
-        if (emailInput) emailInput.focus();
-      }, 500);
+  document.querySelectorAll('[data-scroll]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var id = this.getAttribute('data-scroll');
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      history.pushState(null, '', this.getAttribute('href'));
+      if (id === 'footer-cta-form') {
+        setTimeout(function() {
+          var emailInput = document.getElementById('cta-email');
+          if (emailInput) emailInput.focus();
+        }, 500);
+      }
     });
-  }
+  });
 })();
 
 (function() {
