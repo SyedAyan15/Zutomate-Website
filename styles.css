@@ -1848,11 +1848,9 @@
     .footer-container {
       position: relative;
       z-index: 1;
-      max-width: 900px; /* Constrained width like the reference */
+      max-width: 1200px;
       margin: 0 auto;
-      border-left: 1px dashed rgba(255, 255, 255, 0.15);
-      border-right: 1px dashed rgba(255, 255, 255, 0.15);
-      padding: 0 50px; /* Internal spacing within the borders */
+      padding: 0 52px;
     }
 
     .footer-logo-row {
@@ -2038,6 +2036,31 @@
       font-size: 12px;
       font-weight: 400;
       color: rgba(255,255,255,0.45);
+    }
+    .footer-contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-contact-item:hover {
+      color: rgba(255,255,255,0.90);
+    }
+    .footer-contact-item svg {
+      flex-shrink: 0;
+      opacity: 0.5;
     }
 
     @media (max-width: 800px) {
