@@ -1995,6 +1995,51 @@
       color: white;
     }
 
+    /* —— FOOTER PEOPLE —— */
+    .footer-people {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .footer-person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .footer-person:hover {
+      opacity: 0.8;
+    }
+    .footer-person-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid rgba(255,255,255,0.12);
+      background: #1a3a5c;
+      flex-shrink: 0;
+    }
+    .footer-person-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .footer-person-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.90);
+    }
+    .footer-person-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+    }
+
     @media (max-width: 800px) {
       .footer-container {
         border-left: none;
