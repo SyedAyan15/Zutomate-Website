@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(start \"c:\\\\Users\\\\HP\\\\OneDrive\\\\Desktop\\\\Zuromate\\\\index.html\")",
+      "Read(//c/Users/HP/.claude/projects/c--Users-HP-OneDrive-Desktop-Zuromate/e55078ac-7d85-4d79-ab8b-0afc0fec0424/tool-results/**)"
+    ]
+  }
+}
