@@ -501,44 +501,54 @@ if (heroForm) {
   }
 })();
 
-// ── NAVIGATION ACTIVE STATE ON SCROLL ──
+// ── SECTION SCROLL TRACKING (active nav + clean URL updates) ──
 (function () {
+  if (!document.getElementById('home')) return; // homepage only
+
   const sections = [
-    { id: 'home', linkText: 'Home' },
-    { id: 'services', linkText: 'Services' },
-    { id: 'how-we-work', linkText: 'Process' }
+    { id: 'home',        url: '/',         navText: 'Home' },
+    { id: 'services',    url: '/services', navText: 'Services' },
+    { id: 'ai-systems',  url: '/services', navText: 'Services' },
+    { id: 'how-we-work', url: '/process',  navText: 'Process' },
   ];
 
   const navLinks = document.querySelectorAll('.nav-links a');
+  let lastUrl = null;
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -70% 0px', // Adjust as needed to capture the active section centrally
-    threshold: 0
-  };
+  function getActive() {
+    if (window.scrollY < 80) return sections[0];
+    let active = sections[0];
+    for (const s of sections) {
+      const el = document.getElementById(s.id);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top <= window.innerHeight * 0.45) active = s;
+    }
+    return active;
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        const targetSection = sections.find(s => s.id === id);
+  function tick() {
+    const active = getActive();
+    navLinks.forEach(link => link.classList.toggle('active', link.textContent.trim() === active.navText));
+    if (active.url !== lastUrl) {
+      lastUrl = active.url;
+      history.replaceState(null, '', active.url);
+    }
+  }
 
-        if (targetSection) {
-          navLinks.forEach(link => {
-            if (link.textContent.trim() === targetSection.linkText) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        }
+  window.addEventListener('scroll', tick, { passive: true });
+  tick();
+
+  // Scroll to section when landing via clean URL (e.g. /services, /process)
+  const pathMap = { '/services': 'services', '/process': 'how-we-work', '/faq': 'faq', '/contact': 'footer-cta-form' };
+  const targetId = pathMap[window.location.pathname];
+  if (targetId) {
+    setTimeout(() => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        if (targetId === 'footer-cta-form') setTimeout(() => { const i = document.getElementById('cta-email'); if (i) i.focus(); }, 600);
       }
-    });
-  }, observerOptions);
-
-  sections.forEach(s => {
-    const el = document.getElementById(s.id);
-    if (el) observer.observe(el);
-  });
+    }, 150);
+  }
 })();
 
