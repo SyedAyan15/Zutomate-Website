@@ -514,8 +514,17 @@ if (heroForm) {
 
   const navLinks = document.querySelectorAll('.nav-links a');
   let lastUrl = null;
+  let suppressUntil = 0; // timestamp — suppress scroll tracking while scrolling to a target
 
-  function getActive() {
+  function setActive(navText, url) {
+    navLinks.forEach(link => link.classList.toggle('active', link.textContent.trim() === navText));
+    if (url && url !== lastUrl) {
+      lastUrl = url;
+      history.replaceState(null, '', url);
+    }
+  }
+
+  function getActiveSection() {
     if (window.scrollY < 80) return sections[0];
     let active = sections[0];
     for (const s of sections) {
@@ -527,28 +536,48 @@ if (heroForm) {
   }
 
   function tick() {
-    const active = getActive();
-    navLinks.forEach(link => link.classList.toggle('active', link.textContent.trim() === active.navText));
-    if (active.url !== lastUrl) {
-      lastUrl = active.url;
-      history.replaceState(null, '', active.url);
-    }
+    if (Date.now() < suppressUntil) return;
+    const active = getActiveSection();
+    setActive(active.navText, active.url);
   }
 
   window.addEventListener('scroll', tick, { passive: true });
-  tick();
 
-  // Scroll to section when landing via clean URL (e.g. /services, /process)
-  const pathMap = { '/services': 'services', '/process': 'how-we-work', '/faq': 'faq', '/contact': 'footer-cta-form' };
-  const targetId = pathMap[window.location.pathname];
-  if (targetId) {
+  // When a nav link is clicked, immediately set the correct active state and
+  // suppress scroll-based tracking for 1.2s so the indicator doesn't jump mid-scroll
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const text = link.textContent.trim();
+      const match = sections.find(s => s.navText === text);
+      if (match) {
+        suppressUntil = Date.now() + 1200;
+        setActive(match.navText, match.url);
+      }
+    });
+  });
+
+  // On page load: if URL is /services or /process (coming from another page),
+  // set the correct active link immediately and scroll to section
+  const pathMap = {
+    '/services': { id: 'services',        navText: 'Services', url: '/services' },
+    '/process':  { id: 'how-we-work',     navText: 'Process',  url: '/process'  },
+    '/faq':      { id: 'faq',             navText: null,       url: '/faq'      },
+    '/contact':  { id: 'footer-cta-form', navText: null,       url: '/contact'  },
+  };
+
+  const target = pathMap[window.location.pathname];
+  if (target) {
+    suppressUntil = Date.now() + 2000;
+    if (target.navText) setActive(target.navText, target.url);
     setTimeout(() => {
-      const el = document.getElementById(targetId);
+      const el = document.getElementById(target.id);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
-        if (targetId === 'footer-cta-form') setTimeout(() => { const i = document.getElementById('cta-email'); if (i) i.focus(); }, 600);
+        if (target.id === 'footer-cta-form') setTimeout(() => { const i = document.getElementById('cta-email'); if (i) i.focus(); }, 600);
       }
     }, 150);
+  } else {
+    tick(); // normal homepage load
   }
 })();
 
