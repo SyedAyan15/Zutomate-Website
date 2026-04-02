@@ -1,9 +1,18 @@
 {
-  "cleanUrls": true,
+  "redirects": [
+    { "source": "/case-studies.html",       "destination": "/case-studies",       "permanent": true },
+    { "source": "/shopwave.html",            "destination": "/shopwave",            "permanent": true },
+    { "source": "/goso.html",               "destination": "/goso",               "permanent": true },
+    { "source": "/discover-assessments.html","destination": "/discover-assessments","permanent": true }
+  ],
   "rewrites": [
-    { "source": "/services",  "destination": "/index.html" },
-    { "source": "/process",   "destination": "/index.html" },
-    { "source": "/faq",       "destination": "/index.html" },
-    { "source": "/contact",   "destination": "/index.html" }
+    { "source": "/case-studies",       "destination": "/case-studies.html" },
+    { "source": "/shopwave",           "destination": "/shopwave.html" },
+    { "source": "/goso",              "destination": "/goso.html" },
+    { "source": "/discover-assessments","destination": "/discover-assessments.html" },
+    { "source": "/services",          "destination": "/index.html" },
+    { "source": "/process",           "destination": "/index.html" },
+    { "source": "/faq",               "destination": "/index.html" },
+    { "source": "/contact",           "destination": "/index.html" }
   ]
 }
