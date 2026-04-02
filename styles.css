@@ -2520,3 +2520,105 @@
         grid-template-columns: 1fr;
       }
     }
+
+/* ═══════════════════════════════════════════
+   COMPREHENSIVE MOBILE STYLES  ≤ 768px
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Partners label ── */
+  .partners-label { font-size: 17px; margin-bottom: 28px; padding: 0 24px; }
+
+  /* ── Services CTA ── */
+  .services-cta h2 { font-size: clamp(22px, 6vw, 32px); }
+  .services-cta p  { font-size: 14px; }
+
+  /* ── GTM section headings ── */
+  .gtm-heading { font-size: clamp(22px, 6vw, 32px); }
+  .gtm-sub     { font-size: 13px; max-width: 100%; margin-bottom: 32px; padding: 0 4px; }
+
+  /* ── Why cards stacked properly ── */
+  .why-heading { font-size: clamp(26px, 7vw, 40px); }
+  .why-sub     { font-size: 15px; margin-bottom: 40px; }
+  .why-card-title { font-size: 19px; }
+
+  /* ── Plan section ── */
+  .plan-heading { font-size: clamp(24px, 6.5vw, 38px); }
+  .plan-sub     { font-size: 14px; margin-bottom: 40px; }
+  .plan-timeline {
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+  }
+
+  /* ── FAQ ── */
+  .faq-heading { font-size: clamp(28px, 8vw, 44px); }
+  .faq-sub     { font-size: 14px; }
+  .faq-q       { font-size: 15px; padding: 20px; }
+  .faq-item.open .faq-a { padding: 0 20px 22px; }
+
+  /* ── Footer ── */
+  .site-footer   { padding-top: 52px; padding-bottom: 52px; }
+  .cta-heading   { font-size: clamp(28px, 7vw, 38px); }
+  .footer-logo-row { padding-bottom: 48px; }
+  .footer-cta-row  { padding-bottom: 48px; margin-bottom: 40px; }
+
+  /* ── Case studies preview on homepage ── */
+  .cases-preview-section { padding: 64px 20px 56px; }
+  .cases-preview-section h2 { font-size: clamp(26px, 7vw, 40px); }
+  .case-card { padding: 28px 20px; }
+  .case-headline { font-size: 18px; }
+  .case-metric-value { font-size: 28px; }
+  .case-metrics { flex-wrap: wrap; gap: 16px; }
+  .btn-see-all { width: 100%; justify-content: center; }
+
+  /* ── Testimonials — one card, full width ── */
+  .tslider-side-arrow { display: none; }
+  .tcard { padding: 28px 20px 22px; }
+  .tcard-quote { font-size: 14px; }
+
+  /* ── Services section label ── */
+  .services-label { margin-bottom: 24px; }
+  .services-heading { font-size: clamp(28px, 7vw, 44px); margin-bottom: 14px; }
+  .services-sub { font-size: 14px; }
+}
+
+/* ─── EXTRA SMALL  ≤ 480px ─── */
+@media (max-width: 480px) {
+  h1 { font-size: clamp(34px, 10vw, 52px); letter-spacing: -1px; }
+  .hero-sub { font-size: 15px; }
+
+  /* Shrink badge text slightly */
+  .badge-text, .services-label, .why-badge, .plan-badge, .faq-badge {
+    font-size: 10px; letter-spacing: 1.4px;
+  }
+
+  /* Hero form inputs stack nicely */
+  .hero-form input { font-size: 15px; }
+
+  /* Service tags tighter */
+  .service-tags { gap: 6px; }
+  .tag { font-size: 11px; padding: 5px 12px; }
+
+  /* Why cards */
+  .why-card { padding: 28px 20px 32px; }
+
+  /* GTM col inner padding */
+  .gtm-col { padding: 24px 16px; }
+
+  /* Testimonial card */
+  .tcard { flex: 0 0 calc(100vw - 48px); min-width: calc(100vw - 48px); }
+  .tcard-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .tcard-company { margin-left: 0; }
+
+  /* Plan bar label hidden on very small */
+  .plan-phase-tag { display: none; }
+  .plan-bar { font-size: 11px; padding: 0 10px; }
+
+  /* Case cards */
+  .case-card { padding: 22px 16px; gap: 18px; }
+  .case-metric-value { font-size: 24px; }
+
+  /* Footer */
+  .cta-heading { font-size: clamp(24px, 8vw, 32px); }
+  .footer-person-img { width: 44px; height: 44px; }
+}

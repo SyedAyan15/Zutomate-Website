@@ -419,12 +419,21 @@
       .cs-layout { grid-template-columns: 1fr; padding: 0 24px 80px; gap: 3rem; }
       .cs-sidebar { position: static; order: -1; }
       .cs-detail-hero { padding: 120px 24px 56px; }
+      .cs-stats-bar { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
+      .cs-detail-hero { padding: 100px 20px 40px; }
+      .cs-layout { padding: 0 20px 60px; gap: 2rem; }
       .cs-problem-grid { grid-template-columns: 1fr; }
       .cs-results-grid { grid-template-columns: 1fr; }
       .cs-infra-row { grid-template-columns: 1fr; }
       .cs-rb-divider { display: none; }
+      .cs-stats-bar { grid-template-columns: 1fr 1fr; }
+      .cs-stat { padding: 20px 16px; }
+      .cs-stat-val { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .cs-content h2 { font-size: clamp(1.15rem, 5vw, 1.5rem); }
+      .cs-logo-stack { gap: 12px; }
+      .cs-logo-item { width: 58px; height: 58px; padding: 12px; }
     }
   </style>
 </head>
