@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal | Zutomate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --lg-text-primary: #e5e8ef;
+      --lg-text-secondary: #8a9ab5;
+      --lg-border: rgba(255,255,255,0.08);
+      --lg-bg-secondary: rgba(255,255,255,0.04);
+    }
+
+    .lg-hero {
+      padding: 80px 52px 0;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .lg-hero h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 500;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+    .lg-hero p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      color: var(--lg-text-secondary);
+      margin-bottom: 0;
+    }
+
+    .lg-wrap {
+      max-width: 760px;
+      margin: 48px auto 100px;
+      padding: 0 52px;
+    }
+
+    .lg-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--lg-border);
+      padding-bottom: 0;
+    }
+    .lg-tab {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 22px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--lg-text-secondary);
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lg-tab.active { color: #F26522; border-bottom-color: #F26522; }
+    .lg-tab:hover:not(.active) { color: var(--lg-text-primary); }
+
+    .lg-badge {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      background: rgba(242,101,34,0.1);
+      color: #F26522;
+      border: 1px solid rgba(242,101,34,0.2);
+      border-radius: 4px;
+      padding: 3px 10px;
+      margin-bottom: 20px;
+    }
+    .lg-content h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .lg-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--lg-text-secondary);
+      margin-bottom: 28px;
+    }
+    .lg-box {
+      background: var(--lg-bg-secondary);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      border: 1px solid var(--lg-border);
+    }
+    .lg-box p { margin: 0; }
+
+    .lg-content h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      margin: 32px 0 10px;
+      padding-left: 14px;
+      border-left: 3px solid #F26522;
+    }
+    .lg-content p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--lg-text-secondary);
+      margin-bottom: 12px;
+    }
+    .lg-content ul {
+      padding-left: 1.3rem;
+      margin-bottom: 12px;
+    }
+    .lg-content li {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--lg-text-secondary);
+      margin-bottom: 4px;
+    }
+    .lg-content a { color: #F26522; text-decoration: none; }
+    .lg-content a:hover { text-decoration: underline; }
+    .lg-content strong { color: var(--lg-text-primary); }
+
+    .lg-link-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #F26522;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .lg-link-btn:hover { opacity: 0.8; }
+
+    @media (max-width: 768px) {
+      .lg-hero { padding: 60px 24px 0; }
+      .lg-wrap { padding: 0 24px; margin-top: 36px; }
+      .lg-tab { font-size: 14px; padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <button class="mobile-menu-btn" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+    <a href="/" class="logo" style="display:flex;align-items:center;text-decoration:none;">
+      <img src="logo.svg" alt="Zutomate" style="height:23px;width:auto;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/process">Process</a></li>
+      <li><a href="/case-studies">Case Studies</a></li>
+      <li><a href="/resources">Resources</a></li>
+    </ul>
+    <a href="/contact" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <div class="lg-hero">
+    <div class="badge"><span class="badge-text">Legal</span></div>
+    <h1>Policies &amp; Terms</h1>
+    <p>How we handle your data and the terms governing your use of our site.</p>
+  </div>
+
+  <div class="lg-wrap">
+    <div class="lg-tabs">
+      <button class="lg-tab active" id="tab-pp" onclick="showTab('pp')">Privacy Policy</button>
+      <button class="lg-tab" id="tab-tou" onclick="showTab('tou')">Terms of Use</button>
+    </div>
+
+    <div id="lg-pp" class="lg-content">
+      <div class="lg-badge">Last updated: April 2025</div>
+      <h1>Privacy Policy</h1>
+      <p class="lg-meta">Zutomate | zutomate.com</p>
+      <div class="lg-box"><p>This policy explains how Zutomate ("we", "us", or "our") collects, uses, and protects information when you visit our website or engage our services. By using our site you agree to the practices described here.</p></div>
+
+      <h2>1. Information we collect</h2>
+      <p>We collect information you provide directly and information generated when you use our site:</p>
+      <ul>
+        <li><strong>Contact data</strong> - name, email address, company name, and any details you submit via our contact or booking forms.</li>
+        <li><strong>Usage data</strong> - pages visited, time on site, browser type, and referring URL, collected automatically via analytics tools.</li>
+        <li><strong>Communication data</strong> - messages, emails, or other content you send us.</li>
+        <li><strong>Cookie data</strong> - small files stored in your browser to remember preferences and support analytics (see Section 6).</li>
+      </ul>
+      <p>We do not knowingly collect sensitive personal data or information from individuals under the age of 16.</p>
+
+      <h2>2. How we use your information</h2>
+      <p>We use collected information to:</p>
+      <ul>
+        <li>Respond to enquiries and provide the services you request.</li>
+        <li>Send operational communications related to your engagement with us.</li>
+        <li>Improve and personalise the experience on our website.</li>
+        <li>Analyse site performance and understand how visitors interact with our content.</li>
+        <li>Comply with applicable legal obligations.</li>
+      </ul>
+      <p>We will not sell, rent, or trade your personal information to third parties for their own marketing purposes.</p>
+
+      <h2>3. Legal basis for processing</h2>
+      <p>Where applicable under data protection law (including GDPR), we process your personal data on the following bases:</p>
+      <ul>
+        <li><strong>Consent</strong> - where you have given clear consent (e.g. subscribing to updates).</li>
+        <li><strong>Legitimate interests</strong> - to operate and improve our business, provided your rights are not overridden.</li>
+        <li><strong>Contractual necessity</strong> - to deliver services you have engaged us for.</li>
+        <li><strong>Legal obligation</strong> - where required by law.</li>
+      </ul>
+
+      <h2>4. How we share your information</h2>
+      <p>We may share your information with trusted service providers who help us operate our business, including:</p>
+      <ul>
+        <li>CRM and email platforms (e.g. HubSpot, Google Workspace).</li>
+        <li>Analytics tools (e.g. Google Analytics).</li>
+        <li>Scheduling and meeting tools (e.g. Calendly).</li>
+        <li>Cloud infrastructure and hosting providers.</li>
+      </ul>
+      <p>All third-party processors are bound by appropriate data processing agreements and are only permitted to use your data for specified purposes.</p>
+
+      <h2>5. Data retention</h2>
+      <p>We retain personal data only as long as necessary to fulfil the purposes outlined in this policy or as required by law. Contact and client data is typically retained for up to 3 years after the end of engagement, unless you request earlier deletion.</p>
+
+      <h2>6. Cookies</h2>
+      <p>Our website uses cookies to support analytics and improve user experience. You may control cookie preferences through your browser settings. Disabling cookies may affect the functionality of certain parts of the site. We do not use cookies to serve third-party advertising.</p>
+
+      <h2>7. Your rights</h2>
+      <p>Depending on your location, you may have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you.</li>
+        <li>Request correction of inaccurate data.</li>
+        <li>Request deletion of your personal data.</li>
+        <li>Object to or restrict certain processing activities.</li>
+        <li>Data portability (receive your data in a structured format).</li>
+        <li>Withdraw consent at any time where processing is based on consent.</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:hello@zutomate.com">hello@zutomate.com</a>.</p>
+
+      <h2>8. Data security</h2>
+      <p>We implement appropriate technical and organisational measures to protect your information against unauthorised access, alteration, disclosure, or destruction. However, no internet transmission is entirely secure and we cannot guarantee absolute security.</p>
+
+      <h2>9. International transfers</h2>
+      <p>Your data may be processed in countries outside your own. Where transfers occur, we ensure appropriate safeguards are in place (such as standard contractual clauses) to protect your data in accordance with applicable law.</p>
+
+      <h2>10. Changes to this policy</h2>
+      <p>We may update this policy from time to time. The "Last updated" date at the top of this page will reflect any changes. Continued use of our site after updates constitutes acceptance of the revised policy.</p>
+
+      <h2>11. Contact</h2>
+      <p>If you have questions about this policy or how we handle your data, contact us at <a href="mailto:hello@zutomate.com">hello@zutomate.com</a> or visit <a href="https://www.zutomate.com/contact" target="_blank">zutomate.com/contact</a>.</p>
+    </div>
+
+    <div id="lg-tou" class="lg-content" style="display:none">
+      <div class="lg-badge">Last updated: April 2025</div>
+      <h1>Terms of Use</h1>
+      <p class="lg-meta">Zutomate | zutomate.com</p>
+      <div class="lg-box"><p>By accessing or using zutomate.com (the "Site") or engaging Zutomate's services, you agree to be bound by the following terms. Please read them carefully. If you do not agree, do not use the Site.</p></div>
+
+      <h2>1. About Zutomate</h2>
+      <p>Zutomate is a GTM and AI automation agency that provides outbound infrastructure, Clay-based systems, AI agents, and go-to-market strategy to B2B businesses. References to "Zutomate", "we", "us", or "our" in these terms refer to Zutomate and its team.</p>
+
+      <h2>2. Use of the site</h2>
+      <p>You agree to use the Site only for lawful purposes and in a manner that does not infringe the rights of others. You must not:</p>
+      <ul>
+        <li>Use the Site in any way that violates applicable local, national, or international laws or regulations.</li>
+        <li>Transmit unsolicited or unauthorised advertising or promotional material.</li>
+        <li>Attempt to gain unauthorised access to any part of the Site or its related systems.</li>
+        <li>Scrape, copy, or reproduce any content from the Site without our prior written consent.</li>
+        <li>Misrepresent your identity or affiliation with any person or organisation.</li>
+      </ul>
+
+      <h2>3. Intellectual property</h2>
+      <p>All content on this Site, including text, graphics, logos, icons, case studies, and code, is the property of Zutomate or its licensors and is protected by applicable intellectual property laws.</p>
+      <p>You may not reproduce, distribute, modify, or create derivative works from any content without our express written permission. Referencing or linking to our Site is permitted provided you do so fairly and without damaging our reputation.</p>
+
+      <h2>4. Service engagements</h2>
+      <p>Enquiries submitted through the Site do not constitute a binding contract. Any service engagement between you and Zutomate is governed by a separate written agreement (such as a Statement of Work or service contract) entered into by both parties.</p>
+      <p>Zutomate reserves the right to decline any engagement at its sole discretion.</p>
+
+      <h2>5. Disclaimer of warranties</h2>
+      <p>The Site and all content are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not warrant that the Site will be uninterrupted, error-free, or free from viruses or other harmful components.</p>
+      <p>While we strive to ensure accuracy, we make no representations about the completeness or reliability of any content on the Site.</p>
+
+      <h2>6. Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, Zutomate shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of, or inability to use, the Site or its content. Our total liability to you for any claim arising from your use of the Site shall not exceed the amount you paid us (if any) in the 3 months preceding the claim.</p>
+
+      <h2>7. Third-party links</h2>
+      <p>The Site may contain links to third-party websites or services. These are provided for convenience only. Zutomate has no control over and accepts no responsibility for the content, privacy practices, or terms of any third-party sites. Accessing third-party links is at your own risk.</p>
+
+      <h2>8. Privacy</h2>
+      <p>Your use of the Site is also governed by our <button class="lg-link-btn" onclick="showTab('pp')">Privacy Policy</button>, which is incorporated into these Terms by reference.</p>
+
+      <h2>9. Changes to the site and terms</h2>
+      <p>We reserve the right to modify, suspend, or discontinue any part of the Site at any time without notice. We may also update these Terms at any time. The "Last updated" date reflects the most recent revision. Continued use of the Site after changes constitutes your acceptance of the updated Terms.</p>
+
+      <h2>10. Governing law</h2>
+      <p>These Terms are governed by and construed in accordance with applicable law. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of the applicable territory. Where Zutomate operates across multiple jurisdictions, parties agree to resolve disputes by good-faith negotiation before initiating formal proceedings.</p>
+
+      <h2>11. Contact</h2>
+      <p>For questions about these Terms, reach us at <a href="mailto:hello@zutomate.com">hello@zutomate.com</a> or visit <a href="https://www.zutomate.com/contact" target="_blank">zutomate.com/contact</a>.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-bg-glow"></div>
+    <div class="footer-container">
+      <div class="footer-logo-row">
+        <a href="/" class="footer-logo"><img src="logo.svg" alt="Zutomate" style="height:32px;width:auto;" /></a>
+      </div>
+      <div class="footer-cta-row">
+        <h2 class="cta-heading">Book your strategy call</h2>
+        <form id="footer-cta-form" class="cta-form">
+          <div class="cta-input-group">
+            <input type="email" name="email" placeholder="Email" required>
+            <div class="input-divider"></div>
+            <input type="text" name="full_name" placeholder="Full name" required>
+          </div>
+          <button type="submit">Book call</button>
+        </form>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-col">
+          <h3>Navigate</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/process">Process</a></li>
+            <li><a href="/faq">FAQs</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow</h3>
+          <ul class="social-links">
+            <li><a href="https://www.linkedin.com/company/zutomate" target="_blank">LinkedIn</a></li>
+            <li><a>Youtube</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Get in touch</h3>
+          <div class="footer-people">
+            <a href="https://www.linkedin.com/in/zainva/" target="_blank" rel="noopener" class="footer-person">
+              <img src="zain.jpg.png" alt="Zain Tanveer" class="footer-person-img" />
+              <div class="footer-person-info"><span class="footer-person-name">Zain Tanveer</span><span class="footer-person-title">GTM Engineer</span></div>
+            </a>
+            <a href="https://www.linkedin.com/in/syed-ayan-hassan/" target="_blank" rel="noopener" class="footer-person">
+              <img src="ayan.jpg.png" alt="Syed Ayan Hassan" class="footer-person-img" />
+              <div class="footer-person-info"><span class="footer-person-name">Syed Ayan Hassan</span><span class="footer-person-title">GTM Engineer</span></div>
+            </a>
+          </div>
+          <div class="footer-contact-details">
+            <a href="mailto:hello@zutomate.com" class="footer-contact-item">hello@zutomate.com</a>
+            <a href="tel:+17029641639" class="footer-contact-item">+1 702 964 1639</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Zutomate 2026. All rights reserved. | Built for B2B growth.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function showTab(id) {
+      document.getElementById('lg-pp').style.display = id === 'pp' ? '' : 'none';
+      document.getElementById('lg-tou').style.display = id === 'tou' ? '' : 'none';
+      document.getElementById('tab-pp').classList.toggle('active', id === 'pp');
+      document.getElementById('tab-tou').classList.toggle('active', id === 'tou');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Auto-select tab based on URL path
+    (function () {
+      const path = window.location.pathname;
+      if (path.includes('terms')) showTab('tou');
+    })();
+  </script>
+</body>
+</html>

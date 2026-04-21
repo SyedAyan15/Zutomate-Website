@@ -5,7 +5,8 @@
     { "source": "/goso.html",               "destination": "/goso",               "permanent": true },
     { "source": "/discover-assessments.html","destination": "/discover-assessments","permanent": true },
     { "source": "/truclean.html",            "destination": "/truclean",            "permanent": true },
-    { "source": "/resources.html",           "destination": "/resources",           "permanent": true }
+    { "source": "/resources.html",           "destination": "/resources",           "permanent": true },
+    { "source": "/legal.html",               "destination": "/privacy",             "permanent": true }
   ],
   "rewrites": [
     { "source": "/case-studies",       "destination": "/case-studies.html" },
@@ -14,6 +15,8 @@
     { "source": "/discover-assessments","destination": "/discover-assessments.html" },
     { "source": "/truclean",           "destination": "/truclean.html" },
     { "source": "/resources",          "destination": "/resources.html" },
+    { "source": "/privacy",            "destination": "/legal.html" },
+    { "source": "/terms",              "destination": "/legal.html" },
     { "source": "/services",          "destination": "/index.html" },
     { "source": "/process",           "destination": "/index.html" },
     { "source": "/faq",               "destination": "/index.html" },
