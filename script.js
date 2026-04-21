@@ -87,6 +87,43 @@
   });
 
   window.addEventListener('resize', () => setPos(pos, false));
+
+  // Touch swipe support
+  const wrapper = track.parentElement;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartPos = 0;
+  let isDragging = false;
+
+  wrapper.addEventListener('touchstart', (e) => {
+    if (isTransitioning) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartPos = pos;
+    isDragging = true;
+    track.style.transition = 'none';
+  }, { passive: true });
+
+  wrapper.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const deltaX = e.touches[0].clientX - touchStartX;
+    const deltaY = e.touches[0].clientY - touchStartY;
+    if (Math.abs(deltaX) < Math.abs(deltaY)) return; // vertical scroll — don't hijack
+    e.preventDefault();
+    const baseOffset = -(touchStartPos * getCardW());
+    track.style.transform = 'translateX(' + (baseOffset + deltaX) + 'px)';
+  }, { passive: false });
+
+  wrapper.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(deltaX) > 50) {
+      deltaX < 0 ? next() : prev();
+    } else {
+      setPos(pos, true); // snap back
+    }
+  });
 })();
 
 
