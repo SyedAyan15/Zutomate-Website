@@ -2270,54 +2270,44 @@
         padding: 50px 20px;
       }
 
-      /* 90-Day Plan - Mobile vertical list */
+      /* 90-Day Plan - Mobile compact Gantt */
       .plan-section {
-        padding: 50px 20px;
+        padding: 50px 12px;
       }
       .plan-timeline {
         overflow-x: visible;
-        padding-bottom: 0;
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 0;
-        padding-right: 0;
+        margin: 0;
+        padding: 0;
       }
-      .plan-months { display: none; }
+      .plan-months { min-width: unset; }
+      .plan-rows { min-width: unset; padding: 6px 0; }
+      .plan-month-label {
+        font-size: 8px;
+        letter-spacing: 0.3px;
+        padding: 0 0 8px 4px;
+      }
       .plan-col-dividers { display: none; }
-      .plan-rows { min-width: unset; padding: 8px 0; }
       .plan-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 44px;
-        margin-bottom: 8px;
+        display: grid;
+        grid-template-columns: 22px 1fr 1fr 1fr 1fr;
+        min-height: 28px;
+        margin-bottom: 5px;
         opacity: 1;
         transform: none;
       }
       .plan-row-num {
-        min-width: 28px;
-        flex-shrink: 0;
-        text-align: right;
-        padding-right: 4px;
-        font-size: 11px;
+        font-size: 8px;
+        padding-right: 2px;
       }
-      .plan-bar-wrap.dark { display: none; }
-      .plan-bar-wrap,
-      .plan-bar-wrap.span2,
-      .plan-bar-wrap.span3,
-      .plan-bar-wrap.span4 {
-        flex: 1;
-        padding: 0;
-        grid-column: unset;
-      }
+      .plan-bar-wrap { padding: 0 2px; }
       .plan-bar {
-        height: auto;
-        min-height: 44px;
-        padding: 10px 14px;
-        white-space: normal;
-        font-size: 13px;
+        height: 26px;
+        padding: 0 5px;
+        font-size: 9px;
+        border-radius: 4px;
+        white-space: nowrap;
       }
-      .plan-phase-tag { display: inline-flex; }
+      .plan-phase-tag { display: none; }
       
       /* Testimonials */
       .testimonials-section {
@@ -2635,12 +2625,20 @@
   .gtm-col { padding: 24px 16px; }
 
   /* Testimonial card */
-  .tcard { flex: 0 0 calc(100vw - 48px); min-width: calc(100vw - 48px); }
-  .tcard-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .tcard {
+    flex: 0 0 calc(100vw - 48px);
+    min-width: calc(100vw - 48px);
+    padding: 22px 20px 18px;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+  .tcard-quote { font-size: 14px; line-height: 1.6; }
+  .tcard-quote-mark { font-size: 30px; margin-bottom: 10px; }
+  .tcard-footer { flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 14px; }
   .tcard-company { margin-left: 0; }
 
   /* Plan bar on very small screens */
-  .plan-bar { font-size: 12px; padding: 10px 12px; }
+  .plan-bar { font-size: 8px; padding: 0 4px; }
 
   /* Case cards */
   .case-card { padding: 22px 16px; gap: 18px; }
