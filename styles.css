@@ -2270,25 +2270,54 @@
         padding: 50px 20px;
       }
 
-      /* 90-Day Plan - Mobile Scroller */
+      /* 90-Day Plan - Mobile vertical list */
       .plan-section {
         padding: 50px 20px;
       }
       .plan-timeline {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 20px;
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
+        overflow-x: visible;
+        padding-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
       }
-      .plan-months {
-        min-width: 600px;
+      .plan-months { display: none; }
+      .plan-col-dividers { display: none; }
+      .plan-rows { min-width: unset; padding: 8px 0; }
+      .plan-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        margin-bottom: 8px;
+        opacity: 1;
+        transform: none;
       }
-      .plan-rows {
-        min-width: 600px;
+      .plan-row-num {
+        min-width: 28px;
+        flex-shrink: 0;
+        text-align: right;
+        padding-right: 4px;
+        font-size: 11px;
       }
+      .plan-bar-wrap.dark { display: none; }
+      .plan-bar-wrap,
+      .plan-bar-wrap.span2,
+      .plan-bar-wrap.span3,
+      .plan-bar-wrap.span4 {
+        flex: 1;
+        padding: 0;
+        grid-column: unset;
+      }
+      .plan-bar {
+        height: auto;
+        min-height: 44px;
+        padding: 10px 14px;
+        white-space: normal;
+        font-size: 13px;
+      }
+      .plan-phase-tag { display: inline-flex; }
       
       /* Testimonials */
       .testimonials-section {
@@ -2610,9 +2639,8 @@
   .tcard-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
   .tcard-company { margin-left: 0; }
 
-  /* Plan bar label hidden on very small */
-  .plan-phase-tag { display: none; }
-  .plan-bar { font-size: 11px; padding: 0 10px; }
+  /* Plan bar on very small screens */
+  .plan-bar { font-size: 12px; padding: 10px 12px; }
 
   /* Case cards */
   .case-card { padding: 22px 16px; gap: 18px; }
