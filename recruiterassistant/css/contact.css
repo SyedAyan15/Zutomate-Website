@@ -1,0 +1,248 @@
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+
+.contact-page main {
+  background: var(--dark);
+  min-height: calc(100vh - 64px);
+  padding: 5rem 4rem;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+
+/* ============================================================
+   LEFT PANEL
+   ============================================================ */
+
+.contact-heading {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.2;
+  margin: 0.5rem 0 1.2rem;
+}
+
+.contact-heading em {
+  color: var(--accent);
+  font-style: normal;
+}
+
+.contact-intro {
+  color: var(--text-on-dark);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+.contact-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.contact-benefits li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.benefit-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.contact-benefits strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.2rem;
+}
+
+.contact-benefits p {
+  font-size: 0.85rem;
+  color: var(--text-on-dark);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.contact-divider {
+  height: 1px;
+  background: var(--border-strong);
+  margin-bottom: 2rem;
+}
+
+.contact-founder {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--border-strong);
+}
+
+.contact-founder-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.contact-founder-role {
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-top: 0.1rem;
+}
+
+.contact-email-line {
+  font-size: 0.82rem;
+  color: var(--text-on-dark);
+}
+
+.contact-email-line a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(240, 115, 48, 0.4);
+  transition: border-color 0.2s;
+}
+
+.contact-email-line a:hover {
+  border-color: var(--accent);
+}
+
+
+/* ============================================================
+   RIGHT PANEL: Calendly
+   ============================================================ */
+
+.contact-calendar {
+  position: sticky;
+  top: 100px;
+}
+
+.calendly-wrap {
+  background: #0B2545;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Invert Calendly iframe to match dark theme */
+.calendly-inline-widget iframe {
+  filter: invert(1) hue-rotate(180deg);
+  border-radius: 0 0 10px 10px;
+}
+
+
+/* ============================================================
+   SKELETON LOADER
+   ============================================================ */
+
+.calendly-skeleton {
+  padding: 2rem;
+  position: absolute;
+  inset: 0;
+  background: #0B2545;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.skeleton-pulse {
+  background: linear-gradient(90deg, #e8edf2 25%, #d0dae6 50%, #e8edf2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 60%;
+  margin-bottom: 0.8rem;
+}
+
+.skeleton-sub {
+  height: 14px;
+  width: 40%;
+  margin-bottom: 2rem;
+}
+
+.skeleton-days {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton-day {
+  flex: 1;
+  height: 60px;
+  border-radius: 6px;
+}
+
+.skeleton-time {
+  height: 44px;
+  margin-bottom: 0.6rem;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-page main {
+    padding: 4rem 2rem;
+  }
+
+  .contact-heading {
+    font-size: 2rem;
+  }
+
+  .contact-calendar {
+    position: static;
+  }
+
+  .calendly-inline-widget {
+    height: 600px !important;
+  }
+}

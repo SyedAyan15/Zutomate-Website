@@ -1,5 +1,7 @@
 {
   "redirects": [
+    { "source": "/recruiterassistant/index.html",   "destination": "/recruiterassistant",         "permanent": true },
+    { "source": "/recruiterassistant/contact.html", "destination": "/recruiterassistant/contact", "permanent": true },
     { "source": "/case-studies.html",       "destination": "/case-studies",       "permanent": true },
     { "source": "/shopwave.html",            "destination": "/shopwave",            "permanent": true },
     { "source": "/goso.html",               "destination": "/goso",               "permanent": true },
@@ -9,6 +11,8 @@
     { "source": "/legal.html",               "destination": "/privacy",             "permanent": true }
   ],
   "rewrites": [
+    { "source": "/recruiterassistant",         "destination": "/recruiterassistant/index.html" },
+    { "source": "/recruiterassistant/contact", "destination": "/recruiterassistant/contact.html" },
     { "source": "/case-studies",       "destination": "/case-studies.html" },
     { "source": "/shopwave",           "destination": "/shopwave.html" },
     { "source": "/goso",              "destination": "/goso.html" },
