@@ -34,12 +34,11 @@
     gtag('config', 'G-5TECEG48CJ');
   </script>
 
-  <!-- Calendly preconnect + early script load -->
+  <!-- Calendly preconnect -->
   <link rel="preconnect" href="https://assets.calendly.com">
   <link rel="preconnect" href="https://calendly.com">
   <link rel="dns-prefetch" href="https://assets.calendly.com">
   <link rel="dns-prefetch" href="https://calendly.com">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,12 +151,16 @@
             <div class="skeleton-pulse skeleton-time"></div>
           </div>
 
-          <!-- Calendly inline widget -->
-          <div
-            class="calendly-inline-widget"
-            data-url="https://calendly.com/zutomate/30min?hide_gdpr_banner=1"
-            style="min-width: 320px; height: 700px;"
-          ></div>
+          <!-- Calendly direct iframe — loads immediately, no JS dependency -->
+          <iframe
+            id="calendlyFrame"
+            src="https://calendly.com/zutomate/30min?hide_gdpr_banner=1&embed_domain=zutomate.com&embed_type=Inline"
+            width="100%"
+            height="700"
+            frameborder="0"
+            loading="eager"
+            onload="document.getElementById('calendlySkeleton').style.display='none'"
+          ></iframe>
 
         </div>
       </div>
@@ -175,21 +178,11 @@
   </footer>
 
   <script>
-    var skeleton = document.getElementById('calendlySkeleton');
-
-    function showCalendly() {
-      if (skeleton) skeleton.style.display = 'none';
-    }
-
-    // Hide skeleton once Calendly fires any event
-    window.addEventListener('message', function (e) {
-      if (e.data && e.data.event && e.data.event.indexOf('calendly') === 0) {
-        showCalendly();
-      }
-    });
-
-    // Fallback: hide after 3.5 seconds regardless
-    setTimeout(showCalendly, 3500);
+    // Fallback in case onload doesn't fire (cross-origin iframe quirks)
+    setTimeout(function () {
+      var s = document.getElementById('calendlySkeleton');
+      if (s) s.style.display = 'none';
+    }, 5000);
   </script>
 
 </body>
