@@ -13,7 +13,6 @@
   "rewrites": [
     { "source": "/recruiterassistant",          "destination": "/recruiterassistant/index.html"   },
     { "source": "/recruiterassistant/contact",  "destination": "/recruiterassistant/contact.html" },
-    { "source": "/recruiterassistant/about",   "destination": "/recruiterassistant/about.html"   },
     { "source": "/case-studies",                "destination": "/case-studies/index.html"          },
     { "source": "/shopwave",                    "destination": "/case-studies/shopwave.html"       },
     { "source": "/goso",                        "destination": "/case-studies/goso.html"           },
