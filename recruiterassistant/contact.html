@@ -34,11 +34,12 @@
     gtag('config', 'G-5TECEG48CJ');
   </script>
 
-  <!-- Calendly preconnect -->
+  <!-- Calendly preconnect + early script load -->
   <link rel="preconnect" href="https://assets.calendly.com">
   <link rel="preconnect" href="https://calendly.com">
   <link rel="dns-prefetch" href="https://assets.calendly.com">
   <link rel="dns-prefetch" href="https://calendly.com">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -154,10 +155,9 @@
           <!-- Calendly inline widget -->
           <div
             class="calendly-inline-widget"
-            data-url="https://calendly.com/zutomate/30min"
+            data-url="https://calendly.com/zutomate/30min?hide_gdpr_banner=1"
             style="min-width: 320px; height: 700px;"
           ></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
         </div>
       </div>

@@ -149,16 +149,14 @@
 }
 
 .calendly-wrap {
-  background: #0B2545;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5);
   position: relative;
 }
 
-/* Invert Calendly iframe to match dark theme */
 .calendly-inline-widget iframe {
-  filter: invert(1) hue-rotate(180deg);
   border-radius: 0 0 10px 10px;
 }
 
