@@ -261,23 +261,44 @@ nav {
 .stat-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1rem 0;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.2s, padding-left 0.2s;
+}
+
+.stat-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  padding-left: 0.75rem;
 }
 
 .stat-row:last-of-type {
   border-bottom: none;
 }
 
+.stat-row:hover .stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+}
+
+.stat-row:hover .stat-val {
+  letter-spacing: 0.01em;
+  transition: letter-spacing 0.2s;
+}
+
 .stat-label {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s;
 }
 
 .stat-val {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--accent-light);
+  transition: letter-spacing 0.2s;
 }
 
 .hero-badge {
@@ -292,11 +313,7 @@ nav {
 }
 
 .badge-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
+  display: none;
 }
 
 .badge-text {
@@ -985,6 +1002,10 @@ footer {
 @media (max-width: 1024px) {
   nav {
     padding: 1rem 2rem;
+  }
+
+  .nav-logo img {
+    height: 20px;
   }
 
   .nav-links {
