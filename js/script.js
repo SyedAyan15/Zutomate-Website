@@ -471,7 +471,7 @@ if (ctaForm) {
     var name = document.getElementById('cta-name').value;
 
     // 1. Send data to your backend Webhook silently in background using GET
-    var WEBHOOK_URL = 'https://n8n.srv1426253.hstgr.cloud/webhook/c51d9bb0-50d4-4fe9-996b-c6f4f6ecdaa9';
+    var WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
     if (WEBHOOK_URL) {
       var queryParams = "?email=" + encodeURIComponent(email) + "&full_name=" + encodeURIComponent(name) + "&source=Footer+CTA";
 
@@ -498,7 +498,7 @@ if (heroForm) {
     var company = document.getElementById('hero-company').value;
 
     // 1. Send data to your backend Webhook silently in background using GET
-    var WEBHOOK_URL = 'https://n8n.srv1426253.hstgr.cloud/webhook/c51d9bb0-50d4-4fe9-996b-c6f4f6ecdaa9';
+    var WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
     if (WEBHOOK_URL) {
       var queryParams = "?email=" + encodeURIComponent(email) + "&company_name=" + encodeURIComponent(company) + "&source=Hero+CTA";
 
