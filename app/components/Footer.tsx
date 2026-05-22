@@ -66,11 +66,19 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://www.youtube.com/@zutomate" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/@gtmsync" target="_blank" rel="noopener noreferrer">
                   <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21.58 6.01c-.24-.91-.97-1.63-1.88-1.87-1.66-.45-8.31-.45-8.31-.45s-6.66 0-8.32.45c-.9.24-1.63.96-1.87 1.87-.45 1.66-.45 5.12-.45 5.12s0 3.46.45 5.12c.24.91.97 1.63 1.87 1.87 1.66.45 8.32.45 8.32.45s6.65 0 8.31-.45c.91-.24 1.64-.96 1.88-1.87.45-1.66.45-5.12.45-5.12s0-3.46-.45-5.12zm-12.2 8.49v-6l5.5 3-5.5 3z" />
                   </svg>
                   Youtube
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=61583443971831" target="_blank" rel="noopener noreferrer">
+                  <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.27h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z" />
+                  </svg>
+                  Facebook
                 </a>
               </li>
             </ul>
