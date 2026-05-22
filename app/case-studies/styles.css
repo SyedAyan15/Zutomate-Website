@@ -1,0 +1,94 @@
+.cs-list { max-width: 1100px; margin: 0 auto; padding: 0 52px 100px; display: flex; flex-direction: column; gap: 1px; }
+
+.cs-hcard {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  gap: 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 16px;
+}
+.cs-hcard:hover { border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); }
+
+.cs-hcard-left {
+  padding: 32px 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
+}
+.cs-hcard-logo {
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-hcard-company {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 500; font-size: 1.05rem;
+  color: rgba(255,255,255,0.9); letter-spacing: -0.2px;
+}
+.cs-hcard-tag {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif; font-weight: 600;
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(242,101,34,0.10);
+  border: 1px solid rgba(242,101,34,0.22);
+  padding: 3px 9px; border-radius: 4px;
+  align-self: flex-start;
+}
+
+.cs-hcard-mid {
+  padding: 32px 36px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+}
+.cs-hcard-headline {
+  font-family: "Bricolage Grotesque", sans-serif; font-weight: 500;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  color: #ffffff; letter-spacing: -0.5px; line-height: 1.25;
+}
+.cs-hcard-desc {
+  font-family: "DM Sans", sans-serif; font-weight: 400;
+  font-size: 0.88rem; color: rgba(255,255,255,0.42);
+  line-height: 1.65; max-width: 560px;
+}
+
+.cs-hcard-right {
+  padding: 32px 32px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  display: flex; flex-direction: column; justify-content: space-between;
+  align-items: flex-end; gap: 20px; min-width: 200px;
+}
+.cs-hcard-metrics { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; }
+.cs-hcard-metric { text-align: right; }
+.cs-hcard-metric-val {
+  font-family: "Bricolage Grotesque", sans-serif; font-weight: 500;
+  font-size: 1.5rem; color: var(--orange); letter-spacing: -1px; line-height: 1;
+}
+.cs-hcard-metric-lbl {
+  font-family: "DM Sans", sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.07em;
+}
+.cs-hcard-cta {
+  font-family: "DM Sans", sans-serif; font-weight: 600; font-size: 0.8rem;
+  color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 5px;
+  transition: color 0.2s; white-space: nowrap;
+}
+.cs-hcard:hover .cs-hcard-cta { color: var(--orange); }
+
+@media (max-width: 900px) {
+  .cs-list { padding: 0 24px 80px; }
+  .cs-hcard { grid-template-columns: 1fr; }
+  .cs-hcard-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .cs-hcard-right { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); flex-direction: row; align-items: center; }
+  .cs-hcard-metrics { flex-direction: row; gap: 24px; }
+}
+@media (max-width: 600px) {
+  .cs-list { padding: 0 16px 64px; gap: 16px; }
+  .cs-hcard-headline { font-size: 1rem; }
+  .cs-hcard-desc { font-size: 0.82rem; }
+  .cs-hcard-right { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; }
+  .cs-hcard-metrics { flex-wrap: wrap; gap: 16px; }
+  .cs-hcard-metric-val { font-size: 1.5rem; }
+  .cs-hcard-cta { align-self: flex-end; }
+}
