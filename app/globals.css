@@ -98,11 +98,12 @@
     }
 
     nav.nav-scrolled .nav-links {
-      gap: 22px;
+      gap: 0px;
     }
 
     nav.nav-scrolled .nav-links a {
       font-size: 13px;
+      padding: 5px 11px;
     }
 
     nav.nav-scrolled .nav-cta {
@@ -128,8 +129,9 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 34px;
+      gap: 4px;
       list-style: none;
+      position: relative;
     }
 
     .nav-links a {
@@ -139,6 +141,11 @@
       font-weight: 400;
       transition: color 0.18s;
       letter-spacing: 0.1px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      display: block;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-links a:hover {
@@ -169,10 +176,22 @@
 
     .nav-links a.active {
       color: var(--white);
+    }
+
+    /* Sliding active pill — absolutely positioned behind the links */
+    .nav-pill {
+      position: absolute;
+      height: 32px;
+      top: 50%;
+      transform: translateY(-50%);
       background: var(--w06);
-      padding: 6px 14px;
-      border-radius: 6px;
       border: 1px solid var(--w12);
+      border-radius: 6px;
+      pointer-events: none;
+      z-index: 0;
+      transition: left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                  width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.18s ease;
     }
 
     .nav-cta {
@@ -2155,11 +2174,19 @@
         transform: translateY(0);
       }
 
+      .nav-pill {
+        display: none;
+      }
+
       .nav-links a {
         font-size: 26px;
         font-weight: 500;
         color: white;
         font-family: 'Bricolage Grotesque', sans-serif;
+        padding: 0;
+        border-radius: 0;
+        background: none;
+        border: none;
       }
 
       /* Hamburger animation */

@@ -1,20 +1,95 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
+type NavSection = 'home' | 'services' | 'process' | 'case-studies' | 'resources';
+
+const NAV_ITEMS: { label: string; section: NavSection; scrollId?: string; href: string }[] = [
+  { label: 'Home',         section: 'home',          scrollId: undefined,    href: '/' },
+  { label: 'Services',     section: 'services',      scrollId: 'services',   href: '/services' },
+  { label: 'Process',      section: 'process',       scrollId: 'how-we-work',href: '/process' },
+  { label: 'Case Studies', section: 'case-studies',  scrollId: undefined,    href: '/case-studies' },
+  { label: 'Resources',    section: 'resources',     scrollId: undefined,    href: '/resources' },
+];
+
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const navRef = useRef<HTMLElement>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef  = useRef<HTMLElement>(null);
+  const ulRef   = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([null, null, null, null, null]);
 
-  const isHome = pathname === '/';
-  const isCaseStudies = pathname === '/case-studies' ||
+  const [mobileOpen,    setMobileOpen]    = useState(false);
+  const [scrollSection, setScrollSection] = useState<NavSection>('home');
+  const [pill, setPill] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const isHomePage        = pathname === '/';
+  const isCaseStudiesPage = pathname === '/case-studies' ||
     ['/shopwave', '/goso', '/discover-assessments', '/truclean'].includes(pathname);
-  const isResources = pathname === '/resources';
+  const isResourcesPage   = pathname === '/resources';
 
+  const currentSection: NavSection = isCaseStudiesPage ? 'case-studies'
+    : isResourcesPage  ? 'resources'
+    : isHomePage       ? scrollSection
+    : 'home';
+
+  // ── Scroll-based active section (home only) ──────────────────────────────
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    function update() {
+      const y           = window.scrollY + 130;
+      const servicesEl  = document.getElementById('services');
+      const processEl   = document.getElementById('how-we-work');
+      const servicesTop = servicesEl ? servicesEl.offsetTop : Infinity;
+      const processTop  = processEl  ? processEl.offsetTop  : Infinity;
+
+      if (y >= processTop)      setScrollSection('process');
+      else if (y >= servicesTop) setScrollSection('services');
+      else                       setScrollSection('home');
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [isHomePage]);
+
+  // ── Scroll to hash on home page load (cross-page nav) ────────────────────
+  useEffect(() => {
+    if (!isHomePage) return;
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }, [isHomePage]);
+
+  // ── Sliding pill ─────────────────────────────────────────────────────────
+  const updatePill = useCallback(() => {
+    const ul = ulRef.current;
+    if (!ul) return;
+    const idx = NAV_ITEMS.findIndex(item => item.section === currentSection);
+    const li  = itemRefs.current[idx];
+    if (!li) return;
+
+    const ulRect = ul.getBoundingClientRect();
+    const liRect = li.getBoundingClientRect();
+    setPill({ left: liRect.left - ulRect.left, width: liRect.width, opacity: 1 });
+  }, [currentSection]);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(updatePill);
+    return () => cancelAnimationFrame(id);
+  }, [updatePill]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updatePill);
+    return () => window.removeEventListener('resize', updatePill);
+  }, [updatePill]);
+
+  // ── Navbar scroll morph ───────────────────────────────────────────────────
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -22,33 +97,53 @@ export default function Navbar() {
 
     function onScroll() {
       if (window.scrollY > 60) {
-        nav!.classList.remove('nav-top');
-        nav!.classList.add('nav-scrolled');
+        nav!.classList.replace('nav-top', 'nav-scrolled');
       } else {
-        nav!.classList.remove('nav-scrolled');
-        nav!.classList.add('nav-top');
+        nav!.classList.replace('nav-scrolled', 'nav-top');
       }
     }
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  function handleDataScroll(e: React.MouseEvent<HTMLAnchorElement>, id: string, href: string) {
-    e.preventDefault();
-    if (isHome) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-      history.pushState(null, '', href);
-      if (id === 'footer-cta-form') {
-        setTimeout(() => {
-          const emailInput = document.getElementById('cta-email');
-          if (emailInput) (emailInput as HTMLInputElement).focus();
-        }, 500);
-      }
-    } else {
-      router.push('/');
+  // ── Click handlers ────────────────────────────────────────────────────────
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement>, item: typeof NAV_ITEMS[0]) {
+    // Case studies / resources: let Next.js Link handle it normally
+    if (item.section === 'case-studies' || item.section === 'resources') {
+      setMobileOpen(false);
+      return;
     }
+
+    e.preventDefault();
     setMobileOpen(false);
+
+    if (isHomePage) {
+      if (!item.scrollId) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const el = document.getElementById(item.scrollId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      setScrollSection(item.section);
+    } else {
+      // Full navigation to home — browser handles hash scroll natively
+      window.location.href = item.scrollId ? `/#${item.scrollId}` : '/';
+    }
+  }
+
+  function handleGetInTouch(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (isHomePage) {
+      const el = document.getElementById('footer-cta-form');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const input = document.getElementById('cta-email') as HTMLInputElement | null;
+        if (input) input.focus();
+      }, 500);
+    } else {
+      window.location.href = '/#footer-cta-form';
+    }
   }
 
   return (
@@ -58,30 +153,50 @@ export default function Navbar() {
         aria-label="Toggle Menu"
         onClick={() => setMobileOpen(v => !v)}
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
       <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <Image src="/assets/logo.svg" alt="Zutomate" width={90} height={23} style={{ height: '23px', width: 'auto' }} />
       </Link>
 
-      <ul className={`nav-links${mobileOpen ? ' active' : ''}`}>
-        <li><a href="/" data-scroll="home" className={isHome ? 'active' : ''} onClick={(e) => handleDataScroll(e, 'home', '/')}>Home</a></li>
-        <li><a href="/services" data-scroll="services" onClick={(e) => handleDataScroll(e, 'services', '/services')}>Services</a></li>
-        <li><a href="/process" data-scroll="how-we-work" onClick={(e) => handleDataScroll(e, 'how-we-work', '/process')}>Process</a></li>
-        <li><Link href="/case-studies" className={isCaseStudies ? 'active' : ''} onClick={() => setMobileOpen(false)}>Case Studies</Link></li>
-        <li><Link href="/resources" className={isResources ? 'active' : ''} onClick={() => setMobileOpen(false)}>Resources</Link></li>
+      <ul className={`nav-links${mobileOpen ? ' active' : ''}`} ref={ulRef}>
+        {/* Sliding pill indicator */}
+        <span
+          className="nav-pill"
+          aria-hidden="true"
+          style={{ left: pill.left, width: pill.width, opacity: pill.opacity }}
+        />
+
+        {NAV_ITEMS.map((item, idx) => {
+          const isActive = currentSection === item.section;
+          const isLink   = item.section === 'case-studies' || item.section === 'resources';
+
+          return (
+            <li key={item.section} ref={el => { itemRefs.current[idx] = el; }}>
+              {isLink ? (
+                <Link
+                  href={item.href}
+                  className={isActive ? 'active' : ''}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  className={isActive ? 'active' : ''}
+                  onClick={e => handleClick(e, item)}
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
 
-      <a
-        href="/contact"
-        data-scroll="footer-cta-form"
-        className="nav-cta"
-        id="nav-cta-link"
-        onClick={(e) => handleDataScroll(e, 'footer-cta-form', '/contact')}
-      >
+      <a href="#footer-cta-form" className="nav-cta" id="nav-cta-link" onClick={handleGetInTouch}>
         <span className="arrow">↗</span> Get in touch
       </a>
     </nav>

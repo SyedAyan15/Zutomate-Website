@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description:
     "Zutomate builds AI-powered outbound systems, Clay automations, and AI agents for B2B teams. Predictable pipeline without the guesswork.",
   metadataBase: new URL("https://zutomate.com"),
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     url: "https://zutomate.com/",
