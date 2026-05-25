@@ -68,6 +68,19 @@ export default function Navbar() {
     if (!isHomePage) return;
     const hash = window.location.hash.replace('#', '');
     if (!hash) return;
+
+    // Immediately activate the target section so the pill jumps there at once
+    const hashToSection: Record<string, NavSection> = {
+      'services':    'services',
+      'how-we-work': 'process',
+    };
+    const target = hashToSection[hash];
+    if (target) {
+      setScrollSection(target);
+      // Keep scroll listener locked for the full duration of the scroll animation
+      scrollLockUntil.current = Date.now() + 1500;
+    }
+
     setTimeout(() => {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });

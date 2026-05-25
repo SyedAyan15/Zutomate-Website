@@ -178,7 +178,7 @@
       color: var(--white);
     }
 
-    /* Sliding active pill — absolutely positioned behind the links */
+    /* Active pill — no position transition, jumps instantly to clicked item */
     .nav-pill {
       position: absolute;
       height: 32px;
@@ -189,9 +189,7 @@
       border-radius: 6px;
       pointer-events: none;
       z-index: 0;
-      transition: left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-                  width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.18s ease;
+      transition: opacity 0.15s ease;
     }
 
     .nav-cta {
