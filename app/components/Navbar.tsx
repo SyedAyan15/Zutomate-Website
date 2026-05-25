@@ -15,10 +15,15 @@ const NAV_ITEMS: { label: string; section: NavSection; scrollId?: string; href: 
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  // Strip trailing slash so comparisons work with trailingSlash: true config
+  const pathname = rawPathname.length > 1 && rawPathname.endsWith('/') ? rawPathname.slice(0, -1) : rawPathname;
+
   const navRef  = useRef<HTMLElement>(null);
   const ulRef   = useRef<HTMLUListElement>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([null, null, null, null, null]);
+  // Prevents scroll listener from overriding a manual nav click during smooth scroll
+  const scrollLockUntil = useRef<number>(0);
 
   const [mobileOpen,    setMobileOpen]    = useState(false);
   const [scrollSection, setScrollSection] = useState<NavSection>('home');
@@ -39,13 +44,16 @@ export default function Navbar() {
     if (!isHomePage) return;
 
     function update() {
+      // Don't override a manual click while smooth scroll is still animating
+      if (Date.now() < scrollLockUntil.current) return;
+
       const y           = window.scrollY + 130;
       const servicesEl  = document.getElementById('services');
       const processEl   = document.getElementById('how-we-work');
       const servicesTop = servicesEl ? servicesEl.offsetTop : Infinity;
       const processTop  = processEl  ? processEl.offsetTop  : Infinity;
 
-      if (y >= processTop)      setScrollSection('process');
+      if (y >= processTop)       setScrollSection('process');
       else if (y >= servicesTop) setScrollSection('services');
       else                       setScrollSection('home');
     }
@@ -118,6 +126,10 @@ export default function Navbar() {
     setMobileOpen(false);
 
     if (isHomePage) {
+      // Lock scroll detector for 900 ms so the smooth scroll animation
+      // doesn't immediately reset the active section back to 'home'
+      scrollLockUntil.current = Date.now() + 900;
+
       if (!item.scrollId) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
