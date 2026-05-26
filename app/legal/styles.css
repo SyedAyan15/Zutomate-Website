@@ -1,0 +1,141 @@
+:root {
+  --lg-text-primary: #e5e8ef;
+  --lg-text-secondary: #8a9ab5;
+  --lg-border: rgba(255,255,255,0.08);
+  --lg-bg-secondary: rgba(255,255,255,0.04);
+}
+
+.lg-hero {
+  padding: 80px 52px 0;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.lg-hero h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+.lg-hero p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: var(--lg-text-secondary);
+  margin-bottom: 0;
+}
+
+.lg-wrap {
+  max-width: 760px;
+  margin: 48px auto 100px;
+  padding: 0 52px;
+}
+
+.lg-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--lg-border);
+  padding-bottom: 0;
+}
+.lg-tab {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 22px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--lg-text-secondary);
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.lg-tab.active { color: #F26522; border-bottom-color: #F26522; }
+.lg-tab:hover:not(.active) { color: var(--lg-text-primary); }
+
+.lg-badge {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(242,101,34,0.1);
+  color: #F26522;
+  border: 1px solid rgba(242,101,34,0.2);
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 20px;
+}
+.lg-content h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.lg-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--lg-text-secondary);
+  margin-bottom: 28px;
+}
+.lg-box {
+  background: var(--lg-bg-secondary);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  border: 1px solid var(--lg-border);
+}
+.lg-box p { margin: 0; }
+
+.lg-content h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  margin: 32px 0 10px;
+  padding-left: 14px;
+  border-left: 3px solid #F26522;
+}
+.lg-content p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--lg-text-secondary);
+  margin-bottom: 12px;
+}
+.lg-content ul {
+  padding-left: 1.3rem;
+  margin-bottom: 12px;
+}
+.lg-content li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--lg-text-secondary);
+  margin-bottom: 4px;
+}
+.lg-content a { color: #F26522; text-decoration: none; }
+.lg-content a:hover { text-decoration: underline; }
+.lg-content strong { color: var(--lg-text-primary); }
+
+.lg-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #F26522;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.lg-link-btn:hover { opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .lg-hero { padding: 60px 24px 0; }
+  .lg-wrap { padding: 0 24px; margin-top: 36px; }
+  .lg-tab { font-size: 14px; padding: 10px 14px; }
+}
