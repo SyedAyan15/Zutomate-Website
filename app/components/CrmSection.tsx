@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import FlowCol from './FlowCol';
+import AnimatedSectionHeader from './AnimatedSectionHeader';
 
 function readSvg(slug: string): string {
   return fs.readFileSync(
@@ -17,8 +18,10 @@ export default function CrmSection() {
 
   return (
     <section className="gtm-section">
-      <h2 className="gtm-heading">Automated CRM Systems</h2>
-      <p className="gtm-sub">CRM hygiene, enrichment pipelines, and lifecycle automation that keep your data clean and reps focused.</p>
+      <AnimatedSectionHeader
+        heading="Automated CRM Systems"
+        sub="CRM hygiene, enrichment pipelines, and lifecycle automation that keep your data clean and reps focused."
+      />
       <div className="gtm-grid gtm-grid-2">
         {cols.map(c => (
           <FlowCol key={c.slug} title={c.title} viewBox={c.viewBox} svgHtml={readSvg(c.slug)} />

@@ -1,7 +1,20 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
+
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.13, delayChildren: 0.2 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+};
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -78,35 +91,45 @@ export default function Hero() {
       <canvas id="dot-canvas" ref={canvasRef}></canvas>
       <div className="hero-glow"></div>
 
-      <div className="hero-content">
-        <div className="badge">
+      <motion.div
+        className="hero-content"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.div className="badge" variants={item}>
           <span className="badge-text">For B2B Businesses</span>
-        </div>
+        </motion.div>
 
-        <h1>
+        <motion.h1 variants={item}>
           We Build <span className="accent">Predictable</span><br />
           <span className="muted">Growth Systems</span>
-        </h1>
+        </motion.h1>
 
-        <p className="hero-sub">
+        <motion.p className="hero-sub" variants={item}>
           Embedding intelligent AI workflows into businesses<br />
           to engineer end-to-end growth systems.
-        </p>
+        </motion.p>
 
-        <form id="hero-cta-form" className="hero-form" onSubmit={handleSubmit}>
+        <motion.form
+          id="hero-cta-form"
+          className="hero-form"
+          onSubmit={handleSubmit}
+          variants={item}
+        >
           <input type="email" id="hero-email" placeholder="Work email" required />
           <div className="vdivider"></div>
           <input type="text" id="hero-company" placeholder="Company name" required />
           <button type="submit">Book a Call →</button>
-        </form>
+        </motion.form>
 
-        <div className="service-tags">
+        <motion.div className="service-tags" variants={item}>
           <span className="tag">Go-To-Market</span>
           <span className="tag">ABM</span>
           <span className="tag">RevOps</span>
           <span className="tag">AI Agents</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import FlowCol from './FlowCol';
+import AnimatedSectionHeader from './AnimatedSectionHeader';
 
 function readSvg(slug: string): string {
   return fs.readFileSync(
@@ -17,8 +18,10 @@ export default function AiSection() {
 
   return (
     <section className="gtm-section" id="ai-systems">
-      <h2 className="gtm-heading">AI Agent Systems</h2>
-      <p className="gtm-sub">Autonomous agents that research, qualify, and engage accounts — without human input.</p>
+      <AnimatedSectionHeader
+        heading="AI Agent Systems"
+        sub="Autonomous agents that research, qualify, and engage accounts — without human input."
+      />
       <div className="gtm-grid gtm-grid-2">
         {cols.map(c => (
           <FlowCol key={c.slug} title={c.title} viewBox={c.viewBox} svgHtml={readSvg(c.slug)} svgStyle={c.svgStyle} />

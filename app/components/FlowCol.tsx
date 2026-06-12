@@ -1,3 +1,6 @@
+'use client';
+import { motion } from 'framer-motion';
+
 interface FlowColProps {
   title: string;
   viewBox: string;
@@ -5,9 +8,17 @@ interface FlowColProps {
   svgStyle?: React.CSSProperties;
 }
 
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
+
 export default function FlowCol({ title, viewBox, svgHtml, svgStyle }: FlowColProps) {
   return (
-    <div className="gtm-col">
+    <motion.div
+      className="gtm-col"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.65, ease }}
+    >
       <p className="gtm-col-title">{title}</p>
       <svg
         viewBox={viewBox}
@@ -15,6 +26,6 @@ export default function FlowCol({ title, viewBox, svgHtml, svgStyle }: FlowColPr
         style={{ display: 'block', ...svgStyle }}
         dangerouslySetInnerHTML={{ __html: svgHtml }}
       />
-    </div>
+    </motion.div>
   );
 }

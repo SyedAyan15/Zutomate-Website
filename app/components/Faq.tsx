@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FadeUp } from './Motion';
 
 const items = [
   {
@@ -87,14 +89,25 @@ export default function Faq() {
     <section className="faq-section" id="faq">
       <div className="faq-inner">
         <div className="faq-header">
-          <div className="faq-badge">FAQ</div>
-          <h2 className="faq-heading">Frequently asked <span className="faq-accent">questions</span></h2>
-          <p className="faq-sub">Everything you need to know about how Zutomate builds and manages your growth engine.</p>
+          <FadeUp><div className="faq-badge">FAQ</div></FadeUp>
+          <FadeUp delay={0.08}>
+            <h2 className="faq-heading">Frequently asked <span className="faq-accent">questions</span></h2>
+          </FadeUp>
+          <FadeUp delay={0.15}>
+            <p className="faq-sub">Everything you need to know about how Zutomate builds and manages your growth engine.</p>
+          </FadeUp>
         </div>
 
         <div className="faq-list">
           {items.map((item, i) => (
-            <div key={i} className={`faq-item${open === i ? ' open' : ''}`}>
+            <motion.div
+              key={i}
+              className={`faq-item${open === i ? ' open' : ''}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
               <button
                 className="faq-q"
                 aria-expanded={open === i}
@@ -104,7 +117,7 @@ export default function Faq() {
                 <span className="faq-icon">{open === i ? '×' : '+'}</span>
               </button>
               <div className="faq-a">{item.a}</div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

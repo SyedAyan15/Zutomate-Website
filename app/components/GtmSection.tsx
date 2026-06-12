@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import FlowCol from './FlowCol';
+import AnimatedSectionHeader from './AnimatedSectionHeader';
 
 function readSvg(slug: string): string {
   return fs.readFileSync(
@@ -18,8 +19,10 @@ export default function GtmSection() {
 
   return (
     <section className="gtm-section">
-      <h2 className="gtm-heading">GTM Systems</h2>
-      <p className="gtm-sub">Pipeline generation infrastructure — from ICP to booked meetings.</p>
+      <AnimatedSectionHeader
+        heading="GTM Systems"
+        sub="Pipeline generation infrastructure — from ICP to booked meetings."
+      />
       <div className="gtm-grid">
         {cols.map(c => (
           <FlowCol key={c.slug} title={c.title} viewBox={c.viewBox} svgHtml={readSvg(c.slug)} />
