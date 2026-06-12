@@ -397,7 +397,7 @@
     .tag {
       padding: 8px 18px;
       border: 1px solid var(--w12);
-      border-radius: 100px;
+      border-radius: 6px;
       font-size: 13px;
       color: var(--w55);
       cursor: pointer;

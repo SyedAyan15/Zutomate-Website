@@ -101,11 +101,10 @@ export default function Hero() {
         </form>
 
         <div className="service-tags">
-          <span className="tag">Outbound</span>
-          <span className="tag">AI Automation</span>
+          <span className="tag">Go-To Market</span>
+          <span className="tag">ABM</span>
           <span className="tag">RevOps</span>
-          <span className="tag">Cold Email</span>
-          <span className="tag">Lead Generation</span>
+          <span className="tag">AI Agents</span>
         </div>
       </div>
     </section>
