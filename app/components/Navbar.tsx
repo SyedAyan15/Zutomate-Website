@@ -28,6 +28,8 @@ export default function Navbar() {
   const [mobileOpen,    setMobileOpen]    = useState(false);
   const [scrollSection, setScrollSection] = useState<NavSection>('home');
   const [pill, setPill] = useState({ left: 0, width: 0, opacity: 0 });
+  // Always holds the latest updatePill so the morph handler can call it without stale closures
+  const updatePillRef = useRef<() => void>(() => {});
 
   const isHomePage        = pathname === '/';
   const isCaseStudiesPage = pathname === '/case-studies' ||
@@ -88,18 +90,21 @@ export default function Navbar() {
   }, [isHomePage]);
 
   // ── Sliding pill ─────────────────────────────────────────────────────────
+  // Use offsetLeft/offsetWidth (relative to the ul itself, not the viewport)
+  // so the pill stays accurate regardless of nav scroll/morph state.
   const updatePill = useCallback(() => {
     const ul = ulRef.current;
     if (!ul) return;
     const idx = NAV_ITEMS.findIndex(item => item.section === currentSection);
     const li  = itemRefs.current[idx];
     if (!li) return;
-
-    const ulRect = ul.getBoundingClientRect();
-    const liRect = li.getBoundingClientRect();
-    setPill({ left: liRect.left - ulRect.left, width: liRect.width, opacity: 1 });
+    setPill({ left: li.offsetLeft, width: li.offsetWidth, opacity: 1 });
   }, [currentSection]);
 
+  // Keep ref current so the morph handler always calls the latest version
+  updatePillRef.current = updatePill;
+
+  // Re-run whenever the active section changes
   useEffect(() => {
     const id = requestAnimationFrame(updatePill);
     return () => cancelAnimationFrame(id);
@@ -117,10 +122,17 @@ export default function Navbar() {
     nav.classList.add('nav-top');
 
     function onScroll() {
-      if (window.scrollY > 60) {
-        nav!.classList.replace('nav-top', 'nav-scrolled');
+      const scrolled = window.scrollY > 60;
+      if (scrolled) {
+        if (!nav!.classList.contains('nav-scrolled')) {
+          nav!.classList.replace('nav-top', 'nav-scrolled');
+          requestAnimationFrame(() => updatePillRef.current());
+        }
       } else {
-        nav!.classList.replace('nav-scrolled', 'nav-top');
+        if (nav!.classList.contains('nav-scrolled')) {
+          nav!.classList.replace('nav-scrolled', 'nav-top');
+          requestAnimationFrame(() => updatePillRef.current());
+        }
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
