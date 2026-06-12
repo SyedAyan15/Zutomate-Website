@@ -101,7 +101,7 @@ export default function Hero() {
         </form>
 
         <div className="service-tags">
-          <span className="tag">Go-To Market</span>
+          <span className="tag">Go-To-Market</span>
           <span className="tag">ABM</span>
           <span className="tag">RevOps</span>
           <span className="tag">AI Agents</span>
