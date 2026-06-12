@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
 
@@ -18,20 +18,13 @@ const item = {
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouse = useRef({ x: -9999, y: -9999 });
-
-  // Spring-smoothed glow position
-  const glowX = useMotionValue(50);
-  const glowY = useMotionValue(40);
-  const springX = useSpring(glowX, { damping: 30, stiffness: 120 });
-  const springY = useSpring(glowY, { damping: 30, stiffness: 120 });
 
   useEffect(() => {
     const c = canvasRef.current;
     if (!c) return;
     const ctx = c.getContext('2d')!;
-    const GAP = 40;
-    let W = 0, H = 0;
+    const GAP = 48;
+    let W = 0, H = 0, ox = 0, oy = 0;
     let animId: number;
 
     function resize() {
@@ -41,54 +34,33 @@ export default function Hero() {
     resize();
     window.addEventListener('resize', resize);
 
-    function onMouseMove(e: MouseEvent) {
-      const rect = c!.getBoundingClientRect();
-      mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      // Update spring glow position as percentage
-      glowX.set((e.clientX / window.innerWidth) * 100);
-      glowY.set((e.clientY / window.innerHeight) * 100);
-    }
-    window.addEventListener('mousemove', onMouseMove);
-
     function frame() {
       ctx.clearRect(0, 0, W, H);
+      ox = (ox + 0.10) % GAP;
+      oy = (oy + 0.10) % GAP;
 
-      const mx = mouse.current.x;
-      const my = mouse.current.y;
-      const INFLUENCE = 180; // px radius where dots react
+      for (let row = -GAP; row < H + GAP; row += GAP) {
+        const py = row + oy;
+        const dy = (py - H / 2) / (H / 2);
+        const alpha = Math.max(0, Math.min(0.10, (Math.abs(dy) - 0.15) * 0.18));
+        ctx.beginPath();
+        ctx.moveTo(0, py);
+        ctx.lineTo(W, py);
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
 
-      const cols = Math.ceil(W / GAP) + 2;
-      const rows = Math.ceil(H / GAP) + 2;
-
-      for (let r = 0; r < rows; r++) {
-        for (let col = 0; col < cols; col++) {
-          const x = col * GAP;
-          const y = r * GAP;
-
-          const dx = x - mx;
-          const dy = y - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const proximity = Math.max(0, 1 - dist / INFLUENCE);
-
-          // Base: tiny dim dot, edges fade out
-          const edgeFadeX = Math.max(0, Math.min(1, Math.min(x / 80, (W - x) / 80)));
-          const edgeFadeY = Math.max(0, Math.min(1, Math.min(y / 80, (H - y) / 80)));
-          const edgeFade = edgeFadeX * edgeFadeY;
-
-          const baseAlpha = 0.055 * edgeFade;
-          const dotSize   = 1 + proximity * 3.5;
-          const alpha     = baseAlpha + proximity * 0.55 * edgeFade;
-
-          // Blend white → orange based on proximity
-          const r_c = Math.round(255 + (242 - 255) * proximity);
-          const g_c = Math.round(255 + (101 - 255) * proximity);
-          const b_c = Math.round(255 + (34  - 255) * proximity);
-
-          ctx.beginPath();
-          ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r_c},${g_c},${b_c},${alpha})`;
-          ctx.fill();
-        }
+      for (let col = -GAP; col < W + GAP; col += GAP) {
+        const px = col + ox;
+        const dx = (px - W / 2) / (W / 2);
+        const alpha = Math.max(0, Math.min(0.10, (Math.abs(dx) - 0.15) * 0.18));
+        ctx.beginPath();
+        ctx.moveTo(px, 0);
+        ctx.lineTo(px, H);
+        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
       }
 
       animId = requestAnimationFrame(frame);
@@ -97,16 +69,14 @@ export default function Hero() {
 
     return () => {
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', onMouseMove);
       cancelAnimationFrame(animId);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const email   = (form.querySelector('#hero-email')   as HTMLInputElement).value;
+    const email = (form.querySelector('#hero-email') as HTMLInputElement).value;
     const company = (form.querySelector('#hero-company') as HTMLInputElement).value;
 
     const params = `?email=${encodeURIComponent(email)}&company_name=${encodeURIComponent(company)}&source=Hero+CTA`;
@@ -117,25 +87,9 @@ export default function Hero() {
   }
 
   return (
-    <section className="hero" id="home" style={{ position: 'relative', overflow: 'hidden' }}>
-      <canvas id="dot-canvas" ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
-
-      {/* Cursor-following radial glow */}
-      <motion.div
-        className="hero-cursor-glow"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          background: 'radial-gradient(600px circle at var(--gx) var(--gy), rgba(242,101,34,0.10) 0%, transparent 70%)',
-          // Use a CSS trick: update custom properties via inline style driven by spring
-        }}
-        animate={{}}
-      />
-      {/* Spring glow overlay — updates CSS vars */}
-      <SpringGlow springX={springX} springY={springY} />
-
-      <div className="hero-glow" />
+    <section className="hero" id="home">
+      <canvas id="dot-canvas" ref={canvasRef}></canvas>
+      <div className="hero-glow"></div>
 
       <motion.div
         className="hero-content"
@@ -177,34 +131,5 @@ export default function Hero() {
         </motion.div>
       </motion.div>
     </section>
-  );
-}
-
-// Separate client component so spring values can drive DOM directly
-function SpringGlow({ springX, springY }: { springX: ReturnType<typeof useSpring>; springY: ReturnType<typeof useSpring> }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const unsubX = springX.on('change', () => update());
-    const unsubY = springY.on('change', () => update());
-
-    function update() {
-      if (!ref.current) return;
-      ref.current.style.background = `radial-gradient(700px circle at ${springX.get()}% ${springY.get()}%, rgba(242,101,34,0.11) 0%, transparent 65%)`;
-    }
-
-    return () => { unsubX(); unsubY(); };
-  }, [springX, springY]);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        transition: 'background 0.05s',
-      }}
-    />
   );
 }
