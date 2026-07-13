@@ -160,6 +160,19 @@ export default function Testimonials() {
         <h2>What our clients say</h2>
       </div>
 
+      {/* preload every card's photo and logo up front so slides never wait on images */}
+      <div aria-hidden style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
+        {cards.map((c) => (
+          <span key={c.name}>
+            <Image src={c.avatar} alt="" width={320} height={400} sizes="320px" loading="eager" />
+            {c.logo && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src={c.logo} alt="" />
+            )}
+          </span>
+        ))}
+      </div>
+
       <div className="tspot-wrap">
         <button className="tspot-arrow" onClick={() => go(idx - 1, -1)} aria-label="Previous testimonial">&#8592;</button>
 
