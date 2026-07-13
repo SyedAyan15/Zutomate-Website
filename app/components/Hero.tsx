@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
+const premiumEase = [0.16, 1, 0.3, 1] as const;
 
 const container = {
   hidden: {},
@@ -15,6 +17,54 @@ const item = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
+
+const TRUST_AVATARS = [
+  { src: '/assets/avatars/david.jpg', alt: 'David Romic, Director at Calculated Solutions' },
+  { src: '/assets/avatars/catrice.jpg', alt: 'Catrice L., Sr Talent Acquisition Partner' },
+  { src: '/assets/avatars/ofek.jpg', alt: 'Ofek Mussafi, Strategic Account Manager at DNAnexus' },
+  { src: '/assets/avatars/sam.png', alt: 'Sam Elliott, CEO at Circular Resourcing' },
+];
+
+const TRUST_COUNT = 50;
+
+function TrustedByCard() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const startTimeout = setTimeout(() => {
+      let n = 0;
+      const id = setInterval(() => {
+        n = Math.min(n + 2, TRUST_COUNT);
+        setCount(n);
+        if (n >= TRUST_COUNT) clearInterval(id);
+      }, 30);
+    }, 900);
+    return () => clearTimeout(startTimeout);
+  }, []);
+
+  return (
+    <motion.div
+      className="hero-trust-card"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.9, ease: premiumEase }}
+    >
+      <div className="hero-trust-inner">
+        <div className="trust-avatars">
+          {TRUST_AVATARS.map((a) => (
+            <span className="trust-avatar" key={a.src}>
+              <Image src={a.src} alt={a.alt} fill sizes="32px" />
+            </span>
+          ))}
+        </div>
+        <div className="trust-copy">
+          <span className="trust-count">{count}+</span>
+          <span className="trust-label">B2B founders trust us</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -128,6 +178,7 @@ export default function Hero() {
           <span className="tag">ABM</span>
           <span className="tag">RevOps</span>
           <span className="tag">AI Agents</span>
+          <TrustedByCard />
         </motion.div>
       </motion.div>
     </section>
