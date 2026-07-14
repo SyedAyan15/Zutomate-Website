@@ -4,7 +4,7 @@ import { FadeUp } from './Motion';
 
 const GlobeCanvas = dynamic(() => import('./GlobeCanvas'), {
   ssr: false,
-  loading: () => <div style={{ height: '620px' }} />,
+  loading: () => <div style={{ height: 'min(620px, 118vw)' }} />,
 });
 
 export default function GlobeSection() {

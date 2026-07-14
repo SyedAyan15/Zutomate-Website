@@ -46,7 +46,21 @@ function latLonToVec3(lat: number, lon: number, r: number) {
   );
 }
 
-function Earth({ paused }: { paused: boolean }) {
+/* tracks the same breakpoint the site CSS uses */
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px)').matches : false,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const onChange = () => setMobile(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return mobile;
+}
+
+function Earth({ paused, rows }: { paused: boolean; rows: number }) {
   const ref = useRef<THREE.Group>(null);
   const [dots, setDots] = useState<{ land: Float32Array; ocean: Float32Array } | null>(null);
   useFrame((_, dt) => {
@@ -69,7 +83,6 @@ function Earth({ paused }: { paused: boolean }) {
       // ring sampling: fixed latitude rows, dots along each ring at the same
       // arc spacing as the row gap — every dot is equidistant from its neighbours.
       // The full sphere is dotted; land dots render bright, ocean dots faint.
-      const rows = 200;
       const land: number[] = [];
       const ocean: number[] = [];
       for (let ri = 0; ri < rows; ri++) {
@@ -86,7 +99,7 @@ function Earth({ paused }: { paused: boolean }) {
       }
       setDots({ land: new Float32Array(land), ocean: new Float32Array(ocean) });
     };
-  }, []);
+  }, [rows]);
 
   return (
     <group ref={ref} rotation={[0, 4.0, 0]}>
@@ -125,25 +138,31 @@ function Atmosphere() {
   );
 }
 
-function ToolNodes({ paused }: { paused: boolean }) {
+function ToolNodes({ paused, mobile }: { paused: boolean; mobile: boolean }) {
   const ref = useRef<THREE.Group>(null);
   useFrame((_, dt) => {
     if (!paused && ref.current) ref.current.rotation.y += dt * 0.22;
   });
 
+  // tighter orbits + smaller badges so everything fits a narrow viewport
+  const rScale = mobile ? 0.72 : 1;
+  const badge = mobile ? 27 : 36;
+  const icon = mobile ? 14 : 19;
+
   return (
     <group ref={ref}>
       {TOOLS.map((tool) => {
         const rad = (tool.angle * Math.PI) / 180;
+        const r = tool.r * rScale;
         return (
-          <group key={tool.name} position={[Math.cos(rad) * tool.r, tool.rise, Math.sin(rad) * tool.r]}>
+          <group key={tool.name} position={[Math.cos(rad) * r, tool.rise * (mobile ? 0.85 : 1), Math.sin(rad) * r]}>
             <mesh>
-              <sphereGeometry args={[0.04, 16, 16]} />
+              <sphereGeometry args={[mobile ? 0.034 : 0.04, 16, 16]} />
               <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.8} />
             </mesh>
             <Html center>
               <div style={{
-                width: 36, height: 36, borderRadius: '50%',
+                width: badge, height: badge, borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 background: 'rgba(13,27,46,0.70)',
                 border: '1px solid rgba(255,255,255,0.16)',
@@ -155,8 +174,8 @@ function ToolNodes({ paused }: { paused: boolean }) {
                 <img
                   src={tool.icon}
                   alt={tool.name}
-                  width={19}
-                  height={19}
+                  width={icon}
+                  height={icon}
                   style={{ borderRadius: 4, display: 'block' }}
                 />
               </div>
@@ -171,9 +190,11 @@ function ToolNodes({ paused }: { paused: boolean }) {
 export default function GlobeCanvas() {
   const [paused, setPaused] = useState(false);
   const pointerStart = useRef({ x: 0, y: 0 });
+  const mobile = useIsMobile();
+
   return (
     <div
-      style={{ width: '100%', height: '620px', position: 'relative', cursor: paused ? 'grab' : 'pointer' }}
+      style={{ width: '100%', height: mobile ? '460px' : '620px', position: 'relative', cursor: paused ? 'grab' : 'pointer' }}
       onPointerDown={e => { pointerStart.current = { x: e.clientX, y: e.clientY }; }}
       onPointerUp={e => {
         const dx = e.clientX - pointerStart.current.x;
@@ -181,22 +202,32 @@ export default function GlobeCanvas() {
         if (Math.sqrt(dx * dx + dy * dy) < 6) setPaused(p => !p);
       }}
     >
-      <Canvas camera={{ position: [0, 0.5, 7], fov: 42 }}>
+      {/* key remounts the canvas when crossing the breakpoint so the camera updates */}
+      <Canvas
+        key={mobile ? 'mobile' : 'desktop'}
+        dpr={mobile ? [1, 1.75] : [1, 2]}
+        camera={{ position: [0, 0.45, mobile ? 12.4 : 7], fov: 42 }}
+      >
         <ambientLight intensity={0.75} />
         <directionalLight position={[5, 3, 5]} intensity={1.5} color="#fff8f0" />
         <pointLight position={[-6, -2, -4]} intensity={0.45} color="#dbe6f5" />
-        <Stars radius={130} depth={60} count={3000} factor={3} saturation={0} fade />
-        <Earth paused={paused} />
+        <Stars radius={130} depth={60} count={mobile ? 1200 : 3000} factor={3} saturation={0} fade />
+        <Earth paused={paused} rows={mobile ? 130 : 200} />
         <Atmosphere />
-        <ToolNodes paused={paused} />
-        <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI * 0.25} maxPolarAngle={Math.PI * 0.75} rotateSpeed={0.5} />
+        <ToolNodes paused={paused} mobile={mobile} />
+        {/* OrbitControls hijacks touch scrolling — desktop only */}
+        {!mobile && (
+          <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI * 0.25} maxPolarAngle={Math.PI * 0.75} rotateSpeed={0.5} />
+        )}
       </Canvas>
       <div style={{
         position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)',
         fontSize: 11, color: 'rgba(255,255,255,0.28)', fontFamily: 'DM Sans, sans-serif',
-        letterSpacing: '0.5px', pointerEvents: 'none', userSelect: 'none',
+        letterSpacing: '0.5px', pointerEvents: 'none', userSelect: 'none', whiteSpace: 'nowrap',
       }}>
-        {paused ? 'DRAG TO EXPLORE  ·  CLICK TO RESUME' : 'CLICK TO PAUSE  ·  DRAG TO ROTATE'}
+        {mobile
+          ? (paused ? 'TAP TO RESUME' : 'TAP TO PAUSE')
+          : (paused ? 'DRAG TO EXPLORE  ·  CLICK TO RESUME' : 'CLICK TO PAUSE  ·  DRAG TO ROTATE')}
       </div>
     </div>
   );
