@@ -27,6 +27,15 @@ const cards: Card[] = [
     avatar: '/assets/avatars/ofek.jpg',
   },
   {
+    quote: "Zutomate has been an incredible growth partner for my business. From GTM strategy and LinkedIn content to optimization, they've handled everything exceptionally well. Zain and Ayan have always been there to provide guidance, answer questions, and ensure everything runs smoothly. If you're looking for a hands-off sales system that consistently delivers, these are the people to work with. Highly recommended.",
+    name: 'Maya Magno',
+    title: 'Founder',
+    company: 'Nuvaris AI',
+    logo: '/assets/logos/nuvarisai.png',
+    wordmark: true,
+    avatar: '/assets/avatars/maya.jpg',
+  },
+  {
     quote: 'Zutomate worked with us for nearly 5 years and was a pivotal part of the growth of our business. They are always available, timely in their responses and absolute systems wizards. Whenever we had any systems integration issue, I knew they would be able to quickly figure it out. Highly recommend working with them.',
     name: 'James Adams',
     title: 'CEO',
