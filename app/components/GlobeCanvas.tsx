@@ -60,11 +60,32 @@ function useIsMobile() {
   return mobile;
 }
 
-function Earth({ paused, rows }: { paused: boolean; rows: number }) {
+/* shared user-drag rotation applied on top of each layer's auto-spin */
+type Spin = { offset: number; vel: number; dragging: boolean };
+
+/* applies fling momentum + decay when the finger is lifted */
+function SpinController({ spin }: { spin: React.MutableRefObject<Spin> }) {
+  useFrame((_, dt) => {
+    const s = spin.current;
+    if (s.dragging) return;
+    if (s.vel !== 0) {
+      s.offset += s.vel * dt;
+      s.vel *= Math.pow(0.92, dt * 60);
+      if (Math.abs(s.vel) < 0.002) s.vel = 0;
+    }
+  });
+  return null;
+}
+
+const EARTH_BASE_ROT = 4.0;
+
+function Earth({ paused, rows, spin }: { paused: boolean; rows: number; spin: React.MutableRefObject<Spin> }) {
   const ref = useRef<THREE.Group>(null);
+  const auto = useRef(0);
   const [dots, setDots] = useState<{ land: Float32Array; ocean: Float32Array } | null>(null);
   useFrame((_, dt) => {
-    if (!paused && ref.current) ref.current.rotation.y += dt * 0.12;
+    if (!paused) auto.current += dt * 0.12;
+    if (ref.current) ref.current.rotation.y = EARTH_BASE_ROT + auto.current + spin.current.offset;
   });
 
   /* Sample the local land-mask (black = land) to split dots into land/ocean layers */
@@ -102,7 +123,7 @@ function Earth({ paused, rows }: { paused: boolean; rows: number }) {
   }, [rows]);
 
   return (
-    <group ref={ref} rotation={[0, 4.0, 0]}>
+    <group ref={ref}>
       {/* dark core — occludes far-side dots, gives the sphere depth */}
       <mesh>
         <sphereGeometry args={[1.96, 48, 48]} />
@@ -138,10 +159,12 @@ function Atmosphere() {
   );
 }
 
-function ToolNodes({ paused, mobile }: { paused: boolean; mobile: boolean }) {
+function ToolNodes({ paused, mobile, spin }: { paused: boolean; mobile: boolean; spin: React.MutableRefObject<Spin> }) {
   const ref = useRef<THREE.Group>(null);
+  const auto = useRef(0);
   useFrame((_, dt) => {
-    if (!paused && ref.current) ref.current.rotation.y += dt * 0.22;
+    if (!paused) auto.current += dt * 0.22;
+    if (ref.current) ref.current.rotation.y = auto.current + spin.current.offset;
   });
 
   // tighter orbits + smaller badges so everything fits a narrow viewport
@@ -191,12 +214,80 @@ export default function GlobeCanvas() {
   const [paused, setPaused] = useState(false);
   const pointerStart = useRef({ x: 0, y: 0 });
   const mobile = useIsMobile();
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const spin = useRef<Spin>({ offset: 0, vel: 0, dragging: false });
+
+  /* Mobile: horizontal swipe rotates the globe, vertical swipe scrolls the page.
+     We attach non-passive listeners so a horizontal drag can preventDefault
+     (rotate) while a vertical drag falls through to the page scroll. */
+  useEffect(() => {
+    if (!mobile) return;
+    const el = wrapRef.current;
+    if (!el) return;
+    let startX = 0, startY = 0, lastX = 0, lastT = 0;
+    let axis: 'none' | 'rotate' | 'scroll' = 'none';
+    let moved = false;
+
+    const onStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      startX = lastX = t.clientX;
+      startY = t.clientY;
+      lastT = performance.now();
+      axis = 'none';
+      moved = false;
+      spin.current.dragging = true;
+      spin.current.vel = 0;
+    };
+    const onMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (axis === 'none' && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        axis = Math.abs(dx) > Math.abs(dy) ? 'rotate' : 'scroll';
+        if (axis === 'scroll') spin.current.dragging = false; // let the page scroll
+      }
+      if (axis === 'rotate') {
+        e.preventDefault();
+        moved = true;
+        const now = performance.now();
+        const step = (t.clientX - lastX) * 0.006;
+        spin.current.offset += step;
+        spin.current.vel = step / Math.max(0.001, (now - lastT) / 1000);
+        lastX = t.clientX;
+        lastT = now;
+      }
+    };
+    const onEnd = () => {
+      if (axis !== 'rotate') spin.current.dragging = false;
+      else spin.current.dragging = false;
+      if (!moved) setPaused(p => !p); // tap = pause/resume
+    };
+
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd, { passive: true });
+    el.addEventListener('touchcancel', onEnd, { passive: true });
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+      el.removeEventListener('touchcancel', onEnd);
+    };
+  }, [mobile]);
 
   return (
     <div
-      style={{ width: '100%', height: mobile ? '460px' : '620px', position: 'relative', cursor: paused ? 'grab' : 'pointer' }}
-      onPointerDown={e => { pointerStart.current = { x: e.clientX, y: e.clientY }; }}
+      ref={wrapRef}
+      style={{
+        width: '100%',
+        height: mobile ? '460px' : '620px',
+        position: 'relative',
+        cursor: paused ? 'grab' : 'pointer',
+        touchAction: mobile ? 'pan-y' : undefined,
+      }}
+      onPointerDown={e => { if (e.pointerType === 'touch') return; pointerStart.current = { x: e.clientX, y: e.clientY }; }}
       onPointerUp={e => {
+        if (e.pointerType === 'touch') return;
         const dx = e.clientX - pointerStart.current.x;
         const dy = e.clientY - pointerStart.current.y;
         if (Math.sqrt(dx * dx + dy * dy) < 6) setPaused(p => !p);
@@ -212,10 +303,11 @@ export default function GlobeCanvas() {
         <directionalLight position={[5, 3, 5]} intensity={1.5} color="#fff8f0" />
         <pointLight position={[-6, -2, -4]} intensity={0.45} color="#dbe6f5" />
         <Stars radius={130} depth={60} count={mobile ? 1200 : 3000} factor={3} saturation={0} fade />
-        <Earth paused={paused} rows={mobile ? 130 : 200} />
+        <SpinController spin={spin} />
+        <Earth paused={paused} rows={mobile ? 130 : 200} spin={spin} />
         <Atmosphere />
-        <ToolNodes paused={paused} mobile={mobile} />
-        {/* OrbitControls hijacks touch scrolling — desktop only */}
+        <ToolNodes paused={paused} mobile={mobile} spin={spin} />
+        {/* desktop uses OrbitControls (camera). mobile uses custom touch-drag above. */}
         {!mobile && (
           <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI * 0.25} maxPolarAngle={Math.PI * 0.75} rotateSpeed={0.5} />
         )}
@@ -226,7 +318,7 @@ export default function GlobeCanvas() {
         letterSpacing: '0.5px', pointerEvents: 'none', userSelect: 'none', whiteSpace: 'nowrap',
       }}>
         {mobile
-          ? (paused ? 'TAP TO RESUME' : 'TAP TO PAUSE')
+          ? (paused ? 'SWIPE TO ROTATE  ·  TAP TO RESUME' : 'SWIPE TO ROTATE  ·  TAP TO PAUSE')
           : (paused ? 'DRAG TO EXPLORE  ·  CLICK TO RESUME' : 'CLICK TO PAUSE  ·  DRAG TO ROTATE')}
       </div>
     </div>

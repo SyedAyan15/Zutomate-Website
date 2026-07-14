@@ -123,6 +123,7 @@ export default function Testimonials() {
   const [dir, setDir] = useState(1);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const touchRef = useRef({ x: 0, y: 0 });
 
   function go(next: number, direction: number) {
     setDir(direction);
@@ -176,7 +177,18 @@ export default function Testimonials() {
       <div className="tspot-wrap">
         <button className="tspot-arrow" onClick={() => go(idx - 1, -1)} aria-label="Previous testimonial">&#8592;</button>
 
-        <div className="tspot-viewport">
+        <div
+          className="tspot-viewport"
+          onTouchStart={(e) => { touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }}
+          onTouchEnd={(e) => {
+            const dx = e.changedTouches[0].clientX - touchRef.current.x;
+            const dy = e.changedTouches[0].clientY - touchRef.current.y;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+              if (dx < 0) go(idx + 1, 1);
+              else go(idx - 1, -1);
+            }
+          }}
+        >
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={idx}
