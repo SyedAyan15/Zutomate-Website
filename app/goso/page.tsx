@@ -33,15 +33,15 @@ export default function GosoPage() {
           <span className="cs-client-logo-name">GOSO</span>
         </div>
 
-        <h1>From <em>$20K</em> to <em>$100K ARR</em> with a full revenue engine built from scratch</h1>
+        <h1>From <em>$20K</em> to <em>$100K MRR</em> with a full revenue engine built from scratch</h1>
 
         <div className="cs-mrr-banner">
           <div className="cs-mrr-from">
-            <div className="cs-mrr-label">Starting ARR</div>
+            <div className="cs-mrr-label">Starting MRR</div>
             <div className="cs-mrr-val">$20K</div>
           </div>
           <div className="cs-mrr-to">
-            <div className="cs-mrr-label">Achieved ARR</div>
+            <div className="cs-mrr-label">Achieved MRR</div>
             <div className="cs-mrr-val">$100K</div>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function GosoPage() {
         <div className="cs-stats-bar">
           <div className="cs-stat">
             <span className="cs-stat-val">5x</span>
-            <span className="cs-stat-lbl">ARR Growth</span>
+            <span className="cs-stat-lbl">MRR Growth</span>
           </div>
           <div className="cs-stat">
             <span className="cs-stat-val">7+</span>
@@ -80,7 +80,7 @@ export default function GosoPage() {
           <section className="reveal">
             <div className="cs-section-tag">Context</div>
             <h2>The Situation</h2>
-            <p>At $20K ARR, Goso had product-market fit but growth was stalling. Their outreach was ad hoc, lead data was fragmented across platforms, and there was no structured system to consistently convert prospects into paying clients.</p>
+            <p>At $20K MRR, Goso had product-market fit but growth was stalling. Their outreach was ad hoc, lead data was fragmented across platforms, and there was no structured system to consistently convert prospects into paying clients.</p>
             <p>Scaling required more than hustle. They needed a <span className="cs-hl">complete revenue infrastructure</span>: a lead engine sourcing and enriching prospects from multiple channels, an AI-powered personalization layer, and a CRM that could turn pipeline into closed revenue automatically.</p>
             <p>The goal was to eliminate the dependency on manual effort and build something that compounds over time.</p>
           </section>
@@ -266,13 +266,13 @@ export default function GosoPage() {
           <section className="reveal">
             <div className="cs-section-tag">Results</div>
             <h2>What Goso Achieved</h2>
-            <p>The system delivered a scalable, compounding revenue engine that grew Goso&apos;s ARR 5x and keeps running without manual effort.</p>
+            <p>The system delivered a scalable, compounding revenue engine that grew Goso&apos;s MRR 5x and keeps running without manual effort.</p>
 
             <div className="cs-results-hero">
               <div className="cs-results-hero-top">
                 <div>
                   <div className="cs-results-big-val">5x</div>
-                  <div className="cs-results-big-lbl">ARR growth from $20K to $100K per month</div>
+                  <div className="cs-results-big-lbl">MRR growth from $20K to $100K per month</div>
                 </div>
                 <div style={{borderLeft:'1px solid rgba(255,255,255,0.25)',paddingLeft:'2.5rem'}}>
                   <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:600,fontSize:'0.68rem',letterSpacing:'0.1em',textTransform:'uppercase',color:'rgba(255,255,255,0.6)',marginBottom:'8px'}}>Built and Delivered</div>
@@ -285,7 +285,7 @@ export default function GosoPage() {
               <div className="cs-results-hero-bottom">
                 <div className="cs-result-cell">
                   <div className="cs-result-val">$20K&rarr;$100K</div>
-                  <div className="cs-result-lbl">ARR in months</div>
+                  <div className="cs-result-lbl">MRR in months</div>
                 </div>
                 <div className="cs-result-cell">
                   <div className="cs-result-val">7+</div>
@@ -320,7 +320,7 @@ export default function GosoPage() {
               <li>Full GoHighLevel CRM setup with pipelines, deal tracking, and reporting</li>
               <li>Automated lead nurture sequences and SDR task workflows in GHL</li>
               <li>Always-on pipeline engine that runs without manual intervention</li>
-              <li>5x ARR growth from $20K to $100K per month</li>
+              <li>5x MRR growth from $20K to $100K per month</li>
             </ul>
           </section>
 
@@ -329,7 +329,7 @@ export default function GosoPage() {
         <aside className="cs-sidebar">
 
           <div className="cs-mrr-mini">
-            <div className="cs-mrr-mini-label">ARR Growth</div>
+            <div className="cs-mrr-mini-label">MRR Growth</div>
             <div className="cs-mrr-mini-row">
               <span className="cs-mrr-mini-from">$20K</span>
               <span className="cs-mrr-mini-arrow">&#8594;</span>
@@ -376,7 +376,7 @@ export default function GosoPage() {
             <div className="cs-sidebar-body">
               <div className="cs-mini-stat">
                 <div className="cs-mini-stat-val">5x</div>
-                <div className="cs-mini-stat-lbl">ARR Growth ($20K to $100K)</div>
+                <div className="cs-mini-stat-lbl">MRR Growth ($20K to $100K)</div>
               </div>
               <div className="cs-mini-stat">
                 <div className="cs-mini-stat-val">7+</div>
@@ -394,7 +394,7 @@ export default function GosoPage() {
           </div>
 
           <div className="cs-cta-card">
-            <h3>Ready to scale your ARR?</h3>
+            <h3>Ready to scale your MRR?</h3>
             <p>We build complete revenue engines covering strategy, data, outreach, and CRM, tailored to your business.</p>
             <a href="/contact" className="cs-cta-btn">Book a Strategy Call</a>
           </div>

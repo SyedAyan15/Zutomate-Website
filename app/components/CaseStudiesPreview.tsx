@@ -56,11 +56,11 @@ export default function CaseStudiesPreview() {
                 <span className="case-tag">Full Revenue Engine</span>
                 <span className="case-company" style={{ fontFamily: "'Black Han Sans',sans-serif", fontSize: '0.95rem', letterSpacing: '0.5px' }}>GOSO</span>
               </div>
-              <div className="case-headline">From $20K to $100K ARR with a revenue engine built from scratch</div>
+              <div className="case-headline">From $20K to $100K MRR with a revenue engine built from scratch</div>
               <div className="case-metrics">
                 <div className="case-metric">
                   <span className="case-metric-value">5x</span>
-                  <span className="case-metric-label">ARR growth</span>
+                  <span className="case-metric-label">MRR growth</span>
                 </div>
                 <div className="case-metric">
                   <span className="case-metric-value">7+</span>

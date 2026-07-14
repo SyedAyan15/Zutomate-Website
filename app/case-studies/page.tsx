@@ -77,14 +77,14 @@ export default function CaseStudiesPage() {
             <span className="cs-hcard-tag">Full Revenue Engine</span>
           </div>
           <div className="cs-hcard-mid">
-            <div className="cs-hcard-headline">From $20K to $100K ARR with a revenue engine built from scratch</div>
+            <div className="cs-hcard-headline">From $20K to $100K MRR with a revenue engine built from scratch</div>
             <div className="cs-hcard-desc">Built the complete GTM infrastructure for a B2B social marketing platform. Multi-source lead pipeline via n8n, Claude AI personalization, Smartlead email, and full GoHighLevel CRM setup.</div>
           </div>
           <div className="cs-hcard-right">
             <div className="cs-hcard-metrics">
               <div className="cs-hcard-metric">
                 <div className="cs-hcard-metric-val">5x</div>
-                <div className="cs-hcard-metric-lbl">ARR growth</div>
+                <div className="cs-hcard-metric-lbl">MRR growth</div>
               </div>
               <div className="cs-hcard-metric">
                 <div className="cs-hcard-metric-val">7+</div>
