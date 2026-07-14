@@ -27,7 +27,7 @@ const cards: Card[] = [
     avatar: '/assets/avatars/ofek.jpg',
   },
   {
-    quote: "Zutomate has been an incredible growth partner for my business. From GTM strategy and LinkedIn content to optimization, they've handled everything exceptionally well. Zain and Ayan have always been there to provide guidance, answer questions, and ensure everything runs smoothly. If you're looking for a hands-off sales system that consistently delivers, these are the people to work with. Highly recommended.",
+    quote: "Zutomate has been an incredible growth partner for my business. From GTM strategy and LinkedIn content to optimization, they've handled everything exceptionally well. Zain and Ayan have always ensure everything runs smoothly.",
     name: 'Maya Magno',
     title: 'Founder',
     company: 'Nuvaris AI',
