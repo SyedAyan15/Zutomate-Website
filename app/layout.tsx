@@ -6,9 +6,12 @@ export const metadata: Metadata = {
   description:
     "Zutomate builds AI-powered outbound systems, Clay automations, and AI agents for B2B teams. Predictable pipeline without the guesswork.",
   metadataBase: new URL("https://zutomate.com"),
+  // /favicon.ico comes from the app/favicon.ico file convention, which emits its
+  // own link tag. Declaring `icons` here suppresses the convention's apple link,
+  // so /apple-icon.png (also a file convention) has to be named explicitly.
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: { url: "/favicon.svg", type: "image/svg+xml" },
+    apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",
