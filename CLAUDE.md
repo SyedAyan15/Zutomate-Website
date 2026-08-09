@@ -72,8 +72,14 @@ Opacity variants `--w80` / `--w55` / `--w40` / `--w12` / `--w06` are defined in 
 
 Detailed rules live in `.claude/skills/`: `rules.md` (hard constraints), `components.md`, `copy.md`, `flowcharts.md` (viewBox standards), `case-studies.md`, `tools-logos.md`.
 
+## SEO routes
+
+`app/robots.ts` and `app/sitemap.ts` generate `/robots.txt` and `/sitemap.xml`. Both share `BASE_URL` from `app/site.ts`.
+
+**Adding a page means adding it to the `routes` array in `app/sitemap.ts`** — nothing discovers routes automatically. Paths must keep their trailing slash to match `trailingSlash: true`, or the sitemap will point at URLs that redirect.
+
 ## Known gaps
 
-- **No `robots.txt` and no `sitemap.xml`** — `/robots.txt` and `/sitemap.xml` both 404 in production. The archived static site had both; they were never ported.
+- `/recruiterassistant` and `/recruiterassistant/contact` existed on the old static site and 404 in production — they were never migrated. Deliberately left out of the sitemap.
 - `tailwindcss`, `@tailwindcss/postcss`, and `playwright` are unused dependencies.
 - `out/` is a stale artifact from an earlier static export; `next.config.ts` no longer sets `output: 'export'`.
