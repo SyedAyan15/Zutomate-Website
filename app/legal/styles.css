@@ -1,8 +1,8 @@
 :root {
-  --lg-text-primary: #e5e8ef;
-  --lg-text-secondary: #8a9ab5;
-  --lg-border: rgba(255,255,255,0.08);
-  --lg-bg-secondary: rgba(255,255,255,0.04);
+  --lg-text-primary: rgba(13, 27, 46, 0.82);
+  --lg-text-secondary: rgba(13, 27, 46, 0.55);
+  --lg-border: rgba(13, 27, 46, 0.1);
+  --lg-bg-secondary: rgba(13, 27, 46, 0.035);
 }
 
 .lg-hero {
@@ -16,7 +16,7 @@
   font-size: clamp(32px, 5vw, 52px);
   font-weight: 500;
   letter-spacing: -1.5px;
-  color: #fff;
+  color: #0d1b2e;
   margin-top: 20px;
   margin-bottom: 12px;
 }
@@ -73,7 +73,7 @@
   font-size: 28px;
   font-weight: 500;
   letter-spacing: -0.5px;
-  color: #fff;
+  color: #0d1b2e;
   margin-bottom: 4px;
 }
 .lg-meta {
@@ -95,7 +95,7 @@
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 16px;
   font-weight: 500;
-  color: #fff;
+  color: #0d1b2e;
   margin: 32px 0 10px;
   padding-left: 14px;
   border-left: 3px solid #F26522;

@@ -26,7 +26,10 @@
     html,
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--navy);
+      /* Pearl, not navy. The page is light from the hero through the FAQ, and
+         only the footer paints dark. With navy here, a fast scroll shows it
+         through before the sections repaint — a blue flash behind the page. */
+      background: var(--pearl-white);
       color: var(--white);
       min-height: 100vh;
       /* `clip`, not `hidden`: both stop sideways scrolling, but `hidden` turns
@@ -72,8 +75,12 @@
       /* Always fixed — only shape changes */
       position: fixed;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      /* Centred with auto margins, not translateX: a transform would make nav
+         the containing block for its own position:fixed children, which left
+         the mobile drawer 16px on-screen when closed. */
+      left: 0;
+      right: 0;
+      margin-inline: auto;
       /* Default: full width */
       width: 100%;
       max-width: 100%;
@@ -3197,15 +3204,23 @@
       }
       .mobile-menu-btn {
         display: flex;
+        /* padding rather than size, so the bars stay put but the target grows
+           to a comfortable tap area */
+        padding: 11px 9px;
+        margin-left: 0;
       }
 
       .nav-links {
         display: flex;
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 100%;
+        right: -100vw;
+        width: 100vw;
         height: 100vh;
+        /* Positioned off-screen AND hidden. The backdrop-filter composites the
+           panel onto its own layer, which was painting a sliver at the screen
+           edge even with the box fully outside the viewport. */
+        visibility: hidden;
         background: rgba(4, 9, 21, 0.96);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -3213,7 +3228,7 @@
         justify-content: center;
         align-items: center;
         gap: 35px;
-        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.4s;
         z-index: 1500;
         padding-top: 60px;
         margin: 0;
@@ -3221,6 +3236,18 @@
 
       .nav-links.active {
         right: 0;
+        visibility: visible;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+      }
+
+      .nav-links a {
+        padding: 12px 20px;
+      }
+
+      /* `.active` uses var(--white), which the nav token block flips to navy
+         for the pearl pages — navy on navy inside this dark drawer. */
+      .nav-links a.active {
+        color: #ffffff;
       }
 
       .nav-links li {
@@ -4168,6 +4195,65 @@
   white-space: nowrap;
 }
 
+@media (max-width: 760px) {
+  /* Five columns cannot be read side by side on a phone. Each row becomes its
+     own block and every verdict names the option it belongs to, so the table
+     reads top to bottom instead of scrolling sideways. */
+  .whyus-card { padding: 6px 12px 12px; }
+
+  .whyus-scroll { overflow-x: visible; }
+
+  .whyus-table,
+  .whyus-table tbody,
+  .whyus-table tr,
+  .whyus-table th,
+  .whyus-table td { display: block; width: auto; }
+
+  .whyus-table { min-width: 0; }
+
+  .whyus-table thead { display: none; }
+
+  .whyus-table tbody tr {
+    padding: 18px 6px 14px;
+    border-bottom: 1px solid var(--w12);
+  }
+
+  .whyus-table tbody tr:last-child { border-bottom: none; }
+
+  .whyus-table tbody th {
+    width: auto;
+    min-width: 0;
+    padding: 0 0 12px;
+    border-bottom: none;
+  }
+
+  .whyus-table tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 7px 0;
+    border-bottom: none;
+    text-align: right;
+  }
+
+  /* the column header, carried onto the cell */
+  .whyus-table tbody td::before {
+    content: attr(data-col);
+    font-size: 13.5px;
+    color: var(--w55);
+    text-align: left;
+  }
+
+  .whyus-table tbody td.is-us {
+    border-radius: 10px;
+    padding: 9px 12px;
+    box-shadow: none;
+  }
+
+  .whyus-table tbody td.is-us::before { color: var(--orange); font-weight: 500; }
+}
+
 @media (max-width: 900px) {
   .whyus-section { padding: 64px 20px 72px; }
   .whyus-head { margin-bottom: 34px; }
@@ -4226,13 +4312,11 @@
   background: var(--pearl-white);
 }
 
-/* body carries 73px of top padding to clear the fixed nav, and its navy
-   background was showing through as a dark strip above the scrolled nav pill.
-   Paint only that strip pearl; everything below 73px keeps the navy the dark
-   sections further down sit on. */
+/* One flat ground for the whole document. The old gradient painted the top
+   73px pearl and everything below navy, which made sense when the page went
+   dark after the hero; it no longer does. */
 body {
-  background: linear-gradient(var(--pearl-white) 0 73px, var(--navy) 73px);
-  background-repeat: no-repeat;
+  background: var(--pearl-white);
 }
 
 /* ── Navbar — pearl bar matching the hero behind it ──
@@ -4266,14 +4350,18 @@ nav.nav-scrolled {
   border-color: rgba(13, 27, 46, 0.24);
 }
 
-/* Nav links — navy rather than the washed grey the --w55 token gives */
-.nav-links a {
-  color: rgba(13, 27, 46, 0.75);
-}
+/* Nav links — navy rather than the washed grey the --w55 token gives.
+   Desktop only: below 768px these live inside the dark drawer, which sets its
+   own white, and this rule would otherwise win by source order. */
+@media (min-width: 769px) {
+  .nav-links a {
+    color: rgba(13, 27, 46, 0.75);
+  }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: #0d1b2e;
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #0d1b2e;
+  }
 }
 
 /* ── Hero ── */

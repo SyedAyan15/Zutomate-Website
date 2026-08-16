@@ -15,7 +15,6 @@ const routes: { path: string; changeFrequency: 'weekly' | 'monthly' | 'yearly'; 
   { path: '/nuvaris-ai/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/victoria-james/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/goso/', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/resources/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/privacy/', changeFrequency: 'yearly', priority: 0.3 },
   { path: '/terms/', changeFrequency: 'yearly', priority: 0.3 },
 ];

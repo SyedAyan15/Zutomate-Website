@@ -4,14 +4,13 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type NavSection = 'home' | 'services' | 'process' | 'case-studies' | 'resources';
+type NavSection = 'home' | 'services' | 'process' | 'case-studies';
 
 const NAV_ITEMS: { label: string; section: NavSection; scrollId?: string; href: string }[] = [
   { label: 'Home',         section: 'home',          scrollId: undefined,    href: '/' },
   { label: 'Services',     section: 'services',      scrollId: 'services',   href: '/services' },
   { label: 'Process',      section: 'process',       scrollId: 'how-we-work',href: '/process' },
   { label: 'Case Studies', section: 'case-studies',  scrollId: undefined,    href: '/case-studies' },
-  { label: 'Resources',    section: 'resources',     scrollId: undefined,    href: '/resources' },
 ];
 
 export default function Navbar() {
@@ -34,11 +33,9 @@ export default function Navbar() {
   const isHomePage        = pathname === '/';
   const isCaseStudiesPage = pathname === '/case-studies' ||
     ['/shopwave', '/goso', '/nuvaris-ai', '/victoria-james'].includes(pathname);
-  const isResourcesPage   = pathname === '/resources';
 
   const currentSection: NavSection = isCaseStudiesPage ? 'case-studies'
-    : isResourcesPage  ? 'resources'
-    : isHomePage       ? scrollSection
+    : isHomePage ? scrollSection
     : 'home';
 
   // ── Scroll-based active section (home only) ──────────────────────────────
@@ -141,8 +138,8 @@ export default function Navbar() {
 
   // ── Click handlers ────────────────────────────────────────────────────────
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>, item: typeof NAV_ITEMS[0]) {
-    // Case studies / resources: let Next.js Link handle it normally
-    if (item.section === 'case-studies' || item.section === 'resources') {
+    // Case studies: let Next.js Link handle it normally
+    if (item.section === 'case-studies') {
       setMobileOpen(false);
       return;
     }
@@ -209,7 +206,7 @@ export default function Navbar() {
 
         {NAV_ITEMS.map((item, idx) => {
           const isActive = currentSection === item.section;
-          const isLink   = item.section === 'case-studies' || item.section === 'resources';
+          const isLink   = item.section === 'case-studies';
 
           return (
             <li key={item.section} ref={el => { itemRefs.current[idx] = el; }}>

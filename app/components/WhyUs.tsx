@@ -101,7 +101,7 @@ export default function WhyUs() {
                     <span className="wu-sub">{r.sub}</span>
                   </th>
                   {r.cells.map((v, i) => (
-                    <td key={COLS[i]} className={i === 0 ? 'is-us' : undefined}>
+                    <td key={COLS[i]} data-col={COLS[i]} className={i === 0 ? 'is-us' : undefined}>
                       <Verdict v={v} />
                     </td>
                   ))}
