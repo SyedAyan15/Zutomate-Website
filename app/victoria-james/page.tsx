@@ -48,7 +48,7 @@ export default function VictoriaJamesPage() {
         },
         {
           k: 'Copywriting',
-          v: 'Messaging was written against those enriched data points, so every email and LinkedIn message opened on something specific to the business receiving it rather than a template with a name merged into it.',
+          v: 'Messaging changed according to the signals that actually predicted fit: the region a company operates in, the hiring signals showing which roles they were actively recruiting for, whether they had recently raised funding, and the region they were hiring into. A business staffing up after a raise received a different message from one hiring steadily in a single market — so the opening line reflected something true about that company rather than a template with a name merged into it.',
         },
         {
           k: 'Sequencing',

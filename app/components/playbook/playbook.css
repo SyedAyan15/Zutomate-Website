@@ -161,7 +161,7 @@
   position: relative;
   display: inline-flex;
   margin-top: 30px;
-  padding: 1.6px;
+  padding: 3px;
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
@@ -170,18 +170,24 @@
 .gf-cta-wrap::before {
   content: '';
   position: absolute;
-  inset: -150%;
+  /* square and wider than the button's diagonal: sized from the element's own
+     box it would be wide and short, and stop spanning the width at 90deg */
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  aspect-ratio: 1;
   z-index: -1;
-  background: conic-gradient(
+  /* two arcs, so a light is always on a long edge of a wide button */
+  background: repeating-conic-gradient(
     from 0deg,
-    transparent 0deg 260deg,
-    rgba(255, 190, 140, 0.5) 300deg,
-    #ffd9c2 335deg,
-    #fff 350deg,
-    #ffd9c2 358deg,
-    transparent 360deg
+    transparent 0deg 84deg,
+    rgba(255, 200, 155, 0.55) 122deg,
+    #ffd9c2 152deg,
+    #ffffff 170deg,
+    #ffd9c2 176deg,
+    transparent 180deg
   );
-  animation: gf-cta-spin 3.4s linear infinite;
+  animation: gf-cta-spin 5.2s linear infinite;
 }
 
 /* the standing glow under the pill, separate from the travelling light */
@@ -200,11 +206,37 @@
 .gf-cta-wrap:hover::after { opacity: 0.78; }
 
 @keyframes gf-cta-spin {
-  to { transform: rotate(1turn); }
+  from { transform: translate(-50%, -50%) rotate(0turn); }
+  to { transform: translate(-50%, -50%) rotate(1turn); }
+}
+
+/* the same seamless sheen the trial buttons carry */
+.gf-cta::after {
+  content: '';
+  position: absolute;
+  inset: -25% -10%;
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(255, 255, 255, 0.16) 34%,
+    rgba(255, 255, 255, 0.62) 42%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  pointer-events: none;
+  animation: gf-cta-sheen 5.2s linear infinite;
+}
+
+@keyframes gf-cta-sheen {
+  to { background-position: -220% 0; }
 }
 
 .gf-cta {
   position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -228,7 +260,9 @@
 
 /* a light orbiting the screen is exactly what reduced-motion is asking about */
 @media (prefers-reduced-motion: reduce) {
-  .gf-cta-wrap::before { animation: none; }
+  .gf-cta-wrap::before,
+  .gf-cta::after { animation: none; }
+  .gf-cta::after { opacity: 0; }
   .gf-cta:hover { transform: none; }
 }
 
