@@ -1,0 +1,645 @@
+/* ═══════════════════════════════════════════════════════════════
+   Automated GTM Engine.
+
+   Split screen: the navy panel on the left carries the accordion,
+   the pearl panel on the right carries the flow. The right panel
+   bleeds to the viewport edge, so the two grounds meet as one seam
+   down the page rather than sitting inside a shared container.
+   ═══════════════════════════════════════════════════════════════ */
+
+.gf-page {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  align-items: stretch;
+  background: var(--navy);
+  position: relative;
+  z-index: 10;
+}
+
+/* ── left: navy, the accordion ── */
+.gf-side {
+  padding: 118px 46px 96px 52px;
+}
+
+.gf-side-inner {
+  position: sticky;
+  top: 104px;
+  max-width: 560px;
+  margin-left: auto;
+}
+
+.gf-back {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.22s ease;
+}
+
+.gf-back:hover { color: var(--orange); }
+.gf-back svg { width: 14px; height: 14px; }
+
+.gf-label {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.gf-title {
+  margin: 16px 0 12px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(32px, 3.2vw, 46px);
+  font-weight: 500;
+  letter-spacing: -1.3px;
+  line-height: 1.08;
+  color: #fff;
+}
+
+.gf-lede {
+  margin: 0 0 30px;
+  max-width: 46ch;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* the accordion */
+.gf-steps {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.gf-step-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.gf-step-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.gf-step-k {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  color: #fff;
+  transition: color 0.22s ease;
+}
+
+.gf-step-head:hover .gf-step-k { color: var(--orange); }
+
+.gf-step-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+
+.gf-step-plus svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gf-step-head:hover .gf-step-plus {
+  border-color: rgba(242, 101, 34, 0.45);
+  background: rgba(242, 101, 34, 0.12);
+}
+
+.gf-step-row.is-open .gf-step-plus svg { transform: rotate(45deg); }
+
+.gf-step-row.is-open .gf-step-plus {
+  border-color: rgba(242, 101, 34, 0.5);
+  background: rgba(242, 101, 34, 0.16);
+  color: var(--orange);
+}
+
+.gf-step-v {
+  margin: 0;
+  padding: 0 56px 24px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* A light travels the rim: a conic gradient spun behind the button, with the
+   button's own fill covering all but a hairline of it. `inset: -150%` keeps the
+   spinning square larger than the pill at every angle, so the arc never clips
+   at the corners. */
+.gf-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  margin-top: 30px;
+  padding: 1.6px;
+  border-radius: 12px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.gf-cta-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 260deg,
+    rgba(255, 190, 140, 0.5) 300deg,
+    #ffd9c2 335deg,
+    #fff 350deg,
+    #ffd9c2 358deg,
+    transparent 360deg
+  );
+  animation: gf-cta-spin 3.4s linear infinite;
+}
+
+/* the standing glow under the pill, separate from the travelling light */
+.gf-cta-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  z-index: -2;
+  border-radius: 12px;
+  background: var(--orange);
+  filter: blur(13px);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.gf-cta-wrap:hover::after { opacity: 0.78; }
+
+@keyframes gf-cta-spin {
+  to { transform: rotate(1turn); }
+}
+
+.gf-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  border-radius: 11px;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.gf-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -14px rgba(242, 101, 34, 0.8);
+}
+
+.gf-cta svg { width: 15px; height: 15px; }
+
+/* a light orbiting the screen is exactly what reduced-motion is asking about */
+@media (prefers-reduced-motion: reduce) {
+  .gf-cta-wrap::before { animation: none; }
+  .gf-cta:hover { transform: none; }
+}
+
+/* ── the pull quote ── */
+.gf-quote {
+  margin: 30px 0 6px;
+  padding: 2px 0 2px 20px;
+  border-left: 2px solid var(--orange);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.gf-quote p { margin: 0; }
+.gf-quote p + p { margin-top: 14px; }
+
+/* the opening claim and the closing promise carry the argument */
+.gf-quote p:first-child,
+.gf-quote p:last-child {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ── right: pearl, the flow ── */
+.gf-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--pearl-white);
+  padding: 118px 52px 96px 48px;
+  min-height: 100vh;
+}
+
+/* Every block after the first hangs off a connector drawn by the block itself,
+   so reordering a stage in flow.ts never leaves an orphaned rule behind. */
+.gf-node {
+  position: relative;
+  margin-top: 38px;
+}
+
+.gf-node:first-child { margin-top: 0; }
+
+.gf-node:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  width: 1.5px;
+  height: 38px;
+  background: linear-gradient(rgba(13, 27, 46, 0.08), rgba(13, 27, 46, 0.26));
+  border-radius: 2px;
+}
+
+/* Stages that follow one another rather than branching: stacked in a single
+   column, each hanging off the one above. Tighter than the 38px between blocks,
+   because these are steps within one stage rather than stages in their own
+   right. */
+.gf-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.gf-stack > * {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+.gf-stack > * + *::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 1.5px;
+  height: 24px;
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+/* One page can carry more than one engine. The heading is a hard break in the
+   flow: nothing connects into it, and nothing connects out of it into the
+   stage below, so the two charts never read as one continuous chain. */
+.gf-section {
+  margin-top: 78px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  text-align: center;
+  color: var(--navy);
+}
+
+.gf-section::before,
+.gf-section + .gf-node::before { display: none; }
+
+/* ── the 3D card ──
+   Four stacked shadows at rising blur and falling opacity approximate real
+   light falloff; a single large shadow just looks like a grey smudge. The
+   inset top highlight and the faint gradient give the face its curvature. */
+.gf-card {
+  border-radius: 15px;
+  border: 1px solid rgba(13, 27, 46, 0.055);
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 1px rgba(13, 27, 46, 0.035),
+    0 3px 6px rgba(13, 27, 46, 0.045),
+    0 10px 20px -8px rgba(13, 27, 46, 0.09),
+    0 26px 44px -18px rgba(13, 27, 46, 0.14);
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s ease;
+}
+
+.gf-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 1px rgba(13, 27, 46, 0.04),
+    0 4px 8px rgba(13, 27, 46, 0.05),
+    0 16px 28px -10px rgba(13, 27, 46, 0.11),
+    0 38px 60px -22px rgba(13, 27, 46, 0.18);
+}
+
+.gf-step {
+  align-self: center;
+  width: min(360px, 100%);
+  padding: 19px 24px;
+  text-align: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--navy);
+}
+
+/* the fan: one bar across the outer items' centres, one stub per item.
+   The bar ends must sit on the outer columns' centres, which is half a column
+   in from each edge — and a column is narrower than 100%/n because of the gap.
+   Ignoring the gap leaves the bar ends a few px shy of the stubs, so the gap is
+   a variable and the bar geometry is derived from it. */
+.gf-row,
+.gf-cols {
+  display: grid;
+  column-gap: var(--gf-gap);
+  row-gap: 0;
+  --gf-gap: 16px;
+}
+
+.gf-n1 { grid-template-columns: minmax(0, 360px); justify-content: center; }
+.gf-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gf-n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gf-n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.gf-n2::after,
+.gf-n3::after,
+.gf-n4::after {
+  content: '';
+  position: absolute;
+  top: -19px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+.gf-n2::after {
+  left: calc(25% - var(--gf-gap) / 4);
+  right: calc(25% - var(--gf-gap) / 4);
+}
+
+.gf-n3::after {
+  left: calc(16.6667% - var(--gf-gap) / 3);
+  right: calc(16.6667% - var(--gf-gap) / 3);
+}
+
+.gf-n4::after {
+  left: calc(12.5% - var(--gf-gap) * 0.375);
+  right: calc(12.5% - var(--gf-gap) * 0.375);
+}
+
+/* The mirror of the fan: every branch rejoins into the stage beneath, rather
+   than one lone centre line carrying the whole flow onward. ::after is already
+   the top bar, so the merge bar is a real element — absolutely positioned, so
+   it never takes a grid cell of its own. */
+.gf-merge {
+  position: absolute;
+  /* Span every column so the bar measures against the whole row, but leave the
+     row axis to auto-placement: `1 / -1` collapses to zero height here (no
+     explicit rows are declared, so line -1 resolves back to line 1) and strands
+     the bar just under the row's top edge instead of below it. */
+  grid-column: 1 / -1;
+  grid-row: auto;
+  right: auto;
+  bottom: -19px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+.gf-n2 .gf-merge {
+  left: calc(25% - var(--gf-gap) / 4);
+  width: calc(50% + var(--gf-gap) / 2);
+}
+
+.gf-n3 .gf-merge {
+  left: calc(16.6667% - var(--gf-gap) / 3);
+  width: calc(66.6667% + var(--gf-gap) * 2 / 3);
+}
+
+.gf-n4 .gf-merge {
+  left: calc(12.5% - var(--gf-gap) * 0.375);
+  width: calc(75% + var(--gf-gap) * 0.75);
+}
+
+/* a single column has nothing to merge */
+.gf-n1 .gf-merge { display: none; }
+
+.gf-row > *:not(.gf-merge)::after,
+.gf-cols > *:not(.gf-merge)::after {
+  content: '';
+  position: absolute;
+  bottom: -19px;
+  left: 50%;
+  width: 1.5px;
+  height: 19px;
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+.gf-row > *,
+.gf-cols > * { position: relative; }
+
+.gf-n1 > *::after,
+.gf-node:last-child > *::after { display: none; }
+
+.gf-n2 > *::before,
+.gf-n3 > *::before {
+  content: '';
+  position: absolute;
+  top: -19px;
+  left: 50%;
+  width: 1.5px;
+  height: 19px;
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+.gf-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  text-align: center;
+}
+
+.gf-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.gf-chip-icon img,
+.gf-chip-icon svg {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Groups are recessed rather than raised — the inset shadow reads as a well,
+   which is what makes the chips sitting in them look like they lift out. */
+.gf-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gf-group-gap);
+  --gf-group-gap: 10px;
+  --gf-out-gap: 28px;
+  padding: 0;
+  background: none;
+}
+
+.gf-group-k {
+  margin-bottom: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(13, 27, 46, 0.45);
+}
+
+/* one row of tiles, so every group is the same height regardless of how many
+   tools it holds — the tiles shrink to fit rather than the block growing */
+.gf-tiles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 10px;
+}
+
+.gf-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 1 34px;
+  min-width: 24px;
+  border-radius: 9px;
+  background: rgba(13, 27, 46, 0.04);
+}
+
+.gf-tile img,
+.gf-tile svg {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+.gf-tile.is-text {
+  width: auto;
+  flex: 0 1 auto;
+  padding: 0 13px;
+  max-width: 100%;
+}
+
+.gf-tile-fallback {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gf-group-out {
+  position: relative;
+  margin-top: var(--gf-out-gap);
+}
+
+.gf-group-out::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * (var(--gf-out-gap) + var(--gf-group-gap)));
+  left: 50%;
+  width: 1.5px;
+  height: calc(var(--gf-out-gap) + var(--gf-group-gap));
+  border-radius: 2px;
+  background: rgba(13, 27, 46, 0.2);
+}
+
+.gf-group-out .gf-chip {
+  border-color: rgba(242, 101, 34, 0.28);
+  color: var(--orange);
+}
+
+@media (max-width: 1040px) {
+  .gf-page { grid-template-columns: 1fr; }
+
+  .gf-side { padding: 104px 24px 56px; }
+  .gf-side-inner { position: static; max-width: none; margin-left: 0; }
+  .gf-flow { padding: 56px 24px 80px; min-height: 0; }
+}
+
+@media (max-width: 900px) {
+  /* four across stops being legible well before the phone breakpoint */
+  .gf-n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--gf-gap); }
+  .gf-n4::after,
+  .gf-n4 > *::before,
+  .gf-n4 > *::after,
+  .gf-n4 .gf-merge { display: none; }
+}
+
+@media (max-width: 640px) {
+  /* three columns of chips do not survive a phone; stack them and drop the
+     fan brackets, which only mean anything across a horizontal spread */
+  .gf-n3,
+  .gf-n4,
+  .gf-cols.gf-n2 {
+    grid-template-columns: 1fr;
+    row-gap: var(--gf-gap);
+  }
+
+  /* stacked, there is no horizontal spread left to bracket — so the fan bar,
+     the merge bar and both sets of stubs all go */
+  .gf-n3::after,
+  .gf-n4::after,
+  .gf-cols.gf-n2::after,
+  .gf-n3 > *::before,
+  .gf-n4 > *::before,
+  .gf-cols.gf-n2 > *::before,
+  .gf-n3 > *::after,
+  .gf-n4 > *::after,
+  .gf-cols.gf-n2 > *::after,
+  .gf-n3 .gf-merge,
+  .gf-n4 .gf-merge,
+  .gf-cols.gf-n2 .gf-merge { display: none; }
+
+  .gf-step { width: 100%; font-size: 16px; }
+  .gf-step-v { padding-right: 0; }
+}

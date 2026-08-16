@@ -1,44 +1,81 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-const rows = [
-  { num: '01', bars: [{ cls: 'orange', tag: 'BUILD', tagCls: 'tag-build', text: 'Kickoff & Discovery', span: 1 }] },
-  { num: '02', bars: [{ cls: 'orange', tag: 'BUILD', tagCls: 'tag-build', text: 'ICP Model + System Architecture', span: 2 }] },
-  { num: '03', bars: [{ cls: 'orange', tag: 'BUILD', tagCls: 'tag-build', text: 'Design Playbooks & Sequences', span: 1 }] },
-  { num: '04', bars: [{ cls: 'launch', tag: 'LAUNCH', tagCls: 'tag-launch', text: 'Ad Campaign Goes Live', span: 1 }] },
-  { num: '05', bars: [{ cls: 'orange', tag: 'BUILD', tagCls: 'tag-build', text: 'Campaign & Infrastructure Setup', span: 1 }] },
-  { num: '06', dark: 1, bars: [{ cls: 'launch', tag: 'LAUNCH', tagCls: 'tag-launch', text: 'First Outreach Goes Live', span: 1 }] },
-  { num: '07', dark: 1, bars: [{ cls: 'orange', tag: 'BUILD', tagCls: 'tag-build', text: 'CRM Integration', span: 1 }] },
-  { num: '08', dark: 1, bars: [{ cls: 'launch', tag: 'LAUNCH', tagCls: 'tag-launch', text: 'Dashboards + Reporting Setup', span: 2 }] },
-  { num: '09', dark: 2, bars: [{ cls: 'scale', tag: 'SCALE', tagCls: 'tag-scale', text: 'Testing & Iterating Playbooks', span: 1 }] },
-  { num: '10', dark: 1, bars: [{ cls: 'scale', tag: 'SCALE', tagCls: 'tag-scale', text: 'Optimisation, Scaling & Documentation', span: 3 }] },
-  { num: '11', dark: 3, bars: [{ cls: 'orange', tag: 'QBR', tagCls: 'tag-build', text: 'Quarterly Review & Roadmap', span: 1 }] },
+/* The engagement as a calendar: what actually happens, month by month. Each
+   month carries a phase so the arc — build, launch, scale — is readable without
+   reading every line. */
+const MONTHS: { k: string; phase: string; cls: string; items: string[] }[] = [
+  {
+    k: 'Month 1',
+    phase: 'Build',
+    cls: 'is-build',
+    items: [
+      'Onboarding and discovery',
+      'Positioning and offer',
+      'Email infrastructure',
+      'LinkedIn profile optimization',
+      'Content strategy and pillars',
+      'Copywriting and sequences',
+      'Clay workspace build',
+    ],
+  },
+  {
+    k: 'Month 2',
+    phase: 'Launch',
+    cls: 'is-launch',
+    items: [
+      'Campaigns go live',
+      'Deliverability and reply-rate tuning',
+      'Founder-led content',
+      'Employee-led content',
+      'Paid ads strategy',
+    ],
+  },
+  {
+    k: 'Month 3',
+    phase: 'Launch',
+    cls: 'is-launch',
+    items: [
+      'RevOps and CRM setup',
+      'Paid ads go live',
+      'Reporting and attribution',
+    ],
+  },
+  {
+    k: 'Month 4 – 6',
+    phase: 'Scale',
+    cls: 'is-scale',
+    items: [
+      'Map the channels that convert',
+      'Cut what is not earning its place',
+      'Expand the target list',
+      'Scale spend behind proven plays',
+      'Quarterly review and roadmap',
+    ],
+  },
 ];
 
-function barStyle(cls: string) {
-  if (cls === 'launch') return { background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.3)' };
-  if (cls === 'scale') return { background: 'rgba(99,102,241,0.10)', borderColor: 'rgba(165,180,252,0.3)' };
-  return {};
-}
-
 export default function ActionPlan() {
-  const rowsRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const planRows = rowsRef.current?.querySelectorAll<HTMLElement>('[data-plan-row]');
-    if (!planRows) return;
+    const cards = gridRef.current?.querySelectorAll<HTMLElement>('[data-cal-card]');
+    if (!cards) return;
 
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const idx = Array.from(planRows).indexOf(entry.target as HTMLElement);
-          setTimeout(() => entry.target.classList.add('visible'), idx * 80);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(cards).indexOf(entry.target as HTMLElement);
+            setTimeout(() => entry.target.classList.add('visible'), idx * 110);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
 
-    planRows.forEach(r => obs.observe(r));
+    cards.forEach((c) => obs.observe(c));
     return () => obs.disconnect();
   }, []);
 
@@ -46,45 +83,40 @@ export default function ActionPlan() {
     <section className="plan-section" id="how-we-work">
       <div style={{ textAlign: 'center' }}>
         <div className="plan-badge">HOW WE WORK</div>
-        <h2 className="plan-heading">Your first <span>3 months</span> action plan</h2>
+        <h2 className="plan-heading">
+          Your first <span>six months</span>, month by month
+        </h2>
         <p className="plan-sub">Each phase compounds the last, from system build to pipeline results.</p>
       </div>
 
-      <div className="plan-timeline">
-        <div className="plan-months">
-          <div className="plan-month-label"></div>
-          <div className="plan-month-label">Month 1</div>
-          <div className="plan-month-label">Month 2</div>
-          <div className="plan-month-label">Month 3</div>
-          <div className="plan-month-label">Review</div>
-        </div>
+      <div className="cal-grid" ref={gridRef}>
+        {MONTHS.map((m) => (
+          <article className={`cal-card ${m.cls}`} key={m.k} data-cal-card>
+            <header className="cal-head">
+              <span className="cal-month">{m.k}</span>
+              <span className="cal-phase">{m.phase}</span>
+            </header>
 
-        <div className="plan-rows" id="planRows" ref={rowsRef}>
-          <div className="plan-col-dividers">
-            <div className="plan-col-div"></div>
-            <div className="plan-col-div"></div>
-            <div className="plan-col-div"></div>
-            <div className="plan-col-div"></div>
-            <div className="plan-col-div"></div>
-          </div>
-
-          {rows.map((row) => (
-            <div key={row.num} className="plan-row" data-plan-row>
-              <div className="plan-row-num">{row.num}</div>
-              {Array.from({ length: row.dark || 0 }).map((_, i) => (
-                <div key={i} className="plan-bar-wrap dark"></div>
+            <ul className="cal-list">
+              {m.items.map((it) => (
+                <li key={it}>
+                  <span className="cal-tick" aria-hidden="true">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M3 7.2l2.6 2.6L11 4.4"
+                        stroke="currentColor"
+                        strokeWidth="1.9"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  {it}
+                </li>
               ))}
-              {row.bars.map((bar, bi) => (
-                <div key={bi} className={`plan-bar-wrap${bar.span > 1 ? ` span${bar.span}` : ''}`}>
-                  <div className={`plan-bar${bar.cls === 'orange' ? ' orange' : ''}`} style={barStyle(bar.cls)}>
-                    <span className={`plan-phase-tag ${bar.tagCls}`}>{bar.tag}</span>
-                    {bar.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
   );

@@ -7,6 +7,9 @@ import { BASE_URL } from './site';
 // URLs that redirect.
 const routes: { path: string; changeFrequency: 'weekly' | 'monthly' | 'yearly'; priority: number }[] = [
   { path: '/', changeFrequency: 'weekly', priority: 1.0 },
+  { path: '/outbound-playbook/', changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/inbound-playbook/', changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/revops-playbook/', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/case-studies/', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/shopwave/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/goso/', changeFrequency: 'monthly', priority: 0.7 },

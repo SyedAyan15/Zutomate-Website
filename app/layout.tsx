@@ -41,7 +41,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600&family=DM+Sans:wght@300;400;500&family=Black+Han+Sans&family=Bebas+Neue&display=swap" rel="stylesheet" />
+        {/* Bricolage is requested as a variable range (200..800) rather than
+            fixed instances, so any weight is available for fine-tuning. */}
+        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:wght@300;400;500&family=Black+Han+Sans&family=Bebas+Neue&display=swap" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>

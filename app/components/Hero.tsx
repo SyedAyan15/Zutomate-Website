@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 const premiumEase = [0.16, 1, 0.3, 1] as const;
@@ -84,6 +83,33 @@ export default function Hero() {
     resize();
     window.addEventListener('resize', resize);
 
+    // Cursor spotlight. `target` is where the pointer actually is; `glow` eases
+    // toward it so the light trails rather than snapping, and `a` fades the
+    // whole effect in and out as the pointer enters and leaves the hero.
+    const RADIUS = 260;
+    const target = { x: 0, y: 0, on: false };
+    const glow = { x: 0, y: 0, a: 0 };
+    const host = c.parentElement;
+
+    function onMove(e: PointerEvent) {
+      const r = c!.getBoundingClientRect();
+      target.x = e.clientX - r.left;
+      target.y = e.clientY - r.top;
+      if (!target.on) {
+        // First entry: place the glow under the cursor so it fades in on the
+        // spot instead of sliding in from a stale position.
+        glow.x = target.x;
+        glow.y = target.y;
+      }
+      target.on = true;
+    }
+    function onLeave() {
+      target.on = false;
+    }
+
+    host?.addEventListener('pointermove', onMove);
+    host?.addEventListener('pointerleave', onLeave);
+
     function frame() {
       ctx.clearRect(0, 0, W, H);
       ox = (ox + 0.10) % GAP;
@@ -92,11 +118,11 @@ export default function Hero() {
       for (let row = -GAP; row < H + GAP; row += GAP) {
         const py = row + oy;
         const dy = (py - H / 2) / (H / 2);
-        const alpha = Math.max(0, Math.min(0.10, (Math.abs(dy) - 0.15) * 0.18));
+        const alpha = Math.max(0, Math.min(0.16, (Math.abs(dy) - 0.12) * 0.26));
         ctx.beginPath();
         ctx.moveTo(0, py);
         ctx.lineTo(W, py);
-        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.strokeStyle = `rgba(13,27,46,${alpha})`;
         ctx.lineWidth = 0.6;
         ctx.stroke();
       }
@@ -104,13 +130,46 @@ export default function Hero() {
       for (let col = -GAP; col < W + GAP; col += GAP) {
         const px = col + ox;
         const dx = (px - W / 2) / (W / 2);
-        const alpha = Math.max(0, Math.min(0.10, (Math.abs(dx) - 0.15) * 0.18));
+        const alpha = Math.max(0, Math.min(0.16, (Math.abs(dx) - 0.12) * 0.26));
         ctx.beginPath();
         ctx.moveTo(px, 0);
         ctx.lineTo(px, H);
-        ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+        ctx.strokeStyle = `rgba(13,27,46,${alpha})`;
         ctx.lineWidth = 0.6;
         ctx.stroke();
+      }
+
+      glow.x += (target.x - glow.x) * 0.08;
+      glow.y += (target.y - glow.y) * 0.08;
+      glow.a += ((target.on ? 1 : 0) - glow.a) * 0.07;
+
+      // Redraw only the lines near the cursor, stroked with a radial gradient.
+      // The gradient supplies the falloff, so no clipping or masking is needed
+      // and there is no hard edge where the spotlight ends.
+      if (glow.a > 0.004) {
+        const g = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, RADIUS);
+        g.addColorStop(0, `rgba(242,101,34,${0.60 * glow.a})`);
+        g.addColorStop(0.5, `rgba(242,101,34,${0.20 * glow.a})`);
+        g.addColorStop(1, 'rgba(242,101,34,0)');
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1;
+
+        for (let row = -GAP; row < H + GAP; row += GAP) {
+          const py = row + oy;
+          if (Math.abs(py - glow.y) > RADIUS) continue;
+          ctx.beginPath();
+          ctx.moveTo(glow.x - RADIUS, py);
+          ctx.lineTo(glow.x + RADIUS, py);
+          ctx.stroke();
+        }
+        for (let col = -GAP; col < W + GAP; col += GAP) {
+          const px = col + ox;
+          if (Math.abs(px - glow.x) > RADIUS) continue;
+          ctx.beginPath();
+          ctx.moveTo(px, glow.y - RADIUS);
+          ctx.lineTo(px, glow.y + RADIUS);
+          ctx.stroke();
+        }
       }
 
       animId = requestAnimationFrame(frame);
@@ -119,22 +178,12 @@ export default function Hero() {
 
     return () => {
       window.removeEventListener('resize', resize);
+      host?.removeEventListener('pointermove', onMove);
+      host?.removeEventListener('pointerleave', onLeave);
       cancelAnimationFrame(animId);
     };
   }, []);
 
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const email = (form.querySelector('#hero-email') as HTMLInputElement).value;
-    const company = (form.querySelector('#hero-company') as HTMLInputElement).value;
-
-    const params = `?email=${encodeURIComponent(email)}&company_name=${encodeURIComponent(company)}&source=Hero+CTA`;
-    fetch(WEBHOOK_URL + params, { method: 'GET', keepalive: true }).catch(() => {});
-
-    const calendlyUrl = `https://calendly.com/zutomate/30min?email=${encodeURIComponent(email)}&a1=${encodeURIComponent(company)}`;
-    window.location.href = calendlyUrl;
-  }
 
   return (
     <section className="hero" id="home">
@@ -152,8 +201,10 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1 variants={item}>
-          We Build <span className="accent">Predictable</span><br />
-          <span className="muted">Growth Systems</span>
+          <span className="hl-light">We Build</span>{' '}
+          <span className="hl-bold">Predictable</span><br />
+          <span className="hl-bold">Growth</span>{' '}
+          <span className="hl-light">Systems</span>
         </motion.h1>
 
         <motion.p className="hero-sub" variants={item}>
@@ -161,17 +212,25 @@ export default function Hero() {
           to engineer end-to-end growth systems.
         </motion.p>
 
-        <motion.form
-          id="hero-cta-form"
-          className="hero-form"
-          onSubmit={handleSubmit}
-          variants={item}
-        >
-          <input type="email" id="hero-email" placeholder="Work email" required />
-          <div className="vdivider"></div>
-          <input type="text" id="hero-company" placeholder="Company name" required />
-          <button type="submit">Book a Call →</button>
-        </motion.form>
+        <motion.div className="trial-wrap" id="hero-cta-form" variants={item}>
+          <a
+            href="https://calendly.com/zutomate/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="trial-cta"
+          >
+            Book 30 Day Free Trial
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        </motion.div>
 
         <motion.div className="service-tags" variants={item}>
           <span className="tag">Go-To-Market</span>

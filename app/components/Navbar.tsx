@@ -194,7 +194,9 @@ export default function Navbar() {
       </button>
 
       <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <Image src="/assets/logo.svg" alt="Zutomate" width={90} height={23} style={{ height: '23px', width: 'auto' }} />
+        {/* Navy wordmark variant — the default logo.svg is white artwork and
+            would disappear against the pearl navbar. */}
+        <Image src="/assets/logo-navy.svg" alt="Zutomate" width={90} height={23} style={{ height: '23px', width: 'auto' }} />
       </Link>
 
       <ul className={`nav-links${mobileOpen ? ' active' : ''}`} ref={ulRef}>

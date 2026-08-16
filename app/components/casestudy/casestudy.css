@@ -1,0 +1,357 @@
+/* Shared styling for every case-study detail page.
+   The page reads on pearl, so the token scale is flipped here the same way
+   globals.css does it for its light sections — anything written against
+   --white / --wNN inverts with the page rather than staying white on white.
+   This stylesheet only loads on case-study routes, so painting the body is
+   scoped to them. */
+
+html body {
+  background: var(--pearl-white, #F7F5F1);
+}
+
+.cs-detail-hero,
+.cs-strategy,
+.cs-stack,
+.cs-campaigns {
+  --white: #0d1b2e;
+  --w80: rgba(13, 27, 46, 0.78);
+  --w55: rgba(13, 27, 46, 0.56);
+  --w40: rgba(13, 27, 46, 0.42);
+  --w12: rgba(13, 27, 46, 0.14);
+  --w06: rgba(13, 27, 46, 0.045);
+  --card-solid: #ffffff;
+  color: #0d1b2e;
+}
+
+.cs-detail-hero {
+  padding: 136px 52px 72px;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cs-detail-hero h1 {
+  font-size: clamp(30px, 4.2vw, 50px);
+  line-height: 1.12;
+  letter-spacing: -1.4px;
+  color: #0d1b2e;
+  margin: 0;
+}
+
+.cs-detail-hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.cs-client-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid rgba(13, 27, 46, 0.08);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .cs-detail-hero { padding: 110px 20px 48px; }
+}
+
+/* ── case-study hero: the outcome first, then the proof ──
+   This hero is on the navy ground, so the copy takes the light end of the
+   scale. The metric cards stay white and read as objects on top of it. */
+.cs-headline-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 34px 0 40px;
+}
+
+.cs-headline-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 210px;
+  padding: 24px 30px;
+  border: 1px solid rgba(13, 27, 46, 0.06);
+  border-radius: 18px;
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 12px 28px -14px rgba(13, 27, 46, 0.14);
+}
+
+.cs-headline-val {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--orange);
+}
+
+.cs-headline-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.4;
+  text-align: center;
+  color: rgba(13, 27, 46, 0.58);
+}
+
+.cs-detail-hero .cs-client-logo {
+  background: #ffffff;
+  border-color: rgba(13, 27, 46, 0.08);
+  padding: 12px 22px;
+  border-radius: 14px;
+}
+
+.cs-client-logo img {
+  width: auto;
+  height: auto;
+  max-width: 170px;
+  max-height: 44px;
+  object-fit: contain;
+}
+
+.cs-hero-quote {
+  max-width: 640px;
+  margin: 38px auto 0;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(13, 27, 46, 0.78);
+}
+
+.cs-hero-attr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.cs-hero-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cs-hero-attr-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: rgba(13, 27, 46, 0.55);
+}
+
+.cs-hero-attr-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0d1b2e;
+}
+
+@media (max-width: 620px) {
+  .cs-headline-stats { gap: 12px; margin: 26px 0 30px; }
+  .cs-headline-stat { min-width: 0; flex: 1 1 100%; padding: 20px 22px; }
+  .cs-hero-quote { font-size: 16px; }
+}
+
+/* ── The Strategy — what we actually did, in order ── */
+.cs-strategy {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 52px 110px;
+}
+
+.cs-strategy h2 {
+  margin: 0 0 34px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  text-align: center;
+  color: #0d1b2e;
+}
+
+.cs-strategy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cs-strategy-list li {
+  position: relative;
+  padding: 22px 26px 22px 30px;
+  border: 1px solid rgba(13, 27, 46, 0.06);
+  border-radius: 16px;
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 10px 24px -14px rgba(13, 27, 46, 0.12);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(13, 27, 46, 0.72);
+}
+
+/* an orange spine on each step, so the list reads as a sequence */
+.cs-strategy-list li::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--orange);
+}
+
+.cs-strategy-list strong {
+  font-weight: 600;
+  color: #0d1b2e;
+}
+
+@media (max-width: 640px) {
+  .cs-strategy { padding: 10px 20px 72px; }
+  .cs-strategy-list li { padding: 18px 20px 18px 24px; font-size: 15px; }
+}
+
+/* ── Tech Stack — the job on the left, the tools that do it on the right ── */
+.cs-stack {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 52px 120px;
+}
+
+.cs-stack-panel {
+  padding: 30px 30px 34px;
+  border: 1px solid rgba(13, 27, 46, 0.08);
+  border-radius: 22px;
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 14px 32px -16px rgba(13, 27, 46, 0.14);
+}
+
+.cs-stack-panel h2 {
+  margin: 0 0 26px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+  color: #0d1b2e;
+}
+
+.cs-stack-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cs-stack-row {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.cs-stack-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(242, 101, 34, 0.07);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  color: #0d1b2e;
+}
+
+.cs-stack-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 8px 18px;
+  padding: 13px 18px;
+  border: 1px solid rgba(13, 27, 46, 0.07);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.cs-stack-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  color: rgba(13, 27, 46, 0.8);
+}
+
+.cs-stack-tool img {
+  width: 21px;
+  height: 21px;
+  border-radius: 5px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 640px) {
+  .cs-stack { padding: 0 20px 80px; }
+  .cs-stack-panel { padding: 22px 18px 26px; }
+  .cs-stack-row { grid-template-columns: 1fr; gap: 8px; }
+  .cs-stack-label { justify-content: flex-start; padding: 11px 16px; }
+}
+
+/* ── Campaign Stats — the dashboard itself, as shipped ── */
+.cs-campaigns {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 52px 120px;
+}
+
+.cs-campaigns h2 {
+  margin: 0 0 28px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #0d1b2e;
+}
+
+/* framed so the screenshot reads as an artefact rather than a loose image */
+.cs-campaign-shot {
+  padding: 10px;
+  border: 1px solid rgba(13, 27, 46, 0.08);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 14px 32px -16px rgba(13, 27, 46, 0.15);
+}
+
+.cs-campaign-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+  .cs-campaigns { padding: 0 20px 80px; }
+  .cs-campaign-shot { padding: 6px; border-radius: 14px; }
+}

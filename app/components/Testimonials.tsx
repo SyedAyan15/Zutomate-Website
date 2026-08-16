@@ -18,6 +18,16 @@ type Card = {
 
 const cards: Card[] = [
   {
+    quote: 'Zutomate helped us automate our lead generation funnels and simplify some of our more complex sales processes. Their work made our operations much more streamlined and efficient, while saving the team a lot of manual effort. Would definitely recommend Zutomate to any business looking to improve lead generation and sales operations through automation.',
+    name: 'Chris Rowan',
+    title: 'CEO and Founder',
+    company: 'TheAgency.io',
+    logo: '/assets/logos/theagency.png',
+    dark: true,
+    wordmark: true,
+    avatar: '/assets/avatars/chris.jpg',
+  },
+  {
     quote: 'Zutomate is highly skilled in end-to-end lead generation and outbound/inbound automations. Their know-how and patience make them a powerful resource to any team looking to streamline and automate their sales process. I highly recommend working with Zutomate!',
     name: 'Ofek Mussafi',
     title: 'Strategic Account Manager',
@@ -119,7 +129,7 @@ function Stars() {
   return (
     <div className="tspot-stars" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
+        <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2l2.94 6.32 6.91.8-5.12 4.7 1.37 6.83L12 17.25l-6.1 3.4 1.37-6.83-5.12-4.7 6.91-.8L12 2z" />
         </svg>
       ))}

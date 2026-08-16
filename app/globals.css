@@ -6,11 +6,16 @@
     }
 
     :root {
+  /* raised surface inside the dark sections; the light zone overrides it */
+  --card-solid: #16233a;
       --navy: #0d1b2e;
       --orange: #F26522;
       --orange-h: #ff7a35;
       --white: #ffffff;
       --pearl: #EDECEA;
+      /* Lighter, whiter pearl used for the light zone at the top of the page.
+         --pearl above is left alone since it is the documented brand token. */
+      --pearl-white: #F7F5F1;
       --w80: rgba(255, 255, 255, 0.80);
       --w55: rgba(255, 255, 255, 0.55);
       --w40: rgba(255, 255, 255, 0.40);
@@ -24,8 +29,26 @@
       background: var(--navy);
       color: var(--white);
       min-height: 100vh;
-      overflow-x: hidden;
+      /* `clip`, not `hidden`: both stop sideways scrolling, but `hidden` turns
+         html/body into scroll containers, which silently disables every
+         `position: sticky` on the site by making them stick to a box that
+         never scrolls. */
+      overflow-x: clip;
       scroll-behavior: smooth;
+    }
+
+    /* Brand the text selection instead of the browser's default blue.
+       Site-wide: works on both the pearl sections and the navy ones. */
+    ::selection {
+      background: #F26522;
+      color: #ffffff;
+    }
+
+    /* Selected text inside an input does not inherit the rule above */
+    input::selection,
+    textarea::selection {
+      background: #F26522;
+      color: #ffffff;
     }
 
     /* ── DOT GRID CANVAS ── */
@@ -756,18 +779,22 @@
       background: var(--navy);
     }
 
+    /* Tokens, not literal white: the light-section block at the end of this
+       file flips --white and the --wNN scale to navy, so anything written with
+       them inverts with the section. Hardcoding white left this label invisible
+       once the services section went pearl. */
     .services-label {
       display: inline-flex;
       align-items: center;
       padding: 8px 22px 10px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid var(--w12);
       border-radius: 100px;
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 1.8px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.80);
+      color: var(--w80);
       margin-bottom: 36px;
       position: relative;
     }
@@ -797,14 +824,963 @@
       margin-right: auto;
     }
 
+    /* Statement line: light lead, bold payoff. The 250 matches the hero's
+       .hl-light, which the variable font range in layout.tsx makes available. */
     .services-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--w55);
-      max-width: 460px;
-      line-height: 1.75;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(25px, 3.2vw, 42px);
+      font-weight: 250;
+      color: var(--white);
+      max-width: 960px;
+      line-height: 1.28;
+      letter-spacing: -0.8px;
       margin: 0 auto;
+    }
+
+    .services-sub-em {
+      font-weight: 600;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    /* ── GTM PILLARS ── */
+    .pillars-section {
+      position: relative;
+      z-index: 10;
+      background: var(--navy);
+      padding: 8px 52px 96px;
+    }
+
+    /* Outbound leads at 1.15fr because it carries the click-through process;
+       Inbound stacks its two services in the narrower column.
+
+       Both columns must end on the same line, which means stretching the whole
+       way down: the grid stretches .svc-stack and the FadeUp wrapper, the
+       wrapper stretches the card. FadeUp renders a real element in the middle
+       of that chain, so it needs .svc-fade — without it the cards fall back to
+       content height and the columns go ragged. */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: stretch;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .svc-fade,
+    .svc-fade > * {
+      height: 100%;
+    }
+
+    .svc-card {
+      display: flex;
+      flex-direction: column;
+      padding: 32px 30px 28px;
+      border: 1px solid var(--w12);
+      border-radius: 18px;
+      background: var(--card-solid);
+      box-shadow:
+        0 1px 2px rgba(13, 27, 46, 0.04),
+        0 14px 34px -18px rgba(13, 27, 46, 0.16);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .svc-card:hover {
+      box-shadow:
+        0 1px 2px rgba(13, 27, 46, 0.05),
+        0 22px 44px -20px rgba(13, 27, 46, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .svc-card:hover,
+    .svc-card.is-open {
+      border-color: rgba(242, 101, 34, 0.35);
+    }
+
+    .svc-label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .svc-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.6px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .svc-title-sm { font-size: 21px; }
+
+    .svc-sub-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: var(--white);
+      margin: 18px 0 8px;
+    }
+
+    .svc-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--w55);
+      margin: 0;
+    }
+
+    .svc-head { margin-bottom: 26px; }
+
+    /* ── shared mockup surface ──
+       Each visual runs a continuous loop while on screen (see useLoop). The
+       panel gets generous padding because it nests inside an already-padded
+       card — anything tighter reads as cramped. */
+    .mock {
+      position: relative;
+      border: 1px solid var(--w12);
+      border-radius: 12px;
+      background: var(--w06);
+      padding: 20px;
+    }
+
+    /* ── OUTBOUND CONVEYOR ── */
+    /* ── OUTBOUND — iPhone lock screen ── */
+
+    /* A warm bloom behind the device, picked out of the wallpaper so the phone
+       looks lit rather than pasted on. It is the only real colour in the
+       section, which is what makes the dark phone the focal object. */
+    .orb-glow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 620px;
+      height: 660px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(
+        closest-side,
+        rgba(242, 101, 34, 0.68) 0%,
+        rgba(232, 84, 78, 0.46) 28%,
+        rgba(196, 52, 126, 0.28) 46%,
+        rgba(122, 40, 152, 0.14) 64%,
+        transparent 80%
+      );
+      filter: blur(56px);
+      animation: orb-pulse 8s ease-in-out infinite;
+    }
+
+    /* a hotter core right behind the device, so the light looks like it is
+       coming off the screen rather than sitting behind it */
+    .orb-glow::after {
+      content: '';
+      position: absolute;
+      inset: 20% 24%;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(255, 138, 66, 0.55) 0%, transparent 74%);
+      filter: blur(34px);
+    }
+
+    @keyframes orb-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+      50%      { transform: translate(-50%, -50%) scale(1.14); opacity: 1; }
+    }
+
+    .orb {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: var(--card-solid);
+      box-shadow:
+        0 0 0 1px var(--w12),
+        0 14px 30px -12px rgba(13, 27, 46, 0.34);
+      animation: orb-float 6.5s ease-in-out infinite;
+    }
+
+    .orb img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* scale rides in as a custom property so the float keyframes can carry it —
+       an inline transform would be overwritten by the animation */
+    @keyframes orb-float {
+      0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
+      50%      { transform: translateY(-11px) scale(var(--s, 1)); }
+    }
+
+    .mock-out {
+      flex: 1;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 20px;
+      background: none;
+      border: none;
+    }
+
+    .ph {
+      position: relative;
+      width: 274px;
+      padding: 10px;
+      border-radius: 46px;
+      background: linear-gradient(160deg, #4a4f57 0%, #16181c 30%, #0a0b0d 70%, #2b2e34 100%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.10),
+        0 2px 3px rgba(255, 255, 255, 0.16) inset,
+        0 0 90px -12px rgba(242, 101, 34, 0.5),
+        0 44px 74px -30px rgba(13, 27, 46, 0.55);
+    }
+
+    .ph-screen {
+      position: relative;
+      height: 560px;
+      border-radius: 37px;
+      background: #05040a;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* The default iOS wallpaper is Apple's copyrighted artwork, so this is a
+       CSS rebuild of that marbled-sphere look — same warm orange-into-magenta
+       falloff, which happens to sit right next to the brand orange. */
+    .ph-wall {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(92% 70% at 32% 84%, #ffc46b 0%, #f5813a 14%, #d8425f 32%, #8e2a86 52%, #3f1550 70%, transparent 84%),
+        radial-gradient(50% 36% at 18% 66%, rgba(255, 214, 150, 0.85) 0%, transparent 60%),
+        radial-gradient(70% 48% at 62% 96%, rgba(190, 45, 120, 0.75) 0%, transparent 62%),
+        radial-gradient(52% 40% at 8% 96%, rgba(255, 150, 60, 0.7) 0%, transparent 65%),
+        #04030a;
+    }
+
+    .ph-wall::after {
+      content: '';
+      position: absolute;
+      inset: -20%;
+      background: conic-gradient(
+        from 190deg at 30% 82%,
+        rgba(255, 170, 80, 0.42),
+        rgba(210, 60, 120, 0.34),
+        rgba(110, 40, 140, 0.4),
+        rgba(255, 200, 120, 0.3),
+        rgba(255, 170, 80, 0.42)
+      );
+      filter: blur(26px);
+      mix-blend-mode: overlay;
+    }
+
+    .ph-island {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 82px;
+      height: 24px;
+      border-radius: 100px;
+      background: #000;
+      z-index: 5;
+    }
+
+    .ph-status {
+      position: relative;
+      z-index: 4;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 22px 0;
+      color: #fff;
+    }
+
+    .ph-status-icons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ph-status-icons svg { height: 11px; width: auto; display: block; }
+
+    .ph-lock {
+      position: relative;
+      z-index: 3;
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .ph-lock svg { width: 17px; height: 17px; display: block; }
+
+    /* iOS sets the lock clock in a very light weight at a large size */
+    .ph-clock {
+      position: relative;
+      z-index: 3;
+      margin-top: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 64px;
+      font-weight: 200;
+      letter-spacing: -1.8px;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+    }
+
+    .ph-day {
+      position: relative;
+      z-index: 3;
+      margin-top: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #fff;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .ph-notifs {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      margin-top: 16px;
+      padding: 0 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    /* Each alert is freshly mounted, so a one-shot keyframe gives it a bloom
+       on arrival that settles into a resting rim glow. */
+    .ph-notif {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 11px;
+      border-radius: 16px;
+      background: rgba(72, 62, 78, 0.58);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      animation: notif-bloom 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes notif-bloom {
+      0% {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+          0 0 46px 6px rgba(255, 255, 255, 0.42),
+          0 0 74px 10px rgba(242, 101, 34, 0.5);
+      }
+      100% {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.16) inset,
+          0 0 26px -6px rgba(255, 255, 255, 0.24),
+          0 10px 26px -12px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    /* a thin lit edge along the top, the way glass catches light */
+    .ph-notif::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 42%);
+    }
+
+    /* app-tinted halo, so Slack and Calendly glow their own colour */
+    .ph-notif.is-slack .ph-notif-icon {
+      box-shadow: 0 0 18px -2px rgba(224, 30, 90, 0.75);
+    }
+
+    .ph-notif.is-cal .ph-notif-icon {
+      box-shadow: 0 0 18px -2px rgba(0, 107, 255, 0.8);
+    }
+
+    /* app icons sit on the white squircle iOS gives them */
+    .ph-notif-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .ph-notif-icon svg { width: 20px; height: 20px; display: block; }
+
+    .ph-notif-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .ph-notif-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .ph-notif-app {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.1px;
+    }
+
+    .ph-notif-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.35;
+    }
+
+    .ph-notif-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.35;
+    }
+
+    .ph-notif-now {
+      flex-shrink: 0;
+      align-self: flex-start;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .ph-actions {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      bottom: 34px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .ph-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #fff;
+    }
+
+    .ph-action svg { width: 19px; height: 19px; display: block; }
+
+    .ph-home {
+      position: absolute;
+      z-index: 3;
+      bottom: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 108px;
+      height: 5px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+
+    /* ── INBOUND — the LinkedIn post ── */
+    /* the post sits whole and centred; the card stretches to match the phone
+       column, so the slack goes above and below rather than clipping the post */
+    .mock-post {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 26px;
+      padding: 18px;
+    }
+
+    .lp-card {
+      border: 1px solid var(--w12);
+      border-radius: 12px;
+      background: var(--card-solid);
+      overflow: hidden;
+      box-shadow: 0 10px 26px -18px rgba(13, 27, 46, 0.4);
+    }
+
+    .lp-caption {
+      margin: 0 0 12px;
+      padding-top: 14px;
+      padding: 0 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--w80);
+    }
+
+    /* square media well — the GIF drops straight in at any size */
+    .lp-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--w06);
+      border-top: 1px solid var(--w12);
+      border-bottom: 1px solid var(--w12);
+    }
+
+    .lp-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lp-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+    }
+
+    .lp-reacts {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* overlapped reaction pips, the way LinkedIn stacks them */
+    .lp-emoji {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--card-solid);
+      box-shadow: 0 0 0 1.5px var(--card-solid);
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .lp-e2 { margin-left: -5px; z-index: 1; }
+    .lp-e3 { margin-left: -5px; z-index: 2; }
+
+    .lp-count {
+      margin-left: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--w55);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lp-impressions {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--w55);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lp-impressions b {
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    .lp-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 6px;
+      padding: 8px 10px 10px;
+      border-top: 1px solid var(--w12);
+    }
+
+    .lp-actions span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--w55);
+    }
+
+    .lp-actions svg {
+      width: 16px;
+      height: 16px;
+    }
+
+
+    /* Dimmed by default rather than hidden, so it still reads on touch where
+       there is no hover. Hover brings it to full strength. */
+    .svc-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      align-self: flex-start;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      opacity: 0.6;
+      transition: opacity 0.25s ease;
+    }
+
+    .svc-card:hover .svc-more,
+    .svc-card.is-open .svc-more,
+    .svc-more:focus-visible {
+      opacity: 1;
+    }
+
+    /* Inside the header the link belongs to the copy above it, so the
+       bottom-pinning `margin-top: auto` resolves to 0 and the gap is stated
+       outright. The inbound card keeps the pinned version. */
+    .svc-more-lead {
+      margin-top: 18px;
+    }
+
+    /* Centred under the copy. The RevOps band already centres its link via the
+       header's text-align; these two cards are left-aligned, so the link needs
+       its own centring without dragging the heading and copy with it. */
+    .svc-hero .svc-more-lead {
+      display: flex;
+      width: fit-content;
+      margin-inline: auto;
+    }
+
+    .svc-more > span:first-child {
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    .svc-more-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--w12);
+      border-radius: 8px;
+      color: var(--orange);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .svc-more-arrow svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .svc-card:hover .svc-more-arrow {
+      transform: translate(2px, -2px);
+      border-color: rgba(242, 101, 34, 0.45);
+    }
+
+    .svc-card.is-open .svc-more-arrow {
+      transform: rotate(135deg);
+    }
+
+    /* Outbound process, revealed on click */
+    .proc {
+      list-style: none;
+      margin: 22px 0 0;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--w12);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .proc-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .proc-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(242, 101, 34, 0.16);
+      border: 1px solid rgba(242, 101, 34, 0.42);
+      color: var(--orange);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .proc-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .proc-k {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .proc-v {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--w55);
+    }
+
+    /* ── RevOps band — the flow ── */
+    .svc-band {
+      display: block;
+      max-width: 1200px;
+      margin: 24px auto 0;
+      padding: 34px 30px 30px;
+    }
+
+    .svc-band-head {
+      max-width: 620px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    /* seven tracks: node column, wires, engine, wires, node column, wires, node */
+    .rev-flow {
+      display: grid;
+      grid-template-columns: 1.1fr 0.52fr 1.25fr 0.52fr 0.95fr 0.46fr 1fr;
+      align-items: stretch;
+      gap: 0;
+      min-height: 236px;
+    }
+
+    .rev-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* two and one-node columns centre against the three-node column beside them */
+    .rev-col.is-pair {
+      justify-content: center;
+      gap: 48px;
+    }
+
+    .rev-col.is-one {
+      justify-content: center;
+    }
+
+    .rev-node {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 15px;
+      border-radius: 13px;
+      border: 1px solid var(--w12);
+      background: var(--card-solid);
+      box-shadow: 0 6px 18px -12px rgba(13, 27, 46, 0.3);
+    }
+
+    .rev-node-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid var(--w12);
+      color: var(--white);
+    }
+
+    .rev-node-icon svg { width: 16px; height: 16px; }
+
+    .rev-node-icon.is-logo {
+      border-color: transparent;
+      background: var(--w06);
+    }
+
+    .rev-node-icon img {
+      width: 19px;
+      height: 19px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .rev-node-k {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* the engine reads as the one solid object the wires run through */
+    .rev-core {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: center;
+      padding: 6px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--w12);
+      background: var(--card-solid);
+      box-shadow:
+        0 0 0 5px rgba(242, 101, 34, 0.05),
+        0 16px 38px -20px rgba(13, 27, 46, 0.34);
+    }
+
+    .rev-core-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 15px 2px;
+    }
+
+    .rev-core-row + .rev-core-row {
+      border-top: 1px solid var(--w12);
+    }
+
+    .rev-core-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--w06);
+      color: var(--w40);
+    }
+
+    .rev-core-icon svg { width: 16px; height: 16px; }
+
+    .rev-core-icon img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .rev-core-k {
+      flex: 1;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .rev-check {
+      display: inline-flex;
+      flex-shrink: 0;
+      color: var(--orange);
+    }
+
+    .rev-check svg { width: 19px; height: 19px; display: block; }
+
+    /* Stretched to fill its gap, so the endpoints stay pinned to the node rows
+       at any width. The dash march is the only motion — it makes the direction
+       of travel unambiguous without animating the nodes themselves. */
+    .rev-wires {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Same token as the secondary body copy, so the wires stay tied to the
+       palette and follow it if the section ever flips to the dark theme. */
+    .rev-wires path {
+      fill: none;
+      stroke: var(--w55);
+      stroke-width: 1.6;
+      stroke-dasharray: 5 4;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+      animation: rev-march 1.1s linear infinite;
+    }
+
+    @keyframes rev-march {
+      to { stroke-dashoffset: -9; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rev-wires path { animation: none; }
+    }
+
+
+    @media (max-width: 900px) {
+      .pillars-section {
+        padding: 8px 24px 64px;
+      }
+
+      .svc-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .svc-title { font-size: 22px; }
+      .svc-band {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 26px 22px;
+      }
+      /* the flow is horizontal by nature; on a phone it stacks into a single
+         downward column and the wires are dropped rather than squashed */
+      .rev-flow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-height: 0;
+      }
+      .rev-wires { display: none; }
+      .rev-col,
+      .rev-col.is-pair { gap: 12px; }
+      .rev-core { padding: 4px 14px; }
+
+      /* stacking is the only honest option — equal heights are a two-column
+         problem, and there is one column here */
+      .svc-fade, .svc-fade > * { height: auto; flex: none; }
+
+      .mock { padding: 16px; }
+      .mock-post { padding: 0; }
+
+      /* no room to orbit anything beside a phone on a phone */
+      .orb { display: none; }
+      .orb-glow { width: 300px; height: 300px; }
+
+      /* the phone is already phone-width — it just loses the surrounding air */
+      .mock-out { flex: none; padding: 8px 0; }
+      .ph { width: 252px; }
+      .ph-screen { height: 470px; }
     }
 
     /* ── GTM SYSTEMS ── */
@@ -1016,8 +1992,8 @@
 
     .tspot-viewport {
       flex: 1;
-      max-width: 1040px;
-      min-height: 400px;
+      max-width: 900px;
+      min-height: 340px;
       display: flex;
     }
 
@@ -1030,11 +2006,11 @@
       border: 1px solid rgba(255, 255, 255, 0.10);
       background: rgba(255, 255, 255, 0.03);
       box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
-      min-height: 400px;
+      min-height: 340px;
     }
 
     .tspot-content {
-      padding: 48px 48px 40px;
+      padding: 38px 40px 32px;
       display: flex;
       flex-direction: column;
     }
@@ -1043,17 +2019,17 @@
       display: flex;
       gap: 4px;
       color: var(--orange);
-      margin-bottom: 26px;
+      margin-bottom: 20px;
     }
 
     .tspot-quote {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: clamp(16px, 1.5vw, 20px);
+      font-size: clamp(15px, 1.2vw, 17px);
       font-weight: 400;
       color: rgba(255, 255, 255, 0.92);
-      line-height: 1.7;
+      line-height: 1.65;
       letter-spacing: -0.2px;
-      margin: 0 0 32px;
+      margin: 0 0 26px;
     }
 
     .tspot-footer {
@@ -1072,7 +2048,7 @@
 
     .tspot-name {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 600;
       color: var(--white);
       letter-spacing: -0.3px;
@@ -1097,18 +2073,18 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 52px;
-      padding: 8px 14px;
-      max-width: 210px;
-      border-radius: 14px;
+      height: 46px;
+      padding: 7px 12px;
+      max-width: 180px;
+      border-radius: 12px;
       background: #ffffff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
     }
 
     .tspot-logochip img {
       display: block;
-      max-height: 36px;
-      max-width: 182px;
+      max-height: 32px;
+      max-width: 156px;
       width: auto;
       height: auto;
       object-fit: contain;
@@ -1121,7 +2097,7 @@
 
     .tspot-wordmark-text {
       font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.85);
       letter-spacing: -0.4px;
@@ -1513,14 +2489,14 @@
     display: inline-flex;
     align-items: center;
     padding: 6px 18px 8px;
-    border: 1px solid rgba(255,255,255,0.18);
+    border: 1px solid var(--w12);
     border-radius: 100px;
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.70);
+    color: var(--w80);
     margin-bottom: 28px;
     position: relative;
   }
@@ -1539,161 +2515,154 @@
     font-family: 'Bricolage Grotesque', sans-serif;
     font-size: clamp(28px, 3.6vw, 48px);
     font-weight: 500;
-    color: rgba(255,255,255,0.92);
+    color: var(--white);
     letter-spacing: -1px;
     line-height: 1.15;
     margin: 0 auto 16px;
-    max-width: 680px;
+    max-width: 940px;
   }
   .plan-heading span { color: #F26522; }
   .plan-sub {
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-    color: rgba(255,255,255,0.45);
+    color: var(--w55);
     margin: 0 auto 64px;
     max-width: 480px;
     line-height: 1.6;
   }
-  /* Timeline wrapper */
-  .plan-timeline {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-  }
-  /* Month headers */
-  .plan-months {
+
+  /* ── HOW WE WORK — the month calendar ──
+     Four cards on the dark ground. The phase chip colours carry the arc:
+     orange to build, green to launch, indigo to scale. */
+  .cal-grid {
     display: grid;
-    grid-template-columns: 64px 1fr 1fr 1fr 1fr;
-    gap: 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    overflow: hidden;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 54px auto 0;
   }
-  .plan-month-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    padding: 0 0 14px 16px;
-    border-left: 1px solid rgba(255,255,255,0.06);
-  }
-  .plan-month-label:first-child { border-left: none; padding-left: 0; }
-  /* Rows */
-  .plan-rows {
-    position: relative;
-    padding: 16px 0 8px;
-  }
-  .plan-row {
-    display: grid;
-    grid-template-columns: 64px 1fr 1fr 1fr 1fr;
-    gap: 0;
-    align-items: center;
-    min-height: 48px;
-    margin-bottom: 10px;
+
+  .cal-card {
+    padding: 24px 24px 26px;
+    border: 1px solid var(--w12);
+    border-radius: 18px;
+    background: var(--card-solid);
+    box-shadow:
+      0 1px 2px rgba(13, 27, 46, 0.05),
+      0 14px 32px -18px rgba(13, 27, 46, 0.18);
     opacity: 0;
-    transform: translateX(-16px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.25s ease;
   }
-  .plan-row.visible {
+
+  .cal-card.visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
   }
-  .plan-row-num {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.30);
-    padding-right: 8px;
-    text-align: right;
-  }
-  .plan-bar-wrap {
-    grid-column: span 1;
-    padding: 0 6px;
-    position: relative;
-  }
-  .plan-bar-wrap.span2 { grid-column: span 2; }
-  .plan-bar-wrap.span3 { grid-column: span 3; }
-  .plan-bar-wrap.span4 { grid-column: span 4; }
-  .plan-bar {
-    height: 40px;
-    border-radius: 8px;
+
+  .cal-card:hover { border-color: var(--w40); }
+
+  .cal-head {
     display: flex;
     align-items: center;
-    padding: 0 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.88);
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.10);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: default;
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--w12);
   }
-  .plan-bar:hover {
-    background: rgba(255,255,255,0.10);
-    border-color: rgba(255,255,255,0.18);
+
+  .cal-month {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--white);
   }
-  .plan-bar.orange {
-    background: rgba(242,101,34,0.14);
-    border-color: rgba(242,101,34,0.4);
-    color: rgba(255,255,255,0.95);
-  }
-  .plan-bar.orange:hover {
-    background: rgba(242,101,34,0.22);
-  }
-  .plan-bar.dark {
-    background: rgba(255,255,255,0.03);
-    border-color: rgba(255,255,255,0.07);
-    color: rgba(255,255,255,0.55);
-  }
-  .plan-phase-tag {
+
+  .cal-phase {
+    padding: 4px 10px 5px;
+    border: 1px solid currentColor;
+    border-radius: 100px;
     font-family: 'DM Sans', sans-serif;
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.1px;
     text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-right: 10px;
-    flex-shrink: 0;
+    white-space: nowrap;
   }
-  .tag-build { background: rgba(242,101,34,0.25); color: #F26522; }
-  .tag-launch { background: rgba(52,211,153,0.15); color: rgba(52,211,153,0.9); }
-  .tag-scale { background: rgba(99,102,241,0.2); color: rgba(165,180,252,0.9); }
+
+  .is-build .cal-phase { color: var(--orange); }
+  .is-launch .cal-phase { color: #047857; }
+  .is-scale .cal-phase { color: #4f46e5; }
+
+  .cal-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .cal-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.42;
+    color: var(--w80);
+  }
+
+  .cal-tick {
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--w06);
+  }
+
+  .cal-tick svg { width: 11px; height: 11px; display: block; }
+
+  .is-build .cal-tick { color: var(--orange); }
+  .is-launch .cal-tick { color: #047857; }
+  .is-scale .cal-tick { color: #4f46e5; }
+
+  @media (max-width: 1040px) {
+    .cal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 620px) {
+    .cal-grid { grid-template-columns: 1fr; margin-top: 34px; }
+  }
+
+
+  /* Timeline wrapper */
+  /* Month headers */
+  /* Rows */
   /* Column dividers */
-  .plan-col-dividers {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: 64px 1fr 1fr 1fr 1fr;
-    pointer-events: none;
-  }
-  .plan-col-div {
-    border-left: 1px solid rgba(255,255,255,0.05);
-  }
-  .plan-col-div:first-child { border-left: none; }
 
   
 
-        .faq-badge {
+    /* tokens, not literal white — the FAQ now sits on the light ground */
+    .faq-badge {
       display: inline-flex;
       align-items: center;
       padding: 8px 22px 10px;
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid var(--w12);
       border-radius: 100px;
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 1.8px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.80);
+      color: var(--w80);
       margin-bottom: 24px;
       position: relative;
     }
@@ -1782,6 +2751,16 @@
 
     /* ── LIST ── */
     .faq-list {
+      padding: 6px 34px 10px;
+      border: 1px solid rgba(13, 27, 46, 0.055);
+      border-radius: 22px;
+      background: linear-gradient(#ffffff, #fcfbf9);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 1px 2px rgba(13, 27, 46, 0.05),
+        0 6px 14px -6px rgba(13, 27, 46, 0.09),
+        0 18px 34px -14px rgba(13, 27, 46, 0.13),
+        0 38px 70px -30px rgba(13, 27, 46, 0.17);
       display: flex;
       flex-direction: column;
       gap: 0;
@@ -1974,6 +2953,7 @@
 
     /* THE HEADLINE & FORM */
     .footer-cta-row {
+      text-align: center;
       padding-bottom: 70px;
       border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
       margin-bottom: 60px;
@@ -2134,7 +3114,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
       font-weight: 400;
-      color: rgba(255,255,255,0.45);
+      color: var(--w55);
     }
     .footer-contact-details {
       display: flex;
@@ -2381,40 +3361,6 @@
       .plan-section {
         padding: 50px 12px;
       }
-      .plan-timeline {
-        overflow-x: visible;
-        margin: 0;
-        padding: 0;
-      }
-      .plan-months { min-width: unset; }
-      .plan-rows { min-width: unset; padding: 6px 0; }
-      .plan-month-label {
-        font-size: 8px;
-        letter-spacing: 0.3px;
-        padding: 0 0 8px 4px;
-      }
-      .plan-col-dividers { display: none; }
-      .plan-row {
-        display: grid;
-        grid-template-columns: 22px 1fr 1fr 1fr 1fr;
-        min-height: 28px;
-        margin-bottom: 5px;
-        opacity: 1;
-        transform: none;
-      }
-      .plan-row-num {
-        font-size: 8px;
-        padding-right: 2px;
-      }
-      .plan-bar-wrap { padding: 0 2px; }
-      .plan-bar {
-        height: 26px;
-        padding: 0 5px;
-        font-size: 9px;
-        border-radius: 4px;
-        white-space: nowrap;
-      }
-      .plan-phase-tag { display: none; }
       
       /* Testimonials */
       .testimonials-section {
@@ -2701,10 +3647,6 @@
   /* ── Plan section ── */
   .plan-heading { font-size: clamp(24px, 6.5vw, 38px); }
   .plan-sub     { font-size: 14px; margin-bottom: 40px; }
-  .plan-timeline {
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px;
-  }
 
   /* ── FAQ ── */
   .faq-heading { font-size: clamp(28px, 8vw, 44px); }
@@ -2738,7 +3680,10 @@
   /* ── Services section label ── */
   .services-label { margin-bottom: 24px; }
   .services-heading { font-size: clamp(28px, 7vw, 44px); margin-bottom: 14px; }
-  .services-sub { font-size: 14px; }
+  /* Statement line now, not body copy — keep it a heading size on mobile and
+     let the emphasis wrap instead of forcing it onto one line. */
+  .services-sub { font-size: clamp(21px, 5.8vw, 30px); letter-spacing: -0.4px; }
+  .services-sub-em { white-space: normal; }
 }
 
 /* ── Globe Section ── */
@@ -2885,7 +3830,6 @@
   .tspot-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
 
   /* Plan bar on very small screens */
-  .plan-bar { font-size: 8px; padding: 0 4px; }
 
   /* Case cards */
   .case-card { padding: 20px 16px; gap: 14px; }
@@ -2896,4 +3840,733 @@
   /* Footer */
   .cta-heading { font-size: clamp(24px, 8vw, 32px); }
   .footer-person-img { width: 44px; height: 44px; }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TRIAL CTA — the wide button that replaced the hero and footer forms
+   A light travels the rim: a conic gradient spun behind the button, with the
+   button's own fill covering all but a hairline. `inset: -150%` keeps the
+   spinning square larger than the pill at every angle so the arc never clips.
+   ═══════════════════════════════════════════════════════════════════════ */
+.trial-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  /* the ring the travelling light shows through */
+  padding: 3px;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.trial-wrap::before {
+  content: '';
+  position: absolute;
+  /* Square, and wider than the button's diagonal. `inset: -150%` derives from
+     the element's own box, so on a wide short button the spinning square is
+     wide and short too — rotate it 90deg and it no longer spans the width,
+     which is why the light vanished for part of every cycle. */
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  aspect-ratio: 1;
+  z-index: -1;
+  /* Two highlights 180deg apart, not one. A single wedge leaves 250deg of dead
+     rotation, which on a button this wide reads as several seconds of nothing
+     before the light appears. Repeating every 180deg keeps one always on a
+     long edge. */
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 116deg,
+    rgba(255, 190, 140, 0.45) 146deg,
+    #ffd9c2 166deg,
+    #ffffff 174deg,
+    #ffd9c2 178deg,
+    transparent 180deg
+  );
+  animation: trial-spin 5.2s linear infinite;
+}
+
+/* the standing glow, separate from the travelling light */
+.trial-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  z-index: -2;
+  border-radius: 16px;
+  background: var(--orange);
+  filter: blur(16px);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.trial-wrap:hover::after { opacity: 0.72; }
+
+@keyframes trial-spin {
+  from { transform: translate(-50%, -50%) rotate(0turn); }
+  to { transform: translate(-50%, -50%) rotate(1turn); }
+}
+
+.trial-cta {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 28px;
+  border-radius: 14px;
+  background: var(--orange);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.trial-cta:hover {
+  background: var(--orange-h);
+  transform: translateY(-1px);
+}
+
+/* A translucent sheen sweeps the face while the light travels the rim. Both
+   run on the same 5.2s clock so they read as one movement rather than two
+   unrelated loops; the skew keeps the leading edge diagonal. */
+.trial-cta::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -60%;
+  width: 52%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.14) 26%,
+    rgba(255, 255, 255, 0.62) 50%,
+    rgba(255, 255, 255, 0.14) 74%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: trial-sheen 5.2s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+  animation-delay: -1.2s;
+}
+
+@keyframes trial-sheen {
+  0% { left: -70%; }
+  72%, 100% { left: 140%; }
+}
+
+.trial-cta svg { width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* the form this replaced carried the gap down to the service tags */
+.hero .trial-wrap { margin-bottom: 38px; }
+
+/* a light orbiting the screen is exactly what reduced motion is asking about */
+@media (prefers-reduced-motion: reduce) {
+  .trial-wrap::before,
+  .trial-cta::after { animation: none; }
+  .trial-cta::after { opacity: 0; }
+  .trial-cta:hover { transform: none; }
+}
+
+@media (max-width: 560px) {
+  .trial-cta { padding: 16px 20px; font-size: 15px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WHY US — the comparison table
+   Written against the --white / --wNN token scale so it inverts with the
+   section rather than hardcoding colours (see the light-section block below).
+   ═══════════════════════════════════════════════════════════════════════ */
+.whyus-section {
+  padding: 96px 52px 104px;
+  position: relative;
+  z-index: 10;
+}
+
+.whyus-head {
+  /* wide enough that the heading does not drop its last word onto a line
+     of its own */
+  max-width: 900px;
+  margin: 0 auto 52px;
+  text-align: center;
+}
+
+.whyus-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 22px 10px;
+  border: 1px solid var(--w12);
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--w80);
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.whyus-badge::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.whyus-heading {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.14;
+  color: var(--white);
+  margin: 0 0 14px;
+}
+
+.whyus-heading span { color: var(--orange); }
+
+.whyus-sub {
+  max-width: 620px;
+  margin: 0 auto;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--w55);
+}
+
+/* Four stacked shadows at rising blur and falling opacity approximate real
+   light falloff; one large shadow just reads as a grey smudge. The inset top
+   highlight gives the face its edge. Same recipe as the playbook flow cards. */
+.whyus-card {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 30px 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(13, 27, 46, 0.055);
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 6px 14px -6px rgba(13, 27, 46, 0.09),
+    0 18px 34px -14px rgba(13, 27, 46, 0.13),
+    0 38px 70px -30px rgba(13, 27, 46, 0.17);
+  overflow: hidden;
+}
+
+.whyus-scroll {
+  overflow-x: auto;
+  /* the frame scrolls, never the page */
+  -webkit-overflow-scrolling: touch;
+}
+
+.whyus-table {
+  width: 100%;
+  min-width: 880px;
+  border-collapse: collapse;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.whyus-table th,
+.whyus-table td {
+  padding: 20px 18px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--w12);
+}
+
+.whyus-table thead th {
+  padding-top: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--white);
+  border-bottom: 1px solid var(--w12);
+}
+
+/* the row label column, left-aligned and wider than the verdict columns */
+.whyus-table tbody th {
+  width: 30%;
+  min-width: 250px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.wu-k {
+  display: block;
+  font-size: 15.5px;
+  color: var(--white);
+}
+
+.wu-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.8px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--w40);
+}
+
+/* Our column is a raised card running the height of the table: the cells share
+   one background, and only the first and last round off. */
+.whyus-table .is-us {
+  background: rgba(242, 101, 34, 0.05);
+}
+
+.whyus-table thead .is-us {
+  padding-top: 20px;
+  border-radius: 16px 16px 0 0;
+  color: var(--orange);
+}
+
+.whyus-table tbody tr:last-child .is-us {
+  border-radius: 0 0 16px 16px;
+  border-bottom-color: transparent;
+}
+
+.wu-mark {
+  display: inline-flex;
+  width: 21px;
+  height: 21px;
+}
+
+.wu-mark svg { width: 100%; height: 100%; display: block; }
+
+.is-yes { color: var(--white); }
+.is-no { color: var(--w12); }
+
+/* a cross in our own column would be a strange thing to ship */
+.is-us .is-yes { color: var(--orange); }
+
+.wu-note {
+  font-size: 13.6px;
+  line-height: 1.4;
+  color: var(--w55);
+}
+
+.wu-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .whyus-section { padding: 64px 20px 72px; }
+  .whyus-head { margin-bottom: 34px; }
+  .whyus-card { padding: 8px 16px 16px; border-radius: 18px; }
+  .whyus-table th,
+  .whyus-table td { padding: 16px 12px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LIGHT ZONE — pearl background, navbar through testimonials
+   Everything from ServicesIntro down stays on navy.
+
+   The dark theme is built on white-alpha tokens (--w80 … --w06) and
+   --white. Redefining those tokens on the light-zone sections flips every
+   rule that uses them automatically. Only hardcoded rgba(255,255,255,…)
+   and `white` literals need the explicit overrides further down.
+
+   Placed last so it wins on equal specificity, including over the mobile
+   media queries above. Colour only — no layout is touched here.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.hero,
+.partners-section,
+.globe-section,
+.testimonials-section,
+.services-section,
+.whyus-section,
+.pillars-section,
+#case-studies,
+.cases-preview-section,
+.plan-section,
+.faq-section {
+  --white: #0d1b2e;
+  --w80: rgba(13, 27, 46, 0.78);
+  --w55: rgba(13, 27, 46, 0.56);
+  --w40: rgba(13, 27, 46, 0.42);
+  --w12: rgba(13, 27, 46, 0.14);
+  --w06: rgba(13, 27, 46, 0.045);
+
+  /* solid surface that sits above the section ground — white here, a raised
+     navy in the dark sections */
+  --card-solid: #ffffff;
+}
+
+.hero,
+.partners-section,
+.globe-section,
+.testimonials-section,
+.services-section,
+.whyus-section,
+.pillars-section,
+#case-studies,
+.cases-preview-section,
+.plan-section,
+.faq-section {
+  background: var(--pearl-white);
+}
+
+/* body carries 73px of top padding to clear the fixed nav, and its navy
+   background was showing through as a dark strip above the scrolled nav pill.
+   Paint only that strip pearl; everything below 73px keeps the navy the dark
+   sections further down sit on. */
+body {
+  background: linear-gradient(var(--pearl-white) 0 73px, var(--navy) 73px);
+  background-repeat: no-repeat;
+}
+
+/* ── Navbar — pearl bar matching the hero behind it ──
+   Kept as its own token block rather than folded into the selector above,
+   because nav is position:fixed and lives outside those sections. */
+nav {
+  --white: #0d1b2e;
+  --w80: rgba(13, 27, 46, 0.78);
+  --w55: rgba(13, 27, 46, 0.58);
+  --w40: rgba(13, 27, 46, 0.42);
+  --w12: rgba(13, 27, 46, 0.14);
+  --w06: rgba(13, 27, 46, 0.045);
+}
+
+nav.nav-top {
+  background: rgba(247, 245, 241, 0.96);
+  border-bottom: 1px solid rgba(13, 27, 46, 0.10);
+}
+
+nav.nav-scrolled {
+  background: rgba(247, 245, 241, 0.90);
+  border-bottom: 1px solid rgba(13, 27, 46, 0.12);
+  box-shadow: 0 8px 40px rgba(13, 27, 46, 0.14);
+}
+
+.mobile-menu-btn span {
+  background: #0d1b2e;
+}
+
+.nav-cta:hover {
+  border-color: rgba(13, 27, 46, 0.24);
+}
+
+/* Nav links — navy rather than the washed grey the --w55 token gives */
+.nav-links a {
+  color: rgba(13, 27, 46, 0.75);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #0d1b2e;
+}
+
+/* ── Hero ── */
+.badge {
+  border-color: rgba(13, 27, 46, 0.16);
+}
+
+/* "FOR B2B BUSINESSES" — solid navy, not the --w80 wash */
+.badge-text {
+  color: #0d1b2e;
+}
+
+/* Backdrop behind the headline. The dot grid alone reads flat on a light
+   background, so this adds a warm bloom plus two faint concentric rings.
+   .hero-glow is an empty div already in the markup, previously display:none.
+   Sits under .hero-content (z-index 2) and over the grid canvas. */
+.hero-glow {
+  display: block;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1180px, 132vw);
+  height: min(840px, 94vh);
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 46% 40% at 50% 44%, rgba(242, 101, 34, 0.15) 0%, transparent 68%),
+    radial-gradient(ellipse 32% 28% at 76% 28%, rgba(242, 101, 34, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 34% 30% at 24% 64%, rgba(13, 27, 46, 0.06) 0%, transparent 72%);
+}
+
+.hero-glow::before,
+.hero-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(13, 27, 46, 0.06);
+}
+
+.hero-glow::before {
+  width: min(560px, 76vw);
+  aspect-ratio: 1;
+  animation: hero-ring-breathe 9s ease-in-out infinite;
+}
+
+.hero-glow::after {
+  width: min(860px, 108vw);
+  aspect-ratio: 1;
+  border-color: rgba(13, 27, 46, 0.04);
+  animation: hero-ring-breathe 14s ease-in-out infinite reverse;
+}
+
+/* Ambient motion so the hero is not dead before the cursor arrives. The
+   translate has to be repeated in the keyframes or it would be overwritten. */
+@keyframes hero-ring-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow::before,
+  .hero-glow::after {
+    animation: none;
+  }
+}
+
+/* Headline weight rhythm: bold on the substantive words, light on the
+   connective ones — "We Build [Predictable Growth] Systems". All one colour;
+   the contrast comes entirely from weight.
+   700 was added to the Bricolage request in layout.tsx for this; the font was
+   previously only loaded to 600, which was too weak against 300. */
+h1 .hl-bold {
+  font-weight: 500;
+}
+
+h1 .hl-light {
+  font-weight: 250;
+}
+
+/* Trust card — navy plate like the partner pills and service tags, so the
+   copy flips to white. The avatar rings stay navy and keep separating the
+   overlapping photos against the plate. */
+.hero-trust-inner {
+  background: var(--navy);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px -12px rgba(13, 27, 46, 0.55);
+}
+
+.trust-count {
+  color: #ffffff;
+}
+
+.trust-label {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Subhead reads navy rather than grey. Hierarchy against the h1 comes from
+   size and weight (17px / 300) instead of a washed-out colour. */
+.hero-sub {
+  color: rgba(13, 27, 46, 0.82);
+}
+
+.hero-form {
+  background: rgba(255, 255, 255, 0.60);
+  border-color: rgba(13, 27, 46, 0.14);
+}
+
+.hero-form:focus-within {
+  border-color: rgba(242, 101, 34, 0.45);
+  box-shadow: 0 0 0 4px rgba(242, 101, 34, 0.10),
+    0 20px 40px -20px rgba(13, 27, 46, 0.28);
+}
+
+.hero-form input::placeholder {
+  color: rgba(13, 27, 46, 0.36);
+}
+
+/* ── Partners ── */
+.partners-label {
+  color: rgba(13, 27, 46, 0.92);
+}
+
+/* Navy pills sitting on the pearl. Everything inside a pill (white wordmarks,
+   the layered stroke opacities in the icons) is hardcoded white in the base
+   styles and is untouched by the token flip above, so only the plate colour
+   needs setting and the original artwork returns exactly as designed. */
+.partner-pill {
+  background: var(--navy);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 20px -12px rgba(13, 27, 46, 0.55);
+}
+
+/* ── Service tags — matching navy pills ── */
+.tag {
+  background: var(--navy);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 20px -12px rgba(13, 27, 46, 0.55);
+}
+
+/* The base hover swaps in a near-transparent orange, which would flash the
+   pearl through the pill. Keep the plate dark and let the accent do the work. */
+.tag:hover {
+  background: #16283f;
+  border-color: rgba(242, 101, 34, 0.55);
+  color: var(--orange);
+}
+
+/* Edge fades that mask the marquee have to match the new background */
+.partners-rows::before {
+  background: linear-gradient(to right, var(--pearl-white) 10%, transparent 100%);
+}
+
+.partners-rows::after {
+  background: linear-gradient(to left, var(--pearl-white) 10%, transparent 100%);
+}
+
+/* ── Globe ── */
+.globe-section::before {
+  background: radial-gradient(ellipse at 50% 40%, rgba(13, 27, 46, 0.05) 0%, transparent 55%);
+}
+
+/* Orbit rings behind the globe. Each ring carries a single travelling node, so
+   the rotation is actually legible — a plain rotating circle reads as static.
+   The stage is the positioning context; GlobeCanvas paints over these because
+   it comes later in the DOM. */
+.globe-stage {
+  position: relative;
+}
+
+.globe-orbits {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.globe-ring {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(13, 27, 46, 0.10);
+}
+
+/* The travelling node sits on the ring's edge and is carried by its rotation */
+.globe-ring::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 14px rgba(242, 101, 34, 0.55);
+}
+
+.globe-ring--1 {
+  width: min(600px, 88vw);
+  animation: globe-orbit 26s linear infinite;
+}
+
+.globe-ring--2 {
+  width: min(730px, 104vw);
+  border-color: rgba(13, 27, 46, 0.075);
+  animation: globe-orbit 42s linear infinite reverse;
+}
+
+.globe-ring--2::before {
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  top: -3px;
+  background: rgba(13, 27, 46, 0.55);
+  box-shadow: none;
+}
+
+.globe-ring--3 {
+  width: min(860px, 124vw);
+  border-color: rgba(13, 27, 46, 0.05);
+  animation: globe-orbit 64s linear infinite;
+}
+
+.globe-ring--3::before {
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  top: -2.5px;
+  box-shadow: 0 0 10px rgba(242, 101, 34, 0.45);
+}
+
+@keyframes globe-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Real motion here, so honour the preference */
+@media (prefers-reduced-motion: reduce) {
+  .globe-ring {
+    animation: none;
+  }
+}
+
+/* ── Testimonials ── */
+/* The spotlight card keeps its original dark treatment. Re-declaring the white
+   tokens here undoes the section-level flip for everything inside the card, so
+   the quote, name, role and logo chip return to their designed colours with no
+   per-element overrides. The slider arrows are siblings of the card rather than
+   children, so they stay navy-on-pearl. */
+.tspot-card {
+  --white: #ffffff;
+  --w80: rgba(255, 255, 255, 0.80);
+  --w55: rgba(255, 255, 255, 0.55);
+  --w40: rgba(255, 255, 255, 0.40);
+  --w12: rgba(255, 255, 255, 0.12);
+  --w06: rgba(255, 255, 255, 0.06);
+  background: var(--navy);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 20px 50px -26px rgba(13, 27, 46, 0.50);
+}
+
+.tspot-arrow {
+  border-color: rgba(13, 27, 46, 0.15);
+  background: rgba(13, 27, 46, 0.04);
+  color: rgba(13, 27, 46, 0.70);
+}
+
+.tspot-arrow:hover {
+  background: rgba(242, 101, 34, 0.10);
+  border-color: rgba(242, 101, 34, 0.40);
+  color: var(--orange);
+}
+
+.tslider-dot {
+  background: rgba(13, 27, 46, 0.20);
+}
+
+/* ── Seam: the last light section into the first dark one ── */
+.pillars-section {
+  border-bottom: 1px solid rgba(13, 27, 46, 0.08);
 }

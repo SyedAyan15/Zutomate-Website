@@ -2,21 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const WEBHOOK_URL = 'https://ayan15.app.n8n.cloud/webhook/e2fd5927-7bd8-42a9-905d-ab3199544058';
 
 export default function Footer() {
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const email = (form.querySelector('#cta-email') as HTMLInputElement).value;
-    const name = (form.querySelector('#cta-name') as HTMLInputElement).value;
-
-    const params = `?email=${encodeURIComponent(email)}&full_name=${encodeURIComponent(name)}&source=Footer+CTA`;
-    fetch(WEBHOOK_URL + params, { method: 'GET', keepalive: true }).catch(() => {});
-
-    const calendlyUrl = `https://calendly.com/zutomate/30min?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-    window.location.href = calendlyUrl;
-  }
 
   return (
     <footer className="site-footer">
@@ -31,14 +18,25 @@ export default function Footer() {
 
         <div className="footer-cta-row" id="footer-cta-form">
           <h2 className="cta-heading">Book your strategy call</h2>
-          <form className="cta-form" onSubmit={handleSubmit}>
-            <div className="cta-input-group">
-              <input type="email" id="cta-email" name="email" placeholder="Email" required />
-              <div className="input-divider"></div>
-              <input type="text" id="cta-name" name="full_name" placeholder="Full name" required />
-            </div>
-            <button type="submit">Book call</button>
-          </form>
+          <div className="trial-wrap">
+            <a
+              href="https://calendly.com/zutomate/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="trial-cta"
+            >
+              Book 30 Day Free Trial
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div className="footer-links-row">

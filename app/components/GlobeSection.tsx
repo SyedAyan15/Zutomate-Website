@@ -23,7 +23,15 @@ export default function GlobeSection() {
           We orchestrate your entire GTM stack into one unified growth system.
         </p>
       </FadeUp>
-      <GlobeCanvas />
+      <div className="globe-stage">
+        {/* Decorative orbit rings behind the globe. Purely presentational. */}
+        <div className="globe-orbits" aria-hidden="true">
+          <span className="globe-ring globe-ring--1" />
+          <span className="globe-ring globe-ring--2" />
+          <span className="globe-ring globe-ring--3" />
+        </div>
+        <GlobeCanvas />
+      </div>
     </section>
   );
 }
