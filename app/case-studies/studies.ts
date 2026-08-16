@@ -23,7 +23,7 @@ export const STUDIES: Study[] = [
   },
   {
     slug: '/nuvaris-ai',
-    industry: 'AI',
+    industry: 'Software',
     company: 'Nuvaris AI',
     logo: 'nuvarisai.png',
     title:
@@ -31,10 +31,17 @@ export const STUDIES: Study[] = [
   },
   {
     slug: '/shopwave',
-    industry: 'B2B Retail Tech',
+    industry: 'Software',
     company: 'Shopwave',
     logo: 'shopwave.png',
     title:
       'How we made $325K in revenue for Shopwave through outbound and RevOps implementation.',
+  },
+  {
+    slug: '/victoria-james',
+    industry: 'Recruitment',
+    company: 'Victoria James Recruitment',
+    logo: 'victoria-james.png',
+    title: 'We generated 15 leads in a month for Victoria James Recruitment through outbound.',
   },
 ];

@@ -13,6 +13,7 @@ const routes: { path: string; changeFrequency: 'weekly' | 'monthly' | 'yearly'; 
   { path: '/case-studies/', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/shopwave/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/nuvaris-ai/', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/victoria-james/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/goso/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/resources/', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/privacy/', changeFrequency: 'yearly', priority: 0.3 },
