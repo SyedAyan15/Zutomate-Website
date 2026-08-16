@@ -86,6 +86,12 @@ export default function NuvarisAiPage() {
         },
         { k: 'Content', tools: [{ k: 'Figma', logo: 'figma.png' }] },
       ]}
+      campaigns={{
+        src: '/assets/case-studies/nuvarisai-campaigns.png',
+        alt: 'Campaign dashboard for Nuvaris AI showing sends, replies and positive replies',
+        width: 1839,
+        height: 855,
+      }}
     />
   );
 }
