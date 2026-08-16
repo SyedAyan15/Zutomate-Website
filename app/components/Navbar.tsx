@@ -33,7 +33,7 @@ export default function Navbar() {
 
   const isHomePage        = pathname === '/';
   const isCaseStudiesPage = pathname === '/case-studies' ||
-    ['/shopwave', '/goso', '/discover-assessments', '/truclean'].includes(pathname);
+    ['/shopwave', '/goso', '/nuvaris-ai'].includes(pathname);
   const isResourcesPage   = pathname === '/resources';
 
   const currentSection: NavSection = isCaseStudiesPage ? 'case-studies'

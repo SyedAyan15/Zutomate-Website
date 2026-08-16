@@ -22,25 +22,19 @@ export const STUDIES: Study[] = [
       'How we generated $265K in revenue in 6 months for GOSO through outbound and RevOps.',
   },
   {
+    slug: '/nuvaris-ai',
+    industry: 'AI',
+    company: 'Nuvaris AI',
+    logo: 'nuvarisai.png',
+    title:
+      'We generated $62K in revenue for Nuvaris AI through content and outbound in 3 months.',
+  },
+  {
     slug: '/shopwave',
     industry: 'B2B Retail Tech',
     company: 'Shopwave',
     logo: 'shopwave.png',
     title:
       'How we made $325K in revenue for Shopwave through outbound and RevOps implementation.',
-  },
-  {
-    slug: '/discover-assessments',
-    industry: 'HR Tech',
-    company: 'Discover Assessments',
-    title:
-      'How we unstuck a stalled sales engine and delivered 10+ enterprise leads in month one for Discover Assessments.',
-  },
-  {
-    slug: '/truclean',
-    industry: 'Commercial Cleaning',
-    company: 'TruClean',
-    title:
-      'How we took TruClean from zero outbound to a consistent acquisition engine delivering qualified leads every month.',
   },
 ];
