@@ -1,0 +1,106 @@
+/* Standalone landing page for the free trial form. Nothing on the site links
+   here; it is reached by its URL. This stylesheet only loads on this route, so
+   painting the body is scoped to it. */
+
+html body {
+  background: var(--pearl-white, #F7F5F1);
+}
+
+.ft-page {
+  --white: #0d1b2e;
+  --w80: rgba(13, 27, 46, 0.78);
+  --w55: rgba(13, 27, 46, 0.56);
+  --w12: rgba(13, 27, 46, 0.14);
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 132px 24px 96px;
+  color: #0d1b2e;
+}
+
+.ft-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ft-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 22px 10px;
+  border: 1px solid rgba(13, 27, 46, 0.14);
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(13, 27, 46, 0.78);
+  margin-bottom: 26px;
+  position: relative;
+}
+
+/* the orange rule the other section badges carry */
+.ft-badge::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.ft-head h1 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(30px, 4.6vw, 48px);
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  line-height: 1.12;
+  color: #0d1b2e;
+  margin: 0 0 16px;
+}
+
+.ft-head h1 span { color: var(--orange); }
+
+.ft-head p {
+  max-width: 620px;
+  margin: 0 auto;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.62;
+  color: rgba(13, 27, 46, 0.62);
+}
+
+/* the form sits on the same raised card as the rest of the site */
+.ft-form {
+  padding: 10px;
+  border: 1px solid rgba(13, 27, 46, 0.07);
+  border-radius: 22px;
+  background: linear-gradient(#ffffff, #fcfbf9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(13, 27, 46, 0.05),
+    0 14px 32px -16px rgba(13, 27, 46, 0.14),
+    0 38px 70px -34px rgba(13, 27, 46, 0.18);
+  overflow: hidden;
+}
+
+.ft-form iframe {
+  display: block;
+  width: 100%;
+  min-height: 620px;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
+  /* height is driven by JotForm's postMessage; transition keeps the growth
+     from snapping as questions expand */
+  transition: height 0.25s ease;
+}
+
+@media (max-width: 640px) {
+  .ft-page { padding: 108px 16px 72px; }
+  .ft-head { margin-bottom: 28px; }
+  .ft-form { padding: 6px; border-radius: 18px; }
+  .ft-form iframe { border-radius: 12px; }
+}
