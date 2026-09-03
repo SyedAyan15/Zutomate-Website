@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import JotForm from './JotForm';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/free-outbound-trial/' },
   title: 'Free Outbound Trial | Zutomate',
   description:
     'Start a free outbound trial with Zutomate — tell us about your business and we will build and run the first campaigns for you.',

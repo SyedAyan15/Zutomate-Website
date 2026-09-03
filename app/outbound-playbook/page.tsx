@@ -3,6 +3,7 @@ import Playbook from '../components/playbook/Playbook';
 import { FLOW, STEPS } from './flow';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/outbound-playbook/' },
   title: 'Automated Outbound Engine | Zutomate',
   description:
     'The full outbound engine Zutomate builds — ICP modelling, account sourcing, Clay enrichment, copy testing, email and LinkedIn infrastructure, and reporting in one flow.',

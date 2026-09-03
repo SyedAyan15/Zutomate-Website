@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/goso/' },
   title: 'GOSO Case Study | Zutomate',
   description:
     'How Zutomate generated $265K in revenue in 6 months for GOSO through outbound and RevOps — lead sourcing, Clay enrichment, AI copywriting and a CRM that manages the pipeline.',

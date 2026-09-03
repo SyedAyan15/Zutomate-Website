@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/nuvaris-ai/' },
   title: 'Nuvaris AI Case Study | Zutomate',
   description:
     'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through LinkedIn content and outbound — AI Ark sourcing, Clay enrichment, and a productised offer.',

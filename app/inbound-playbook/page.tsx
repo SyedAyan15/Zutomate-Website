@@ -3,6 +3,7 @@ import Playbook from '../components/playbook/Playbook';
 import { FLOW, STEPS } from './flow';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/inbound-playbook/' },
   title: 'Inbound Growth Engine | Zutomate',
   description:
     'The inbound engine Zutomate builds — a LinkedIn content system that turns distribution into warm leads, and a paid ads system modelled on what already works in your market.',

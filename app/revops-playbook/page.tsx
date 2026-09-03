@@ -3,6 +3,7 @@ import Playbook from '../components/playbook/Playbook';
 import { FLOW, STEPS } from './flow';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/revops-playbook/' },
   title: 'RevOps Engine | Zutomate',
   description:
     'The revenue operations layer Zutomate builds — strategy, data hygiene, CRM sync, lead routing and reporting, plus the HubSpot implementation that runs it.',

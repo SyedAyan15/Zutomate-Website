@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/victoria-james/' },
   title: 'Victoria James Recruitment Case Study | Zutomate',
   description:
     'How Zutomate generated 15 leads in a month for Victoria James Recruitment through outbound — Apollo and Clay sourcing, Clay enrichment, and sequencing across email and LinkedIn.',

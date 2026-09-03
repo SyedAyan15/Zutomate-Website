@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/shopwave/' },
   title: 'Shopwave Case Study | Zutomate',
   description:
     'How Zutomate made $325K in revenue for Shopwave through outbound and a HubSpot RevOps implementation — lead sourcing, Clay enrichment, and a pipeline built to convert.',

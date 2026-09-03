@@ -7,11 +7,12 @@ import Footer from '../components/Footer';
 import { STUDIES } from './studies';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/case-studies/' },
   title: 'Case Studies | Zutomate',
   description: 'Real results from Zutomate\'s AI-powered GTM systems — see how B2B teams built predictable pipeline with outbound automation and AI agents.',
   openGraph: {
     type: 'website',
-    url: 'https://zutomate.com/case-studies',
+    url: 'https://zutomate.com/case-studies/',
     title: 'Case Studies | Zutomate',
     description: 'Real results from Zutomate\'s AI-powered GTM systems — see how B2B teams built predictable pipeline with outbound automation and AI agents.',
     images: [{ url: '/og-image.png' }],
