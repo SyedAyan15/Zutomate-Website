@@ -20,10 +20,11 @@ const cards: Card[] = [
   {
     quote: 'Zutomate helped us automate our lead generation funnels and simplify some of our more complex sales processes. Their work made our operations much more streamlined and efficient, while saving the team a lot of manual effort. Would definitely recommend Zutomate to any business looking to improve lead generation and sales operations through automation.',
     name: 'Chris Rowan',
-    title: 'CEO and Founder',
-    company: 'TheAgency.io',
-    logo: '/assets/logos/theagency.png',
-    dark: true,
+    title: 'CEO',
+    company: 'GOSO',
+    /* the same file as the GOSO case study, so the two can never show different
+       marks. White chip, not dark: the artwork is a JPEG on white. */
+    logo: '/assets/case-studies/goso.jpg',
     wordmark: true,
     avatar: '/assets/avatars/chris.jpg',
   },
