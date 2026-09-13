@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/free-outbound-trial/' },
   title: 'Free Outbound Trial | Zutomate',
   description:
-    'Start a free outbound trial with Zutomate — tell us about your business and we will build and run the first campaigns for you.',
+    'Start a free outbound trial with Zutomate. Tell us about your business and we will build and run the first campaigns for you.',
   openGraph: {
     type: 'website',
     url: 'https://zutomate.com/free-outbound-trial/',
     title: 'Free Outbound Trial | Zutomate',
     description:
-      'Start a free outbound trial with Zutomate — tell us about your business and we will build and run the first campaigns for you.',
+      'Start a free outbound trial with Zutomate. Tell us about your business and we will build and run the first campaigns for you.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -42,7 +42,7 @@ export default function FreeOutboundTrialPage() {
           </h1>
           <p>
             Tell us about your business and who you sell to. We&apos;ll build the list, write the
-            sequences and run the first campaigns — so you can judge the system on results rather
+            sequences and run the first campaigns, so you can judge the system on results rather
             than a pitch.
           </p>
         </header>

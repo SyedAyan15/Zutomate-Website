@@ -52,7 +52,7 @@ export const FLOW: Block[] = [
 export const STEPS: Step[] = [
   {
     k: 'Optimise the Profile',
-    v: 'The profile is the landing page for everything that follows. Banner, headline, about and featured section are set so a visitor who arrives from a post understands the offer without scrolling twice — distribution is wasted on a profile that cannot convert the attention it earns.',
+    v: 'The profile is the landing page for everything that follows. Banner, headline, about and featured section are set so a visitor who arrives from a post understands the offer without scrolling twice. Distribution is wasted on a profile that cannot convert the attention it earns.',
   },
   {
     k: 'Set the Content Strategy',
@@ -60,7 +60,7 @@ export const STEPS: Step[] = [
   },
   {
     k: 'Choose the Formats',
-    v: 'Gifs, lead magnets, cheatsheets and infographics each earn attention differently, and each is mapped to a funnel stage. Top of funnel builds reach, middle proves competence, bottom asks for the conversation — so the feed is never all one or all the other.',
+    v: 'Gifs, lead magnets, cheatsheets and infographics each earn attention differently, and each is mapped to a funnel stage. Top of funnel builds reach, middle proves competence, bottom asks for the conversation, so the feed is never all one or all the other.',
   },
   {
     k: 'Ideate the Content',
@@ -68,11 +68,11 @@ export const STEPS: Step[] = [
   },
   {
     k: 'Design the Visuals',
-    v: 'Every asset is built in Figma against one template system, so the feed reads as a single brand rather than a scrapbook. Founder POV posts and employee-led posts run in parallel — the same system, published from more than one account.',
+    v: 'Every asset is built in Figma against one template system, so the feed reads as a single brand rather than a scrapbook. Founder POV posts and employee-led posts run in parallel: the same system, published from more than one account.',
   },
   {
     k: 'Publish and Capture Interest',
-    v: 'Posts go out on a fixed cadence across the founder and employee accounts. Trigify then watches who engages — the likes, comments and profile views that signal intent — and turns that warm audience into a list the outbound engine can work.',
+    v: 'Posts go out on a fixed cadence across the founder and employee accounts. Trigify then watches who engages (the likes, comments and profile views that signal intent) and turns that warm audience into a list the outbound engine can work.',
   },
   {
     k: 'Model the Ads on What Already Works',
@@ -80,7 +80,7 @@ export const STEPS: Step[] = [
   },
   {
     k: 'Generate Copy and Visuals',
-    v: 'Ad copy and creative are generated against those patterns and your positioning, so variants arrive in volume instead of one at a time. Volume is what makes testing meaningful — a single creative cannot tell you what the market responds to.',
+    v: 'Ad copy and creative are generated against those patterns and your positioning, so variants arrive in volume instead of one at a time. Volume is what makes testing meaningful. A single creative cannot tell you what the market responds to.',
   },
   {
     k: 'Test Before Scaling',

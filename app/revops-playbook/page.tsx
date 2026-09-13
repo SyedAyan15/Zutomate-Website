@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/revops-playbook/' },
   title: 'RevOps Engine | Zutomate',
   description:
-    'The revenue operations layer Zutomate builds — strategy, data hygiene, CRM sync, lead routing and reporting, plus the HubSpot implementation that runs it.',
+    'The revenue operations layer Zutomate builds: strategy, data hygiene, CRM sync, lead routing and reporting, plus the HubSpot implementation that runs it.',
   openGraph: {
     type: 'website',
     url: 'https://zutomate.com/revops-playbook/',
     title: 'RevOps Engine | Zutomate',
     description:
-      'The revenue operations layer Zutomate builds — from strategy to HubSpot implementation, stage by stage.',
+      'The revenue operations layer Zutomate builds, from strategy to HubSpot implementation, stage by stage.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'RevOps Engine | Zutomate',
     description:
-      'The revenue operations layer Zutomate builds — from strategy to HubSpot implementation, stage by stage.',
+      'The revenue operations layer Zutomate builds, from strategy to HubSpot implementation, stage by stage.',
     images: ['/og-image.png'],
   },
 };

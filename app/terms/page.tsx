@@ -8,13 +8,13 @@ import "../legal/styles.css";
 
 export const metadata: Metadata = {
   title: "Terms of Use | Zutomate",
-  description: "Zutomate's Terms of Use — the terms governing your use of our site and services.",
+  description: "Zutomate's Terms of Use: the terms governing your use of our site and services.",
   alternates: { canonical: "/terms/" },
   openGraph: {
     type: "website",
     url: "https://zutomate.com/terms/",
     title: "Privacy Policy & Terms of Use | Zutomate",
-    description: "Zutomate's Privacy Policy and Terms of Use — how we collect, use, and protect your information.",
+    description: "Zutomate's Privacy Policy and Terms of Use: how we collect, use, and protect your information.",
     images: [{ url: "https://zutomate.com/og-image.png" }],
     siteName: "Zutomate",
   },

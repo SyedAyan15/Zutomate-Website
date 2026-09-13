@@ -21,7 +21,7 @@ export default function GtmSection() {
     <section className="gtm-section">
       <AnimatedSectionHeader
         heading="GTM Systems"
-        sub="Pipeline generation infrastructure — from ICP to booked meetings."
+        sub="Pipeline generation infrastructure, from ICP to booked meetings."
       />
       <div className="gtm-grid">
         {cols.map(c => (

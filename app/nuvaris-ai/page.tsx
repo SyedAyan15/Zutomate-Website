@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/nuvaris-ai/' },
   title: 'Nuvaris AI Case Study | Zutomate',
   description:
-    'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through LinkedIn content and outbound — AI Ark sourcing, Clay enrichment, and a productised offer.',
+    'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through LinkedIn content, outbound and a productised offer.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/nuvaris-ai/',
@@ -50,7 +50,7 @@ export default function NuvarisAiPage() {
       strategy={[
         {
           k: 'Lead Sourcing',
-          v: 'We built the target list through AI Ark, keeping the audience tight rather than broad — with a three month window, reach mattered less than talking to the right accounts.',
+          v: 'We built the target list through AI Ark, keeping the audience tight rather than broad. With a three month window, reach mattered less than talking to the right accounts.',
         },
         {
           k: 'Data Enrichment',
@@ -62,7 +62,7 @@ export default function NuvarisAiPage() {
         },
         {
           k: 'Offer',
-          v: 'We productised the offer as a revenue recovery system rather than selling hours, and led with a free trial — so prospects bought a named outcome they could picture, and could try it before committing.',
+          v: 'We productised the offer as a revenue recovery system rather than selling hours, and led with a free trial, so prospects bought a named outcome they could picture, and could try it before committing.',
         },
         {
           k: 'Content',

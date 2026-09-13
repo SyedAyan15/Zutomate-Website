@@ -11,19 +11,19 @@ import { graph, breadcrumb, HOME, CASE_STUDIES } from '../seo/schema';
 export const metadata: Metadata = {
   alternates: { canonical: '/case-studies/' },
   title: 'Case Studies | Zutomate',
-  description: 'Real results from Zutomate\'s AI-powered GTM systems — see how B2B teams built predictable pipeline with outbound automation and AI agents.',
+  description: 'Real results from Zutomate\'s AI-powered GTM systems. See how B2B teams built predictable pipeline with outbound automation and AI agents.',
   openGraph: {
     type: 'website',
     url: 'https://zutomate.com/case-studies/',
     title: 'Case Studies | Zutomate',
-    description: 'Real results from Zutomate\'s AI-powered GTM systems — see how B2B teams built predictable pipeline with outbound automation and AI agents.',
+    description: 'Real results from Zutomate\'s AI-powered GTM systems. See how B2B teams built predictable pipeline with outbound automation and AI agents.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Case Studies | Zutomate',
-    description: 'Real results from Zutomate\'s AI-powered GTM systems — see how B2B teams built predictable pipeline with outbound automation and AI agents.',
+    description: 'Real results from Zutomate\'s AI-powered GTM systems. See how B2B teams built predictable pipeline with outbound automation and AI agents.',
     images: ['/og-image.png'],
   },
 };

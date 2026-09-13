@@ -39,10 +39,10 @@ export default function LegalTabs({ defaultTab }: { defaultTab: Tab }) {
           <h2>1. Information we collect</h2>
           <p>We collect information you provide directly and information generated when you use our site:</p>
           <ul>
-            <li><strong>Contact data</strong> — name, email address, company name, and any details you submit via our contact or booking forms.</li>
-            <li><strong>Usage data</strong> — pages visited, time on site, browser type, and referring URL, collected automatically via analytics tools.</li>
-            <li><strong>Communication data</strong> — messages, emails, or other content you send us.</li>
-            <li><strong>Cookie data</strong> — small files stored in your browser to remember preferences and support analytics (see Section 6).</li>
+            <li><strong>Contact data:</strong> name, email address, company name, and any details you submit via our contact or booking forms.</li>
+            <li><strong>Usage data:</strong> pages visited, time on site, browser type, and referring URL, collected automatically via analytics tools.</li>
+            <li><strong>Communication data:</strong> messages, emails, or other content you send us.</li>
+            <li><strong>Cookie data:</strong> small files stored in your browser to remember preferences and support analytics (see Section 6).</li>
           </ul>
           <p>We do not knowingly collect sensitive personal data or information from individuals under the age of 16.</p>
 
@@ -60,10 +60,10 @@ export default function LegalTabs({ defaultTab }: { defaultTab: Tab }) {
           <h2>3. Legal basis for processing</h2>
           <p>Where applicable under data protection law (including GDPR), we process your personal data on the following bases:</p>
           <ul>
-            <li><strong>Consent</strong> — where you have given clear consent (e.g. subscribing to updates).</li>
-            <li><strong>Legitimate interests</strong> — to operate and improve our business, provided your rights are not overridden.</li>
-            <li><strong>Contractual necessity</strong> — to deliver services you have engaged us for.</li>
-            <li><strong>Legal obligation</strong> — where required by law.</li>
+            <li><strong>Consent:</strong> where you have given clear consent (e.g. subscribing to updates).</li>
+            <li><strong>Legitimate interests:</strong> to operate and improve our business, provided your rights are not overridden.</li>
+            <li><strong>Contractual necessity:</strong> to deliver services you have engaged us for.</li>
+            <li><strong>Legal obligation:</strong> where required by law.</li>
           </ul>
 
           <h2>4. How we share your information</h2>

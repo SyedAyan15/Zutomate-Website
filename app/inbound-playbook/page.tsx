@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/inbound-playbook/' },
   title: 'Inbound Growth Engine | Zutomate',
   description:
-    'The inbound engine Zutomate builds — a LinkedIn content system that turns distribution into warm leads, and a paid ads system modelled on what already works in your market.',
+    'The inbound engine Zutomate builds: a LinkedIn content system that turns reach into warm leads, and paid ads modelled on what works in your market.',
   openGraph: {
     type: 'website',
     url: 'https://zutomate.com/inbound-playbook/',
     title: 'Inbound Growth Engine | Zutomate',
     description:
-      'The inbound engine Zutomate builds — LinkedIn content and paid ads, stage by stage.',
+      'The inbound engine Zutomate builds: LinkedIn content and paid ads, stage by stage.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Inbound Growth Engine | Zutomate',
     description:
-      'The inbound engine Zutomate builds — LinkedIn content and paid ads, stage by stage.',
+      'The inbound engine Zutomate builds: LinkedIn content and paid ads, stage by stage.',
     images: ['/og-image.png'],
   },
 };

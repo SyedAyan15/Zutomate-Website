@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/victoria-james/' },
   title: 'Victoria James Recruitment Case Study | Zutomate',
   description:
-    'How Zutomate generated 15 leads in a month for Victoria James Recruitment through outbound — Apollo and Clay sourcing, Clay enrichment, and sequencing across email and LinkedIn.',
+    'How Zutomate generated 15 leads in a month for Victoria James Recruitment with outbound: Apollo and Clay sourcing and email plus LinkedIn sequences.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/victoria-james/',
@@ -51,7 +51,7 @@ export default function VictoriaJamesPage() {
         },
         {
           k: 'Copywriting',
-          v: 'Messaging changed according to the signals that actually predicted fit: the region a company operates in, the hiring signals showing which roles they were actively recruiting for, whether they had recently raised funding, and the region they were hiring into. A business staffing up after a raise received a different message from one hiring steadily in a single market — so the opening line reflected something true about that company rather than a template with a name merged into it.',
+          v: 'Messaging changed according to the signals that actually predicted fit: the region a company operates in, the hiring signals showing which roles they were actively recruiting for, whether they had recently raised funding, and the region they were hiring into. A business staffing up after a raise received a different message from one hiring steadily in a single market, so the opening line reflected something true about that company rather than a template with a name merged into it.',
         },
         {
           k: 'Sequencing',

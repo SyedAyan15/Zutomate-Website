@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/goso/' },
   title: 'GOSO Case Study | Zutomate',
   description:
-    'How Zutomate generated $265K in revenue in 6 months for GOSO through outbound and RevOps — lead sourcing, Clay enrichment, AI copywriting and a CRM that manages the pipeline.',
+    'How Zutomate generated $265K in revenue in 6 months for GOSO with outbound and RevOps: Clay enrichment, AI copywriting and a CRM that runs the pipeline.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/goso/',
@@ -62,11 +62,11 @@ export default function GosoPage() {
         },
         {
           k: 'Offer',
-          v: 'A 7 day free trial — a low-friction ask that gave prospects a reason to reply without committing to a sales process first.',
+          v: 'A 7 day free trial, a low-friction ask that gave prospects a reason to reply without committing to a sales process first.',
         },
         {
           k: 'RevOps',
-          v: 'We built the system underneath it all. Replies and bookings sync straight into the CRM, leads are routed and scored automatically, and every stage reports into one dashboard — so the pipeline is managed rather than remembered, and no positive reply sits unworked.',
+          v: 'We built the system underneath it all. Replies and bookings sync straight into the CRM, leads are routed and scored automatically, and every stage reports into one dashboard, so the pipeline is managed rather than remembered, and no positive reply sits unworked.',
         },
       ]}
       stack={[

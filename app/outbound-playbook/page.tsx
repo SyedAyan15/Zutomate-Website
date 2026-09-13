@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/outbound-playbook/' },
   title: 'Automated Outbound Engine | Zutomate',
   description:
-    'The full outbound engine Zutomate builds — ICP modelling, account sourcing, Clay enrichment, copy testing, email and LinkedIn infrastructure, and reporting in one flow.',
+    'The outbound engine Zutomate builds: ICP modelling, account sourcing, Clay enrichment, copy testing, email and LinkedIn infrastructure, and reporting.',
   openGraph: {
     type: 'website',
     url: 'https://zutomate.com/outbound-playbook/',
     title: 'Automated Outbound Engine | Zutomate',
     description:
-      'The full outbound engine Zutomate builds — from ICP model to booked meeting, stage by stage.',
+      'The full outbound engine Zutomate builds, from ICP model to booked meeting, stage by stage.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Automated Outbound Engine | Zutomate',
     description:
-      'The full outbound engine Zutomate builds — from ICP model to booked meeting, stage by stage.',
+      'The full outbound engine Zutomate builds, from ICP model to booked meeting, stage by stage.',
     images: ['/og-image.png'],
   },
 };

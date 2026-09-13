@@ -99,7 +99,7 @@ export const STEPS: Step[] = [
   },
   {
     k: 'Data & Migration',
-    v: 'Migration, cleanup, enrichment, segmentation and deduplication. A CRM is only as trustworthy as the records inside it — reporting built on duplicated or stale data produces confident answers that are wrong.',
+    v: 'Migration, cleanup, enrichment, segmentation and deduplication. A CRM is only as trustworthy as the records inside it. Reporting built on duplicated or stale data produces confident answers that are wrong.',
   },
   {
     k: 'Automation',
@@ -111,7 +111,7 @@ export const STEPS: Step[] = [
   },
   {
     k: 'Marketing Operations',
-    v: 'Lead management, nurturing, campaigns and attribution — plus the marketing-to-sales handoff that decides whether generated demand is ever worked. Most leaks live in that gap rather than in either team.',
+    v: 'Lead management, nurturing, campaigns and attribution, plus the marketing-to-sales handoff that decides whether generated demand is ever worked. Most leaks live in that gap rather than in either team.',
   },
   {
     k: 'AI & Integrations',

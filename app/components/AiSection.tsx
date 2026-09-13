@@ -20,7 +20,7 @@ export default function AiSection() {
     <section className="gtm-section" id="ai-systems">
       <AnimatedSectionHeader
         heading="AI Agent Systems"
-        sub="Autonomous agents that research, qualify, and engage accounts — without human input."
+        sub="Autonomous agents that research, qualify, and engage accounts without human input."
       />
       <div className="gtm-grid gtm-grid-2">
         {cols.map(c => (

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/shopwave/' },
   title: 'Shopwave Case Study | Zutomate',
   description:
-    'How Zutomate made $325K in revenue for Shopwave through outbound and a HubSpot RevOps implementation — lead sourcing, Clay enrichment, and a pipeline built to convert.',
+    'How Zutomate made $325K in revenue for Shopwave through outbound and a HubSpot RevOps implementation, with Clay enrichment and a pipeline built to convert.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/shopwave/',
@@ -56,7 +56,7 @@ export default function ShopwavePage() {
         },
         {
           k: 'Offer',
-          v: 'Rather than asking for a call up front, we led with something useful — a Loom walkthrough, a free audit, a demo, or a PDF — so a prospect could see the value before committing any time.',
+          v: 'Rather than asking for a call up front, we led with something useful: a Loom walkthrough, a free audit, a demo, or a PDF. That way a prospect could see the value before committing any time.',
         },
         {
           k: 'RevOps',
