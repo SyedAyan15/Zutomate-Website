@@ -3174,6 +3174,77 @@
         gap: 30px;
       }
     }
+
+    /* ASK AI BAND */
+    .askai {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px 40px;
+      margin: 56px 0 48px;
+      padding: 26px 32px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+    }
+    .askai-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: white;
+      margin: 0 0 6px;
+    }
+    .askai-title em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .askai-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+      margin: 0;
+    }
+    .askai-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .askai-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #fff;
+      color: #0d1b2e;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .askai-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+    .askai-btn:hover,
+    .askai-btn:focus-visible {
+      outline: none;
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 2px var(--orange), 0 10px 22px rgba(0, 0, 0, 0.35);
+    }
+    @media (max-width: 800px) {
+      .askai {
+        margin: 40px 0 36px;
+        padding: 22px 20px;
+      }
+      .askai-title {
+        font-size: 19px;
+      }
+    }
+
     .footer-bottom {
       display: flex;
       justify-content: center;

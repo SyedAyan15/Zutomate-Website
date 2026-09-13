@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import AskAi from './AskAi';
 
 
 export default function Footer() {
@@ -117,6 +118,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        <AskAi />
 
       </div>
       <div className="footer-bottom">
