@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
+import { caseStudySchema } from '../seo/schema';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/shopwave/' },
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function ShopwavePage() {
   return (
     <CaseStudy
+      schema={caseStudySchema('/shopwave/', metadata.description ?? '')}
       company="Shopwave"
       logo="shopwave.png"
       title={

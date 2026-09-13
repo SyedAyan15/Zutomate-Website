@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './styles.css';
 import Navbar from '../components/Navbar';
+import JsonLd from '../components/JsonLd';
+import { pageSchema } from '../seo/schema';
 import Footer from '../components/Footer';
 import JotForm from './JotForm';
 
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
 export default function FreeOutboundTrialPage() {
   return (
     <>
+      <JsonLd data={pageSchema('Free Outbound Trial', '/free-outbound-trial/')} />
       <Navbar />
 
       <main className="ft-page">

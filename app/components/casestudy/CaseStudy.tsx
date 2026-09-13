@@ -3,6 +3,7 @@ import Image from 'next/image';
 import './casestudy.css';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import JsonLd from '../JsonLd';
 
 export type Metric = { v: string; k: string };
 export type Step = { k: string; v: string };
@@ -18,6 +19,7 @@ export default function CaseStudy({
   strategy,
   stack,
   campaigns,
+  schema,
 }: {
   title: ReactNode;
   company: string;
@@ -29,9 +31,12 @@ export default function CaseStudy({
   strategy: Step[];
   stack?: StackRow[];
   campaigns?: { src: string; alt: string; width: number; height: number };
+  /* JSON-LD for this page, rendered into the server HTML */
+  schema?: object;
 }) {
   return (
     <>
+      {schema && <JsonLd data={schema} />}
       <Navbar />
 
       <header className="cs-detail-hero">

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
+import JsonLd from '../components/JsonLd';
+import { pageSchema } from '../seo/schema';
 import Footer from "../components/Footer";
 import LegalTabs from "../legal/LegalTabs";
 import "../legal/styles.css";
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
+      <JsonLd data={pageSchema('Terms of Use', '/terms/')} />
       <Navbar />
       <div className="lg-hero">
         <div className="badge"><span className="badge-text">Legal</span></div>

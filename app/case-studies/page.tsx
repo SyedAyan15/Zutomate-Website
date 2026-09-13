@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { STUDIES } from './studies';
+import JsonLd from '../components/JsonLd';
+import { graph, breadcrumb, HOME, CASE_STUDIES } from '../seo/schema';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/case-studies/' },
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <>
+      <JsonLd data={graph(breadcrumb([HOME, CASE_STUDIES]))} />
       <Navbar />
 
       <div className="cs-hero">

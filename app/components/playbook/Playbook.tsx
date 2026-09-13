@@ -3,6 +3,7 @@ import './playbook.css';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import Steps from './Steps';
+import JsonLd from '../JsonLd';
 import type { ReactNode } from 'react';
 import type { Block, Item, Step } from './types';
 
@@ -56,6 +57,7 @@ export default function Playbook({
   flow,
   quote,
   cta = 'Book a call',
+  schema,
 }: {
   title: string;
   /* optional: a page may open on the quote instead */
@@ -65,9 +67,12 @@ export default function Playbook({
   /* an optional closing argument, set immediately before the ask */
   quote?: ReactNode;
   cta?: string;
+  /* JSON-LD for this page, rendered into the server HTML */
+  schema?: object;
 }) {
   return (
     <>
+      {schema && <JsonLd data={schema} />}
       <Navbar />
 
       <main className="gf-page">

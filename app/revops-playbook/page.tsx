@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Playbook from '../components/playbook/Playbook';
+import { playbookSchema } from '../seo/schema';
 import { FLOW, STEPS } from './flow';
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
 export default function RevOpsPage() {
   return (
     <Playbook
+      schema={playbookSchema('revops', metadata.description ?? '')}
       title="RevOps Engine"
       steps={STEPS}
       flow={FLOW}

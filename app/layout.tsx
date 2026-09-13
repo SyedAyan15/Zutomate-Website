@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import JsonLd from "./components/JsonLd";
+import { graph, organization } from "./seo/schema";
 
 export const metadata: Metadata = {
   title: "Zutomate | Predictable Growth Systems for B2B",
@@ -46,7 +48,10 @@ export default function RootLayout({
             fixed instances, so any weight is available for fine-tuning. */}
         <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:wght@300;400;500&family=Black+Han+Sans&family=Bebas+Neue&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        <JsonLd data={graph(organization())} />
+        {children}
+      </body>
     </html>
   );
 }

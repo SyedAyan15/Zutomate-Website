@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CaseStudy from '../components/casestudy/CaseStudy';
+import { caseStudySchema } from '../seo/schema';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/nuvaris-ai/' },
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function NuvarisAiPage() {
   return (
     <CaseStudy
+      schema={caseStudySchema('/nuvaris-ai/', metadata.description ?? '')}
       company="Nuvaris AI"
       logo="nuvarisai.png"
       title={

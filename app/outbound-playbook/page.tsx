@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Playbook from '../components/playbook/Playbook';
+import { playbookSchema } from '../seo/schema';
 import { FLOW, STEPS } from './flow';
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
 export default function OutboundPage() {
   return (
     <Playbook
+      schema={playbookSchema('outbound', metadata.description ?? '')}
       title="Automated Outbound Engine"
       lede="Every stage between an empty list and a booked meeting, and the tooling that runs each one."
       steps={STEPS}
