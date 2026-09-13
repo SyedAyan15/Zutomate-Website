@@ -15,6 +15,7 @@ export default function Footer() {
           <Link href="/" className="footer-logo">
             <Image src="/assets/logo.svg" alt="Zutomate" width={90} height={23} style={{ height: '23px', width: 'auto' }} />
           </Link>
+          <AskAi />
         </div>
 
         <div className="footer-cta-row" id="footer-cta-form">
@@ -118,8 +119,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        <AskAi />
 
       </div>
       <div className="footer-bottom">

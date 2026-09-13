@@ -2939,6 +2939,11 @@
     }
 
     .footer-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px 48px;
       padding-top: 10px;
       padding-bottom: 80px;
     }
@@ -3182,7 +3187,8 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 20px 40px;
-      margin: 56px 0 48px;
+      flex: 1 1 600px;
+      max-width: 880px;
       padding: 26px 32px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -3237,7 +3243,7 @@
     }
     @media (max-width: 800px) {
       .askai {
-        margin: 40px 0 36px;
+        flex-basis: 100%;
         padding: 22px 20px;
       }
       .askai-title {
