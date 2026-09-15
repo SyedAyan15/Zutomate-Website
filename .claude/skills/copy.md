@@ -13,9 +13,11 @@
 - Serves B2B businesses that want predictable pipeline
 
 ## Hero Tagline
-> "We Build Predictable Growth Systems for B2B Businesses"
+> "We Build Allbound Growth Systems for B2B Businesses"
 
-Sub: "Embedding intelligent AI workflows into businesses to engineer end-to-end growth systems."
+Sub: "Outbound, inbound and RevOps built as one system, so your pipeline is predictable."
+
+"Allbound" is jargon many buyers won't know, so whenever it leads a headline, the line under it must say what it means: outbound, inbound and RevOps as one system.
 
 ## Banned Words / Phrases
 - "cutting-edge" / "state-of-the-art"

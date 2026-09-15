@@ -4,9 +4,9 @@ import JsonLd from "./components/JsonLd";
 import { graph, organization } from "./seo/schema";
 
 export const metadata: Metadata = {
-  title: "Zutomate | Predictable Growth Systems for B2B",
+  title: "Zutomate | Allbound Growth Systems for B2B",
   description:
-    "Zutomate builds AI-powered outbound systems, Clay automations, and AI agents for B2B teams. Predictable pipeline without the guesswork.",
+    "Zutomate builds allbound growth systems for B2B teams: outbound, inbound and RevOps as one system, powered by Clay automations and AI agents.",
   metadataBase: new URL("https://zutomate.com"),
   alternates: { canonical: "/" },
   // /favicon.ico comes from the app/favicon.ico file convention, which emits its
@@ -19,17 +19,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://zutomate.com/",
-    title: "Zutomate | Predictable Growth Systems for B2B",
+    title: "Zutomate | Allbound Growth Systems for B2B",
     description:
-      "Zutomate builds AI-powered outbound systems, Clay automations, and AI agents for B2B teams. Predictable pipeline without the guesswork.",
+      "Zutomate builds allbound growth systems for B2B teams: outbound, inbound and RevOps as one system, powered by Clay automations and AI agents.",
     siteName: "Zutomate",
     images: [{ url: "/og-image.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zutomate | Predictable Growth Systems for B2B",
+    title: "Zutomate | Allbound Growth Systems for B2B",
     description:
-      "Zutomate builds AI-powered outbound systems, Clay automations, and AI agents for B2B teams. Predictable pipeline without the guesswork.",
+      "Zutomate builds allbound growth systems for B2B teams: outbound, inbound and RevOps as one system, powered by Clay automations and AI agents.",
     images: ["/og-image.png"],
   },
 };

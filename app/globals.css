@@ -332,7 +332,7 @@
       color: var(--white);
     }
 
-    /* "Predictable" in orange, same weight — not bold */
+    /* "Allbound" in orange, same weight — not bold */
     h1 .accent {
       color: var(--orange);
       font-weight: 500;
@@ -3909,6 +3909,8 @@
 @media (max-width: 480px) {
   h1 { font-size: clamp(34px, 10vw, 52px); letter-spacing: -1px; }
   .hero-sub { font-size: 15px; }
+  /* the desktop line break strands a word on narrow screens; let it wrap */
+  .hero-sub br { display: none; }
 
   /* Shrink badge text slightly */
   .badge-text, .services-label, .why-badge, .plan-badge, .faq-badge {
@@ -4518,7 +4520,7 @@ nav.nav-scrolled {
 }
 
 /* Headline weight rhythm: bold on the substantive words, light on the
-   connective ones — "We Build [Predictable Growth] Systems". All one colour;
+   connective ones — "We Build [Allbound Growth] Systems". All one colour;
    the contrast comes entirely from weight.
    700 was added to the Bricolage request in layout.tsx for this; the font was
    previously only loaded to 600, which was too weak against 300. */

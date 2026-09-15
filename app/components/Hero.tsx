@@ -202,14 +202,14 @@ export default function Hero() {
 
         <motion.h1 variants={item}>
           <span className="hl-light">We Build</span>{' '}
-          <span className="hl-bold">Predictable</span><br />
+          <span className="hl-bold">Allbound</span><br />
           <span className="hl-bold">Growth</span>{' '}
           <span className="hl-light">Systems</span>
         </motion.h1>
 
         <motion.p className="hero-sub" variants={item}>
-          Embedding intelligent AI workflows into businesses<br />
-          to engineer end-to-end growth systems.
+          Outbound, inbound and RevOps built as one system,{' '}<br />
+          so your pipeline is predictable.
         </motion.p>
 
         <motion.div className="trial-wrap" id="hero-cta-form" variants={item}>
