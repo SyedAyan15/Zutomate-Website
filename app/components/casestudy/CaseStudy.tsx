@@ -24,7 +24,8 @@ export default function CaseStudy({
   title: ReactNode;
   company: string;
   logo: string;
-  metrics: Metric[];
+  /* optional: a system-only engagement (Shopwave) has no result figures to show */
+  metrics?: Metric[];
   /* optional: not every client has given us one, and inventing praise is worse
      than showing none */
   quote?: Quote;
@@ -42,14 +43,16 @@ export default function CaseStudy({
       <header className="cs-detail-hero">
         <h1>{title}</h1>
 
-        <div className="cs-headline-stats">
-          {metrics.map((m) => (
-            <div className="cs-headline-stat" key={m.k}>
-              <span className="cs-headline-val">{m.v}</span>
-              <span className="cs-headline-lbl">{m.k}</span>
-            </div>
-          ))}
-        </div>
+        {metrics && metrics.length > 0 && (
+          <div className="cs-headline-stats">
+            {metrics.map((m) => (
+              <div className="cs-headline-stat" key={m.k}>
+                <span className="cs-headline-val">{m.v}</span>
+                <span className="cs-headline-lbl">{m.k}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="cs-client-logo">
           <Image src={`/assets/case-studies/${logo}`} alt={company} width={190} height={56} priority />

@@ -19,7 +19,7 @@ export const STUDIES: Study[] = [
     company: 'GOSO',
     logo: 'goso.jpg',
     title:
-      'How we generated $265K in revenue in 6 months for GOSO through outbound and RevOps.',
+      'We built an outbound and RevOps system that generated $85K in pipeline for GOSO in 3 months.',
   },
   {
     slug: '/nuvaris-ai',
@@ -27,7 +27,7 @@ export const STUDIES: Study[] = [
     company: 'Nuvaris AI',
     logo: 'nuvarisai.png',
     title:
-      'We generated $62K in revenue for Nuvaris AI through content and outbound in 3 months.',
+      'We built a content and outbound system that generated $62K in pipeline for Nuvaris AI in 3 months.',
   },
   {
     slug: '/shopwave',
@@ -35,13 +35,14 @@ export const STUDIES: Study[] = [
     company: 'Shopwave',
     logo: 'shopwave.png',
     title:
-      'How we made $325K in revenue for Shopwave through outbound and RevOps implementation.',
+      'We built a system that finds e-commerce store owners for Shopwave through Store Leads.',
   },
   {
     slug: '/victoria-james',
     industry: 'Recruitment',
     company: 'Victoria James Recruitment',
     logo: 'victoria-james.png',
-    title: 'We generated 15 leads in a month for Victoria James Recruitment through outbound.',
+    title:
+      'We built an outbound system that generated 15 leads in a month for Victoria James Recruitment.',
   },
 ];

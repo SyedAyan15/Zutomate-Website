@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/victoria-james/' },
   title: 'Victoria James Recruitment Case Study | Zutomate',
   description:
-    'How Zutomate generated 15 leads in a month for Victoria James Recruitment with outbound: Apollo and Clay sourcing and email plus LinkedIn sequences.',
+    'How Zutomate built an outbound system that generated 15 leads in a month for Victoria James Recruitment, with Clay sourcing and email plus LinkedIn.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/victoria-james/',
     title: 'Victoria James Recruitment Case Study | Zutomate',
     description:
-      'How Zutomate generated 15 leads in a month for Victoria James Recruitment through outbound.',
+      'How Zutomate built an outbound system that generated 15 leads in a month for Victoria James Recruitment.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Victoria James Recruitment Case Study | Zutomate',
     description:
-      'How Zutomate generated 15 leads in a month for Victoria James Recruitment through outbound.',
+      'How Zutomate built an outbound system that generated 15 leads in a month for Victoria James Recruitment.',
     images: ['/og-image.png'],
   },
 };
@@ -33,7 +33,8 @@ export default function VictoriaJamesPage() {
       logo="victoria-james.png"
       title={
         <>
-          We generated <em>15 leads</em> in a month for Victoria James Recruitment through outbound
+          We built an outbound system that generated <em>15 leads</em> in a month for Victoria
+          James Recruitment
         </>
       }
       metrics={[

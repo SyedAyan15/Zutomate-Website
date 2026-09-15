@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/shopwave/' },
   title: 'Shopwave Case Study | Zutomate',
   description:
-    'How Zutomate made $325K in revenue for Shopwave through outbound and a HubSpot RevOps implementation, with Clay enrichment and a pipeline built to convert.',
+    'How Zutomate built a system that finds e-commerce store owners for Shopwave through Store Leads, then works them with Clay, outbound and HubSpot.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/shopwave/',
     title: 'Shopwave Case Study | Zutomate',
     description:
-      'How Zutomate made $325K in revenue for Shopwave through outbound and RevOps implementation.',
+      'How Zutomate built a system that finds e-commerce store owners for Shopwave through Store Leads.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shopwave Case Study | Zutomate',
     description:
-      'How Zutomate made $325K in revenue for Shopwave through outbound and RevOps implementation.',
+      'How Zutomate built a system that finds e-commerce store owners for Shopwave through Store Leads.',
     images: ['/og-image.png'],
   },
 };
@@ -33,18 +33,18 @@ export default function ShopwavePage() {
       logo="shopwave.png"
       title={
         <>
-          How we made <em>$325K</em> in revenue for Shopwave through outbound and RevOps
-          implementation
+          We built a system that finds{' '}
+          <em>
+            {/* keep the hyphenated word whole; the headline otherwise breaks after "e-" */}
+            <span style={{ whiteSpace: 'nowrap' }}>e-commerce</span> store owners
+          </em>{' '}
+          for Shopwave through Store Leads
         </>
       }
-      metrics={[
-        { v: '20–30', k: 'Leads generated per month' },
-        { v: '$325K', k: 'Revenue generated' },
-      ]}
       strategy={[
         {
           k: 'Lead Sourcing',
-          v: 'We built the target list from Apollo, AI Ark and Discolike, so the market was covered from three angles rather than whatever a single database happened to hold.',
+          v: 'We sourced e-commerce store owners through Store Leads, alongside Apollo, AI Ark and Discolike, so the market was covered from four angles rather than whatever a single database happened to hold.',
         },
         {
           k: 'Data Enrichment',
@@ -67,6 +67,7 @@ export default function ShopwavePage() {
         {
           k: 'Lead Source',
           tools: [
+            { k: 'Store Leads', logo: 'storeleads.png' },
             { k: 'AI Ark', logo: 'aiark.png' },
             { k: 'Apollo', logo: 'apollo.png' },
             { k: 'Discolike', logo: 'discolike.jpg' },

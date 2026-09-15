@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/nuvaris-ai/' },
   title: 'Nuvaris AI Case Study | Zutomate',
   description:
-    'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through LinkedIn content, outbound and a productised offer.',
+    'How Zutomate built a LinkedIn content and outbound system that generated $62K in pipeline for Nuvaris AI in 3 months, with a productised offer.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/nuvaris-ai/',
     title: 'Nuvaris AI Case Study | Zutomate',
     description:
-      'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through content and outbound.',
+      'How Zutomate built a content and outbound system that generated $62K in pipeline for Nuvaris AI in 3 months.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nuvaris AI Case Study | Zutomate',
     description:
-      'How Zutomate generated $62K in revenue for Nuvaris AI in 3 months through content and outbound.',
+      'How Zutomate built a content and outbound system that generated $62K in pipeline for Nuvaris AI in 3 months.',
     images: ['/og-image.png'],
   },
 };
@@ -33,13 +33,13 @@ export default function NuvarisAiPage() {
       logo="nuvarisai.png"
       title={
         <>
-          We generated <em>$62K</em> in revenue for Nuvaris AI through content and outbound in 3
-          months
+          We built a content and outbound system that generated <em>$62K</em> in pipeline for
+          Nuvaris AI in 3 months
         </>
       }
       metrics={[
         { v: '10–15', k: 'Leads generated per month' },
-        { v: '$62K', k: 'Revenue generated in 3 months' },
+        { v: '$62K', k: 'Pipeline generated in 3 months' },
       ]}
       quote={{
         text: 'From GTM strategy and LinkedIn content to optimization, they’ve handled everything exceptionally well',

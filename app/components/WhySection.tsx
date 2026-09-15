@@ -50,7 +50,7 @@ const cards = [
       </svg>
     ),
     layer: 'ACTIVATION LAYER',
-    title: 'Revenue & Growth',
+    title: 'Pipeline & Growth',
     items: [
       'CRM pipeline automation',
       'LinkedIn & email activation',

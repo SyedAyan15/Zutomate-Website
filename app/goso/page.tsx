@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/goso/' },
   title: 'GOSO Case Study | Zutomate',
   description:
-    'How Zutomate generated $265K in revenue in 6 months for GOSO with outbound and RevOps: Clay enrichment, AI copywriting and a CRM that runs the pipeline.',
+    'How Zutomate built an outbound and RevOps system that generated $85K in pipeline for GOSO in 3 months, with Clay enrichment and AI copywriting.',
   openGraph: {
     type: 'article',
     url: 'https://zutomate.com/goso/',
     title: 'GOSO Case Study | Zutomate',
     description:
-      'How Zutomate generated $265K in revenue in 6 months for GOSO through outbound and RevOps.',
+      'How Zutomate built an outbound and RevOps system that generated $85K in pipeline for GOSO in 3 months.',
     images: [{ url: '/og-image.png' }],
     siteName: 'Zutomate',
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'GOSO Case Study | Zutomate',
     description:
-      'How Zutomate generated $265K in revenue in 6 months for GOSO through outbound and RevOps.',
+      'How Zutomate built an outbound and RevOps system that generated $85K in pipeline for GOSO in 3 months.',
     images: ['/og-image.png'],
   },
 };
@@ -33,13 +33,13 @@ export default function GosoPage() {
       logo="goso.jpg"
       title={
         <>
-          How we generated <em>$265K</em> in revenue in 6 months for GOSO through outbound and
-          RevOps
+          We built an outbound and RevOps system that generated <em>$85K</em> in pipeline for
+          GOSO in 3 months
         </>
       }
       metrics={[
         { v: '25–30', k: 'Leads generated per month' },
-        { v: '$265K', k: 'Revenue generated in 6 months' },
+        { v: '$85K', k: 'Pipeline generated in 3 months' },
       ]}
       quote={{
         text: 'Would definitely recommend Zutomate to any business looking to improve lead generation and sales operations through automation',

@@ -107,6 +107,11 @@ html body {
   border-radius: 14px;
 }
 
+/* with no stats row between them, the logo needs its own gap below the h1 */
+.cs-detail-hero h1 + .cs-client-logo {
+  margin-top: 36px;
+}
+
 .cs-client-logo img {
   width: auto;
   height: auto;
