@@ -15,7 +15,7 @@
 ## Hero Tagline
 > "We Build Allbound Growth Systems for B2B Businesses"
 
-Sub: "Outbound, inbound and RevOps built as one system, so your pipeline is predictable."
+Sub: "Outbound, inbound and RevOps built as one system, so your pipeline is consistent."
 
 "Allbound" is jargon many buyers won't know, so whenever it leads a headline, the line under it must say what it means: outbound, inbound and RevOps as one system.
 

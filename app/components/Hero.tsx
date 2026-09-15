@@ -209,7 +209,7 @@ export default function Hero() {
 
         <motion.p className="hero-sub" variants={item}>
           Outbound, inbound and RevOps built as one system,{' '}<br />
-          so your pipeline is predictable.
+          so your pipeline is consistent.
         </motion.p>
 
         <motion.div className="trial-wrap" id="hero-cta-form" variants={item}>
