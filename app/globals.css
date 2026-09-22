@@ -791,7 +791,7 @@
 
     /* ── SERVICES SECTION ── */
     .services-section {
-      padding: 100px 52px;
+      padding: 96px 52px;
       position: relative;
       z-index: 10;
       text-align: center;
@@ -1978,7 +1978,7 @@
 
     /* ── TESTIMONIALS SLIDER ── */
     .testimonials-section {
-      padding: 80px 0 80px;
+      padding: 96px 0;
       position: relative;
       z-index: 10;
       background: var(--navy);
@@ -2717,7 +2717,7 @@
     }
     /* -- FAQ SECTION -- */
     .faq-section {
-      padding: 110px 52px;
+      padding: 96px 52px;
       background: var(--navy);
       position: relative;
       z-index: 10;
@@ -3538,7 +3538,7 @@
 
     /* ── CASE STUDIES ── */
     .cases-preview-section {
-      padding: 100px 48px;
+      padding: 96px 48px;
       max-width: 1100px;
       margin: 0 auto;
       text-align: center;
@@ -4108,7 +4108,7 @@
    section rather than hardcoding colours (see the light-section block below).
    ═══════════════════════════════════════════════════════════════════════ */
 .whyus-section {
-  padding: 96px 52px 104px;
+  padding: 96px 52px;
   position: relative;
   z-index: 10;
 }
