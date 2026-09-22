@@ -201,10 +201,9 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1 variants={item}>
-          <span className="hl-light">We Build</span>{' '}
-          <span className="hl-bold">Allbound</span><br />
-          <span className="hl-bold">Growth</span>{' '}
-          <span className="hl-light">Systems</span>
+          <span className="hl-bold">RevOps and GTM Engineering</span>{' '}
+          <span className="hl-light">for B2B companies running on</span>{' '}
+          <span className="hl-bold">HubSpot and Clay</span>
         </motion.h1>
 
         <motion.p className="hero-sub" variants={item}>
