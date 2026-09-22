@@ -5,6 +5,7 @@ import Partners from './components/Partners';
    stay in the codebase so it can be switched back on. */
 // import GlobeSection from './components/GlobeSection';
 import Testimonials from './components/Testimonials';
+import Tools from './components/Tools';
 import ServicesIntro from './components/ServicesIntro';
 import Pillars from './components/Pillars';
 import WhyUs from './components/WhyUs';
@@ -27,6 +28,7 @@ export default function Home() {
       <Partners />
       {/* <GlobeSection /> */}
       <Testimonials />
+      <Tools />
       <ServicesIntro />
       <Pillars />
       <WhyUs />

@@ -5196,3 +5196,127 @@ h1 .hl-light {
   box-shadow: 0 16px 32px -24px rgba(13, 27, 46, 0.5);
   transform: translateY(-2px);
 }
+
+
+/* ── TOOLS ──
+   The platforms the systems are built on. Sits on the navy ground below the
+   testimonial mosaic, so the copy takes the light end of the scale. */
+.tools-section {
+  padding: 96px 52px;
+  background: var(--navy);
+  position: relative;
+  z-index: 10;
+}
+
+.tools-head {
+  max-width: 1240px;
+  margin: 0 auto 48px;
+}
+
+.tools-label {
+  margin: 0 0 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.tools-heading {
+  margin: 0 0 18px;
+  max-width: 720px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -1px;
+  color: #ffffff;
+}
+
+.tools-sub {
+  margin: 0;
+  max-width: 560px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  padding: 26px 26px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tool-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+.tool-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 46px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.tool-chip img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.tool-kicker {
+  margin: 0 0 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.tool-name {
+  margin: 0 0 12px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  color: #ffffff;
+}
+
+.tool-body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+@media (max-width: 1000px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .tools-section { padding: 64px 20px; }
+  .tools-grid { grid-template-columns: 1fr; gap: 12px; }
+  .tools-head { margin-bottom: 32px; }
+  .tool-card { padding: 22px 20px 24px; }
+}
