@@ -338,7 +338,7 @@
       font-size: clamp(28px, 3.9vw, 48px);
       line-height: 1.16;
       letter-spacing: -1px;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
     }
 
     /* scoped to the hero: .badge is used in other sections with their own rhythm */
@@ -364,7 +364,7 @@
       font-weight: 300;
       line-height: 1.72;
       max-width: 720px;
-      margin: 0 auto 48px;
+      margin: 0 auto 72px;
     }
 
     /* ── FORM ── */
