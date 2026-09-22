@@ -5184,3 +5184,15 @@ h1 .hl-light {
   .tcard--feature { padding: 24px 20px; }
   .tcard-quote { -webkit-line-clamp: 9; }
 }
+
+
+/* hover: the card picks up an orange outline, the CTA already being orange */
+.tcard {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tcard:not(.tcard--cta):hover {
+  border-color: var(--orange);
+  box-shadow: 0 16px 32px -24px rgba(13, 27, 46, 0.5);
+  transform: translateY(-2px);
+}
