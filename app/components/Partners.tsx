@@ -7,8 +7,8 @@ type Partner = { name: string; file: string; boxed?: boolean };
 
 const PARTNERS: Partner[] = [
   { name: 'Office Principles', file: 'office-principles.png', boxed: true },
-  { name: 'ianai ERP', file: 'ianai.jpg', boxed: true },
-  { name: 'GOSO', file: 'goso.jpg' },
+  { name: 'ianai ERP', file: 'ianai.png' },
+  { name: 'GOSO', file: 'goso.png' },
   { name: 'Speexx', file: 'speexx.png', boxed: true },
   { name: 'Shopwave', file: 'shopwave.png', boxed: true },
   { name: 'Bell Recruitment', file: 'bell-recruitment.png' },
@@ -17,11 +17,11 @@ const PARTNERS: Partner[] = [
   { name: 'Scale Hiring', file: 'scalehiring.png' },
   { name: 'Victoria James', file: 'victoria-james.png' },
   { name: 'Adams Limitless', file: 'adamslimitless.png' },
-  { name: 'BizBee Funding', file: 'bizbee.jpg' },
+  { name: 'BizBee Funding', file: 'bizbee.png' },
   { name: 'Velocity Staffing', file: 'velocity-staffing.png' },
   { name: 'Circular Resourcing', file: 'circular-resourcing.png' },
   { name: 'Insight Cyber Solutions', file: 'insight-cyber.png' },
-  { name: 'MIS Support', file: 'mis-support.jpg' },
+  { name: 'MIS Support', file: 'mis-support.png' },
 ];
 
 export default function Partners() {
