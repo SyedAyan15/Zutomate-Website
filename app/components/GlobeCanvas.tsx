@@ -124,10 +124,10 @@ function Earth({ paused, rows, spin }: { paused: boolean; rows: number; spin: Re
 
   return (
     <group ref={ref}>
-      {/* dark core — occludes far-side dots, gives the sphere depth */}
+      {/* dark core: solid sphere the dot sketch is drawn onto */}
       <mesh>
         <sphereGeometry args={[1.96, 48, 48]} />
-        <meshBasicMaterial color="#1d3355" />
+        <meshBasicMaterial color="#101f36" />
       </mesh>
       {/* full dotted sphere — faint ocean grid, bright continents */}
       {dots && (
@@ -136,7 +136,7 @@ function Earth({ paused, rows, spin }: { paused: boolean; rows: number; spin: Re
             <bufferGeometry>
               <bufferAttribute attach="attributes-position" args={[dots.ocean, 3]} />
             </bufferGeometry>
-            <pointsMaterial color={BLUE_DOT} size={0.016} sizeAttenuation transparent opacity={0.34} depthWrite={false} />
+            <pointsMaterial color={BLUE_DOT} size={0.016} sizeAttenuation transparent opacity={0.22} depthWrite={false} />
           </points>
           <points key={`l${dots.land.length}`}>
             <bufferGeometry>
@@ -154,7 +154,7 @@ function Atmosphere() {
   return (
     <mesh>
       <sphereGeometry args={[2.1, 64, 64]} />
-      <meshStandardMaterial color="#6aa5ff" transparent opacity={0.11} side={THREE.BackSide} />
+      <meshStandardMaterial color="#4488ff" transparent opacity={0.06} side={THREE.BackSide} />
     </mesh>
   );
 }
@@ -169,8 +169,8 @@ function ToolNodes({ paused, mobile, spin }: { paused: boolean; mobile: boolean;
 
   // tighter orbits + smaller badges so everything fits a narrow viewport
   const rScale = mobile ? 0.72 : 1;
-  const badge = mobile ? 27 : 36;
-  const icon = mobile ? 14 : 19;
+  const badge = mobile ? 34 : 46;
+  const icon = mobile ? 19 : 26;
 
   return (
     <group ref={ref}>
