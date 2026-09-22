@@ -4549,17 +4549,20 @@ h1 .hl-light {
    copy flips to white. The avatar rings stay navy and keep separating the
    overlapping photos against the plate. */
 .hero-trust-inner {
-  background: var(--navy);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 20px -12px rgba(13, 27, 46, 0.55);
+  background: transparent;
+  border-color: rgba(13, 27, 46, 0.28);
+  box-shadow: none;
 }
 
+/* photos separate against the pearl now that the plate is gone */
+.trust-avatar { border-color: #f7f5f1; }
+
 .trust-count {
-  color: #ffffff;
+  color: #0d1b2e;
 }
 
 .trust-label {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(13, 27, 46, 0.60);
 }
 
 /* Subhead reads navy rather than grey. Hierarchy against the h1 comes from
@@ -4600,16 +4603,16 @@ h1 .hl-light {
 
 /* ── Service tags — matching navy pills ── */
 .tag {
-  background: var(--navy);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 8px 20px -12px rgba(13, 27, 46, 0.55);
+  background: transparent;
+  border-color: rgba(13, 27, 46, 0.28);
+  color: #0d1b2e;
+  box-shadow: none;
 }
 
 /* The base hover swaps in a near-transparent orange, which would flash the
    pearl through the pill. Keep the plate dark and let the accent do the work. */
 .tag:hover {
-  background: #16283f;
+  background: transparent;
   border-color: rgba(242, 101, 34, 0.55);
   color: var(--orange);
 }
