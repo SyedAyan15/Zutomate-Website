@@ -1,7 +1,9 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Partners from './components/Partners';
-import GlobeSection from './components/GlobeSection';
+/* Globe section is off the live page for now; the component and its styles
+   stay in the codebase so it can be switched back on. */
+// import GlobeSection from './components/GlobeSection';
 import Testimonials from './components/Testimonials';
 import ServicesIntro from './components/ServicesIntro';
 import Pillars from './components/Pillars';
@@ -23,7 +25,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Partners />
-      <GlobeSection />
+      {/* <GlobeSection /> */}
       <Testimonials />
       <ServicesIntro />
       <Pillars />
