@@ -23,18 +23,6 @@ const TOOLS: Tool[] = [
     label: 'HubSpot RevOps',
     body: 'Lifecycle stages, pipeline structure, routing and scoring, with reporting that reflects what is actually in play.',
   },
-  {
-    name: 'AI Ark',
-    file: 'aiark.png',
-    label: 'Account sourcing',
-    body: 'Target lists built per segment, so accounts are checked against fit before anyone is contacted.',
-  },
-  {
-    name: 'Prospeo',
-    file: 'prospeo.png',
-    label: 'Contact data',
-    body: 'Work emails found and verified, so sequences reach real inboxes instead of bouncing.',
-  },
 ];
 
 export default function Tools() {
@@ -42,7 +30,7 @@ export default function Tools() {
     <section className="tools-section" id="tools">
       <div className="tools-head">
         <p className="tools-label">The tools we go deep on</p>
-        <h2 className="tools-heading">Five platforms we have built deep expertise around</h2>
+        <h2 className="tools-heading">Three platforms we have built deep expertise around</h2>
         <p className="tools-sub">
           These are not the only tools we work in. They are the ones our systems are built on.
         </p>
