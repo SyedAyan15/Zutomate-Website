@@ -127,7 +127,7 @@ function Earth({ paused, rows, spin }: { paused: boolean; rows: number; spin: Re
       {/* dark core — occludes far-side dots, gives the sphere depth */}
       <mesh>
         <sphereGeometry args={[1.96, 48, 48]} />
-        <meshBasicMaterial color="#101f36" />
+        <meshBasicMaterial color="#1d3355" />
       </mesh>
       {/* full dotted sphere — faint ocean grid, bright continents */}
       {dots && (
@@ -136,7 +136,7 @@ function Earth({ paused, rows, spin }: { paused: boolean; rows: number; spin: Re
             <bufferGeometry>
               <bufferAttribute attach="attributes-position" args={[dots.ocean, 3]} />
             </bufferGeometry>
-            <pointsMaterial color={BLUE_DOT} size={0.016} sizeAttenuation transparent opacity={0.22} depthWrite={false} />
+            <pointsMaterial color={BLUE_DOT} size={0.016} sizeAttenuation transparent opacity={0.34} depthWrite={false} />
           </points>
           <points key={`l${dots.land.length}`}>
             <bufferGeometry>
@@ -154,7 +154,7 @@ function Atmosphere() {
   return (
     <mesh>
       <sphereGeometry args={[2.1, 64, 64]} />
-      <meshStandardMaterial color="#4488ff" transparent opacity={0.06} side={THREE.BackSide} />
+      <meshStandardMaterial color="#6aa5ff" transparent opacity={0.11} side={THREE.BackSide} />
     </mesh>
   );
 }
@@ -187,10 +187,7 @@ function ToolNodes({ paused, mobile, spin }: { paused: boolean; mobile: boolean;
               <div style={{
                 width: badge, height: badge, borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: 'rgba(13,27,46,0.70)',
-                border: '1px solid rgba(255,255,255,0.16)',
-                backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)',
-                boxShadow: '0 1px 0 rgba(255,255,255,0.08) inset, 0 14px 30px -14px rgba(0,0,0,0.65)',
+                background: 'transparent',
                 userSelect: 'none', pointerEvents: 'none',
               }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
