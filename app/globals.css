@@ -338,7 +338,11 @@
       font-size: clamp(28px, 3.9vw, 48px);
       line-height: 1.16;
       letter-spacing: -1px;
+      margin-bottom: 22px;
     }
+
+    /* scoped to the hero: .badge is used in other sections with their own rhythm */
+    .hero .badge { margin-bottom: 28px; }
 
     /* accent word in orange, same weight — not bold */
     h1 .accent {
@@ -360,7 +364,7 @@
       font-weight: 300;
       line-height: 1.72;
       max-width: 720px;
-      margin: 0 auto 52px;
+      margin: 0 auto 36px;
     }
 
     /* ── FORM ── */
@@ -4906,7 +4910,7 @@ h1 .hl-light {
   margin: 0 auto;
 }
 
-.hero .sc-wrap { margin-bottom: 38px; }
+.hero .sc-wrap { margin-bottom: 32px; }
 
 .sc-form {
   display: flex;
@@ -4946,7 +4950,7 @@ h1 .hl-light {
   color: #ffffff;
   font-family: 'DM Sans', sans-serif;
   font-size: 15.5px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: filter 0.2s ease, transform 0.2s ease;
 }
