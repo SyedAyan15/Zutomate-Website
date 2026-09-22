@@ -340,7 +340,7 @@
       letter-spacing: -1px;
     }
 
-    /* "Allbound" in orange, same weight — not bold */
+    /* accent word in orange, same weight — not bold */
     h1 .accent {
       color: var(--orange);
       font-weight: 500;
@@ -359,7 +359,7 @@
       color: var(--w55);
       font-weight: 300;
       line-height: 1.72;
-      max-width: 500px;
+      max-width: 720px;
       margin: 0 auto 52px;
     }
 
@@ -4529,7 +4529,7 @@ nav.nav-scrolled {
 }
 
 /* Headline weight rhythm: bold on the substantive words, light on the
-   connective ones — "We Build [Allbound Growth] Systems". All one colour;
+   connective ones — "[RevOps and GTM Engineering] for B2B companies running on [HubSpot and Clay]". All one colour;
    the contrast comes entirely from weight.
    700 was added to the Bricolage request in layout.tsx for this; the font was
    previously only loaded to 600, which was too weak against 300. */

@@ -32,7 +32,7 @@ export function graph(...nodes: (Node | null)[]) {
 }
 
 export const ORG_DESCRIPTION =
-  'Zutomate is a B2B go-to-market agency that builds AI-powered outbound systems, Clay automations and AI agents for B2B teams selling high-ticket services and software. It combines outbound, inbound and revenue operations into one growth system.';
+  'Zutomate is a RevOps and GTM engineering agency for B2B companies. We design, build, and manage the systems behind modern GTM teams, from CRM architecture and data infrastructure to outbound systems, integrations, and workflow automation.';
 
 /* ── Organization: on every page, via the root layout ── */
 export function organization(): Node {

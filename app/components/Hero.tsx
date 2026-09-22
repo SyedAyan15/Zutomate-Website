@@ -207,8 +207,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p className="hero-sub" variants={item}>
-          Outbound, inbound and RevOps built as one system,{' '}<br />
-          so your pipeline is consistent.
+          Zutomate is a RevOps and GTM engineering agency for B2B companies. We design, build, and manage the systems behind modern GTM teams, from CRM architecture and data infrastructure to outbound systems, integrations, and workflow automation.
         </motion.p>
 
         <motion.div className="trial-wrap" id="hero-cta-form" variants={item}>

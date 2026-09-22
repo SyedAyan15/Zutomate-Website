@@ -13,11 +13,9 @@
 - Serves B2B businesses that want predictable pipeline
 
 ## Hero Tagline
-> "We Build Allbound Growth Systems for B2B Businesses"
+> "RevOps and GTM Engineering for B2B companies running on HubSpot and Clay"
 
-Sub: "Outbound, inbound and RevOps built as one system, so your pipeline is consistent."
-
-"Allbound" is jargon many buyers won't know, so whenever it leads a headline, the line under it must say what it means: outbound, inbound and RevOps as one system.
+Sub: "Zutomate is a RevOps and GTM engineering agency for B2B companies. We design, build, and manage the systems behind modern GTM teams, from CRM architecture and data infrastructure to outbound systems, integrations, and workflow automation."
 
 ## Banned Words / Phrases
 - "cutting-edge" / "state-of-the-art"
