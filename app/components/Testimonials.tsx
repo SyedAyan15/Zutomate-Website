@@ -1,8 +1,7 @@
-'use client';
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { AnimatePresence, motion } from 'framer-motion';
 
+/* Testimonials read as a mosaic: one quote featured in the middle, the rest
+   as smaller cards around it, and a CTA tile closing the grid. */
 type Card = {
   quote: string;
   name: string;
@@ -126,141 +125,52 @@ const cards: Card[] = [
   },
 ];
 
-function Stars() {
+const CALENDLY = 'https://calendly.com/zutomate/30min';
+
+function Card({ c, featured }: { c: Card; featured?: boolean }) {
   return (
-    <div className="tspot-stars" aria-label="5 out of 5 stars">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l2.94 6.32 6.91.8-5.12 4.7 1.37 6.83L12 17.25l-6.1 3.4 1.37-6.83-5.12-4.7 6.91-.8L12 2z" />
-        </svg>
-      ))}
-    </div>
+    <article className={featured ? 'tcard tcard--feature' : 'tcard'}>
+      <header className="tcard-head">
+        <Image src={c.avatar} alt={c.name} width={40} height={40} className="tcard-avatar" />
+        <span className="tcard-id">
+          <span className="tcard-name">{c.name}</span>
+          <span className="tcard-role">
+            {c.title}
+            {c.company ? ' · ' + c.company : ''}
+          </span>
+        </span>
+      </header>
+      <p className="tcard-quote">&ldquo;{c.quote}&rdquo;</p>
+    </article>
   );
 }
 
 export default function Testimonials() {
-  const [idx, setIdx] = useState(0);
-  const [dir, setDir] = useState(1);
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const touchRef = useRef({ x: 0, y: 0 });
-
-  function go(next: number, direction: number) {
-    setDir(direction);
-    setIdx(((next % cards.length) + cards.length) % cards.length);
-  }
-
-  /* only auto-slide while the section is on screen, so visitors
-     always arrive at the first testimonial */
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.25 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const id = setInterval(() => {
-      setDir(1);
-      setIdx((i) => (i + 1) % cards.length);
-    }, 9000);
-    return () => clearInterval(id);
-  }, [inView, idx]);
-
-  const card = cards[idx];
-
+  const [feature, ...rest] = cards;
   return (
-    <section className="testimonials-section" id="testimonials" ref={sectionRef}>
-      <div style={{ textAlign: 'center', marginBottom: '48px', padding: '0 52px' }}>
+    <section className="testimonials-section" id="testimonials">
+      <div className="tgrid-head">
         <div className="badge"><span className="badge-text">Testimonials</span></div>
         <h2>What our clients say</h2>
       </div>
 
-      {/* preload every card's photo and logo up front so slides never wait on images */}
-      <div aria-hidden style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
-        {cards.map((c) => (
-          <span key={c.name}>
-            <Image src={c.avatar} alt="" width={320} height={400} sizes="320px" loading="eager" />
-            {c.logo && (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img src={c.logo} alt="" />
-            )}
-          </span>
+      <div className="tgrid">
+        {rest.slice(0, 2).map((c) => (
+          <Card key={c.name} c={c} />
         ))}
-      </div>
-
-      <div className="tspot-wrap">
-        <button className="tspot-arrow" onClick={() => go(idx - 1, -1)} aria-label="Previous testimonial">&#8592;</button>
-
-        <div
-          className="tspot-viewport"
-          onTouchStart={(e) => { touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }}
-          onTouchEnd={(e) => {
-            const dx = e.changedTouches[0].clientX - touchRef.current.x;
-            const dy = e.changedTouches[0].clientY - touchRef.current.y;
-            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-              if (dx < 0) go(idx + 1, 1);
-              else go(idx - 1, -1);
-            }
-          }}
-        >
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={idx}
-              className="tspot-card"
-              initial={{ opacity: 0, x: 44 * dir }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -44 * dir }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="tspot-content">
-                <Stars />
-                <p className="tspot-quote">{card.quote}</p>
-                <div className="tspot-footer">
-                  <div className="tspot-person">
-                    <span className="tspot-name">{card.name}</span>
-                    <span className="tspot-title">
-                      {card.title}{card.company ? ` @ ${card.company}` : ''}
-                    </span>
-                  </div>
-                  {card.company && (
-                    <div className={`tspot-wordmark${card.dark ? ' dark' : ''}`}>
-                      {card.logo && (
-                        <span className="tspot-logochip">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={card.logo} alt={`${card.company} logo`} />
-                        </span>
-                      )}
-                      {!(card.logo && card.wordmark) && <span className="tspot-wordmark-text">{card.company}</span>}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="tspot-photo">
-                <Image src={card.avatar} alt={card.name} fill sizes="320px" />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        <button className="tspot-arrow" onClick={() => go(idx + 1, 1)} aria-label="Next testimonial">&#8594;</button>
-      </div>
-
-      <div className="tslider-nav">
-        <div className="tslider-dots">
-          {cards.map((_, i) => (
-            <div
-              key={i}
-              className={`tslider-dot${i === idx ? ' active' : ''}`}
-              onClick={() => go(i, i > idx ? 1 : -1)}
-            />
-          ))}
-        </div>
+        <Card c={feature} featured />
+        {rest.slice(2).map((c) => (
+          <Card key={c.name} c={c} />
+        ))}
+        <a className="tcard tcard--cta" href={CALENDLY} target="_blank" rel="noopener noreferrer">
+          <span className="tcta-text">See how we can build, fix or run your GTM systems.</span>
+          <span className="tcta-link">
+            Book a call
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </a>
       </div>
     </section>
   );
