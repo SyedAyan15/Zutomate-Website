@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AskAi from './AskAi';
+import StartConversation from './StartConversation';
 
 
 export default function Footer() {
@@ -20,24 +21,8 @@ export default function Footer() {
 
         <div className="footer-cta-row" id="footer-cta-form">
           <h2 className="cta-heading">Book your strategy call</h2>
-          <div className="trial-wrap">
-            <a
-              href="https://calendly.com/zutomate/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="trial-cta"
-            >
-              Book 30 Day Free Trial
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path
-                  d="M3 8h10M9 4l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+          <div className="sc-wrap">
+            <StartConversation />
           </div>
         </div>
 

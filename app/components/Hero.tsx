@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import StartConversation from './StartConversation';
 
 
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
@@ -210,24 +211,8 @@ export default function Hero() {
           Zutomate is a RevOps and GTM engineering agency for B2B companies. We design, build, and manage the systems behind modern GTM teams, from CRM architecture and data infrastructure to outbound systems, integrations, and workflow automation.
         </motion.p>
 
-        <motion.div className="trial-wrap" id="hero-cta-form" variants={item}>
-          <a
-            href="https://calendly.com/zutomate/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="trial-cta"
-          >
-            Book 30 Day Free Trial
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path
-                d="M3 8h10M9 4l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+        <motion.div className="sc-wrap" id="hero-cta-form" variants={item}>
+          <StartConversation />
         </motion.div>
 
         <motion.div className="service-tags" variants={item}>
