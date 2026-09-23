@@ -5320,3 +5320,120 @@ h1 .hl-light {
   .tools-head { margin-bottom: 32px; }
   .tool-card { padding: 22px 20px 24px; }
 }
+
+
+/* ── OTHER TOOLS ──
+   The wider stack as compact tiles, directly under the three featured
+   platforms, so it reads as the long tail rather than a second headline act. */
+.otools-section {
+  padding: 0 52px 96px;
+  background: var(--navy);
+  position: relative;
+  z-index: 10;
+}
+
+.otools-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px 48px;
+  max-width: 1240px;
+  margin: 0 auto 28px;
+  padding-top: 78px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.otools-heading {
+  margin: 0;
+  max-width: 420px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+}
+
+.otools-sub {
+  margin: 0;
+  max-width: 480px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.otools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.otool {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease;
+}
+
+.otool:hover { border-color: rgba(242, 101, 34, 0.55); }
+
+.otool-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.otool-chip img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.otool-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.otool-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.otool-kind {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+@media (max-width: 1000px) {
+  .otools-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .otools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .otools-section { padding: 0 20px 64px; }
+  .otools-head { padding-top: 48px; margin-bottom: 22px; }
+  .otool { padding: 10px 12px; gap: 10px; }
+}

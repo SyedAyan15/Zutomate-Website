@@ -6,6 +6,7 @@ import Partners from './components/Partners';
 // import GlobeSection from './components/GlobeSection';
 import Testimonials from './components/Testimonials';
 import Tools from './components/Tools';
+import OtherTools from './components/OtherTools';
 import ServicesIntro from './components/ServicesIntro';
 import Pillars from './components/Pillars';
 import WhyUs from './components/WhyUs';
@@ -29,6 +30,7 @@ export default function Home() {
       {/* <GlobeSection /> */}
       <Testimonials />
       <Tools />
+      <OtherTools />
       <ServicesIntro />
       <Pillars />
       <WhyUs />
