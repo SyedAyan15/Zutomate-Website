@@ -7,7 +7,6 @@ const OTHER: [string, string, string, string?][] = [
   ['Smartlead', 'smartlead.png', 'Outbound', 'https://smartlead.ai/?via=zain'],
   ['Lemlist', 'lemlist.png', 'Outbound', 'https://get.lemlist.com/vv99g9fqmneu'],
   ['Salesforge', 'salesforge.png', 'Outbound', 'https://salesforge.ai/?via=LIautomation'],
-  ['InboxKit', 'inboxkit.jpg', 'Deliverability', 'https://www.inboxkit.com/?aff=Mug7K6nf5WEp'],
   ['HeyReach', 'heyreach.png', 'LinkedIn', 'https://heyreach.io/?via=automations'],
   ['Apollo', 'apollo.png', 'Prospecting', 'https://www.apollo.io/'],
   ['AI Ark', 'aiark.png', 'Sourcing', 'https://www.ai-ark.com/?ref=automation'],
