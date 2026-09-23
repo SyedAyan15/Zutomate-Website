@@ -5437,3 +5437,8 @@ h1 .hl-light {
   .otools-head { padding-top: 48px; margin-bottom: 22px; }
   .otool { padding: 10px 12px; gap: 10px; }
 }
+
+
+/* tiles that carry a referral link are clickable */
+.otool--link { text-decoration: none; cursor: pointer; }
+.otool--link:hover { border-color: var(--orange); }
