@@ -13,6 +13,7 @@ const OTHER: [string, string, string][] = [
   ['Prospeo', 'prospeo.png', 'Contact data'],
   ['LinkedIn', 'linkedin.png', 'Sales Navigator'],
   ['Trigify', 'trigify.png', 'Intent signals'],
+  ['Jungler', 'jungler.webp', 'Engagement signals'],
   ['RB2B', 'rb2b.png', 'Visitor ID'],
   ['Common Room', 'commonroom.png', 'Signals'],
   ['Salesforce', 'salesforce.png', 'CRM'],
